@@ -6,7 +6,7 @@ import { url } from "inspector";
 
 
 const navigationLinks = [
-  { text: "Home", url: "/" },
+
   { text: "About Us", url: "/about-us" },
   {
     text: "Services",
