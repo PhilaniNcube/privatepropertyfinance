@@ -1,8 +1,8 @@
 "use client";
-import { Menu } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import Link from "next/link";
+import { url } from "inspector";
 
 
 const navigationLinks = [
@@ -10,14 +10,14 @@ const navigationLinks = [
   { text: "About Us", url: "/about-us" },
   {
     text: "Services",
-    url : "/services",
+    url: "/services",
     submenu: [
       { text: "International Clients", url: "/services/international-clients" },
       { text: "Bridging Finance", url: "/services/bridging-finance" },
       { text: "Care Home Finance", url: "/services/care-home-finance" },
       { text: "Buy-to-Let Mortgages", url: "/services/buy-to-let-mortgages" },
       { text: "Development Funding", url: "/services/development-funding" },
-      // { text: "Property Sourcing", url: "/services/property-sourcing" },
+      { text: "Property Sourcing", url: "/services/property-sourcing" },
     ],
   },
   {
@@ -57,22 +57,69 @@ const Navigation = () => {
         scrolled ? "bg-white text-black" : "bg-transparent text-white"
       }`}
     >
-      <div className="p-4 flex justify-between items-center max-w-7xl mx-auto">
-        <div className="text-lg font-thin">Private Property Finance</div>
-        <Button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          <Menu />
-        </Button>
-        <nav
-          className={`md:flex md:space-x-4 ${menuOpen ? "block" : "hidden"}`}
-        >
-          <ul className="flex flex-col md:flex-row md:space-x-4">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="text-lg font-bold">Private Property Finance</div>
+        <div className="lg:hidden">
+          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+            <SheetTrigger asChild>
+              <button onClick={() => setMenuOpen(!menuOpen)}>
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  ></path>
+                </svg>
+              </button>
+            </SheetTrigger>
+            <SheetContent>
+              <nav>
+                <ul className="flex flex-col space-y-4">
+                  {navigationLinks.map((link) => (
+                    <li key={link.text} className="relative group">
+                      <a
+                        href={link.url}
+                        className="hover:underline block px-4 py-2"
+                      >
+                        {link.text}
+                      </a>
+                      {link.submenu && (
+                        <ul className="pl-4">
+                          {link.submenu.map((sublink) => (
+                            <li key={sublink.text}>
+                              <a
+                                href={sublink.url}
+                                className="block px-4 py-2 hover:bg-gray-200"
+                              >
+                                {sublink.text}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+        <nav className="hidden lg:flex md:space-x-4 ">
+          <ul className="flex space-x-4">
             {navigationLinks.map((link) => (
               <li key={link.text} className="relative group">
-                <Link href={link.url} className="hover:underline block px-4 py-2">
+                <Link href={link.url!} className="hover:underline block px-4 py-2">
                   {link.text}
                 </Link>
                 {link.submenu && (
-                  <ul className="absolute left-0 mt-2 w-48 bg-white text-black shadow-lg rounded-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ul className="absolute left-0 overflow-hidden mt-2 w-48 bg-white text-black shadow-lg rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {link.submenu.map((sublink) => (
                       <li key={sublink.text}>
                         <a
