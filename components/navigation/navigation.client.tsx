@@ -22,10 +22,10 @@ const navigationLinks = [
   },
   {
     text: "Resources",
-    url: "/resources",
+    url: "#",
     submenu: [
       { text: "Calculator", url: "/resources/calculator" },
-      { text: "Knowledge Area", url: "/resources/knowledge-area" },
+      { text: "Privacy Policy", url: "/resources/privacy-policy" },
     ],
   },
   { text: "Contact Us", url: "/contact-us" },
