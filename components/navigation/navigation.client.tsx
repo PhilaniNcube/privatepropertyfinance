@@ -24,7 +24,7 @@ const navigationLinks = [
     text: "Resources",
     url: "#",
     submenu: [
-      { text: "Calculator", url: "/resources/calculator" },
+      // { text: "Calculator", url: "/resources/calculator" },
       { text: "Privacy Policy", url: "/resources/privacy-policy" },
     ],
   },

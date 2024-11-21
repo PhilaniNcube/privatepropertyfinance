@@ -1,17 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Calculator, Home, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomepageHero() {
   return (
-    <section
-      className="relative min-h-[600px] bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage:
-          "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/asset-finance-TSBPfduQETSKH2pprLHKKwQg43TE7G.jpg')",
-      }}
-    >
-      <div className="absolute inset-0 bg-black/60" />
+    <section className="relative min-h-[600px] bg-cover bg-center bg-no-repeat">
+      <div className="absolute inset-0">
+        <Image
+          src="https://utfs.io/f/K39jtZpI79HTZuqhBpFYEmxTDPtCaG3Rre51gfLyB9KkIpUX"
+          width={1920}
+          height={1080}
+          alt="Hero Image"
+          className="object-cover object-center w-full h-full"
+          priority
+        />
+      </div>
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:flex lg:h-[80vh] lg:items-center lg:px-4">
         <div className="max-w-xl text-center sm:text-left">
           <div className="flex items-center space-x-2 text-white mb-4 sm:justify-start justify-center">
@@ -34,27 +38,17 @@ export default function HomepageHero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4 text-center sm:justify-start justify-center">
-            <Button size="lg" className="w-full sm:w-auto gap-2">
-              Calculate Now
-              <Calculator className="h-4 w-4" />
-            </Button>
-
-            <Button
-              variant="secondary"
-              size="lg"
-              className="w-full sm:w-auto gap-2"
-            >
-              Learn More
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
-
-          <p className="mt-6 text-sm text-gray-400">
-            Professional mortgage advice tailored to your needs.
-            <Link href="/terms" className="ml-1 underline hover:text-primary">
-              Terms & Conditions apply
+            <Link href="/contact-us">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="w-full sm:w-auto gap-2"
+              >
+                Learn More
+                <ArrowRight className="h-4 w-4" />
+              </Button>
             </Link>
-          </p>
+          </div>
         </div>
       </div>
     </section>

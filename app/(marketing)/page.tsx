@@ -1,5 +1,6 @@
 import HomepageHero from "./_components/hero";
 import WelcomeSection from "./_components/welcome-section";
+import ServicesGrid from "./services/_components/services-grid";
 
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <div>
      <HomepageHero />
      <WelcomeSection />
+     <ServicesGrid />
     </div>
   );
 }
