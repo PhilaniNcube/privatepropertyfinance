@@ -4,9 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import Link from "next/link";
 import { url } from "inspector";
 
-
 const navigationLinks = [
-
   { text: "About Us", url: "/about-us" },
   {
     text: "Services",
@@ -58,7 +56,11 @@ const Navigation = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-lg font-bold">Private Property Finance</div>
+        <div className="text-lg font-bold">
+          <Link href="/" className="font-thin">
+            Private Property Finance
+          </Link>
+        </div>
         <div className="lg:hidden">
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger asChild>
@@ -115,7 +117,10 @@ const Navigation = () => {
           <ul className="flex space-x-4">
             {navigationLinks.map((link) => (
               <li key={link.text} className="relative group">
-                <Link href={link.url!} className="hover:underline block px-4 py-2">
+                <Link
+                  href={link.url!}
+                  className="hover:underline block px-4 py-2"
+                >
                   {link.text}
                 </Link>
                 {link.submenu && (

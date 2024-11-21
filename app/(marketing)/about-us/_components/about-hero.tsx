@@ -1,17 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const AboutHero = () => {
   return (
-    <section
-      className="relative min-h-[400px] bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage:
-          "url('https://utfs.io/f/K39jtZpI79HTGiEHauUxpmUkFZ3vN8n0QhHuTJfdcDeSVEbW')",
-      }}
-    >
-      <div className="absolute inset-0 bg-black/60" />
+    <section className="relative min-h-[400px] bg-cover bg-center bg-no-repeat">
+      <div className="absolute inset-0 bg-black/70">
+        <Image
+          alt="Hero Image"
+          className="object-cover object-center w-full h-full"
+          priority
+          src="https://utfs.io/f/K39jtZpI79HThxDVgpT4eiQDqWM5pAUcz7CwFT0Eg3frZbGa"
+          width={1920}
+          height={1080}
+        />
+      </div>
       <div className="relative container mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:flex lg:h-[70vh] lg:items-center lg:px-4">
         <div className="max-w-xl text-center sm:text-left">
           <h1 className="text-3xl font-extrabold sm:text-5xl text-white">

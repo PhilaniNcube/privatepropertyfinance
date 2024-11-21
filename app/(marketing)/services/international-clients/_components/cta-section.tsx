@@ -13,9 +13,9 @@ const CTASection = () => (
         requirements and tailor our services to your specific situation. Let us
         help you make your UK property investment dreams a reality.
       </p>
-      <Button size="lg" asChild>
-        <Link href="/questionnaire">
-          Start Questionnaire
+      <Button size="lg" asChild className="bg-accent">
+        <Link href="/get-a-quote">
+          Get A Quote
           <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </Button>

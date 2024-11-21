@@ -10,7 +10,7 @@ const ServicesSection = () => (
         Our Dedicated Service for International Clients
       </h2>
       <div className="grid grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-        <Card className="col-span-4 md:col-span-2 row-span-2 bg-primary text-primary-foreground">
+        <Card className="col-span-4 md:col-span-2 row-span-2 bg-accent text-primary-foreground">
           <CardHeader>
             <CardTitle className="flex items-center text-2xl">
               <Globe className="mr-2 h-6 w-6" />
@@ -78,7 +78,7 @@ const ServicesSection = () => (
             individual needs and goals.
           </CardContent>
         </Card>
-        <Card className="col-span-4 bg-gray-800 text-white">
+        <Card className="col-span-4 bg-accent text-white">
           <CardHeader>
             <CardTitle className="text-xl">
               Ready to Start Your UK Property Journey?
@@ -91,7 +91,7 @@ const ServicesSection = () => (
             </p>
             <Button asChild className="text-zinc-700" variant="outline">
               <Link href="/contact-us">
-                Get Started
+                Contact Us
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

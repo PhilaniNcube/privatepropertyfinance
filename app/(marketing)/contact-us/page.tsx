@@ -48,7 +48,7 @@ export default function ContactUs() {
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-700">
+    <div className="flex min-h-screen bg-accent">
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
         <div className="max-w-md w-full space-y-8">
           <div>
