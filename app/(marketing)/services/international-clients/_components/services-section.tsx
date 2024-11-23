@@ -4,7 +4,7 @@ import { ArrowRight, Building, FileText, Globe, MessageCircle, UserCheck } from 
 import Link from "next/link";
 
 const ServicesSection = () => (
-  <section className="bg-white">
+  <section className="bg-white mb-12">
     <div className="container max-w-7xl mx-auto px-4">
       <h2 className="text-3xl font-bold mb-12 text-center">
         Our Dedicated Service for International Clients

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, PhoneCall } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,7 +8,6 @@ const HeroSection = () => (
     <div
       className="absolute inset-0 bg-cover bg-center"
       style={{
-
         opacity: 0.6,
       }}
     >
@@ -37,18 +36,18 @@ const HeroSection = () => (
 
         <div className="mt-8 flex flex-wrap gap-4 text-center">
           <Link href="/get-a-quote">
-            <Button size="lg" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full bg-accent sm:w-auto">
               Get A Quote
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
           <Link href="/contact-us">
             <Button
-
               size="lg"
-              className="w-full text-zinc-700 hover:bg-accent sm:w-auto"
+              className="w-full hover:bg-accent text-white sm:w-auto"
             >
               Contact Us
+              <PhoneCall className="ml-2 h-4 w-4" />
             </Button>
           </Link>
         </div>
