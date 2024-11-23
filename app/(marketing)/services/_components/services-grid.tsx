@@ -38,6 +38,13 @@ const services = [
       "We partner with a diverse network of development lenders, offering tailored funding solutions for clients across the sector. Whether you are a private individual looking to build or renovate a home to live in, an emerging developer taking on your first project, or an experienced operator undertaking large-scale developments, we can secure the right financing to fit your needs. Our lenders support projects of all sizes, from single property renovations to multi-unit residential and commercial builds designed for sale or rental. With our guidance, we will have access to competitive rates and flexible terms that help bring your development vision to life.",
     image: "https://utfs.io/f/K39jtZpI79HTkcx0mHwGbJSmq85WjZYLfspR93DrwzQBMhuN",
   },
+  {
+    text: "Commercial Mortgages",
+    url: "/services/commercial-mortgages",
+    description:
+      "Looking to expand your business with a new property or land acquisition? Our tailored commercial mortgage services provide the financing solutions you need. A commercial mortgage, sometimes referred to as a business mortgage, is a loan secured against non-residential property, enabling you to purchase or refinance real estate for commercial purposes. We understand the unique needs of businesses and offer competitive rates and flexible terms to help you achieve your goals, whether you're acquiring office space, retail units, industrial warehouses, or investment properties. Let us guide you through the process and secure the right financing to fuel your business growth.",
+    image: "https://utfs.io/f/K39jtZpI79HTKxEK2tpI79HTC0EGhxwWPNok4Xn3MZUgY58B",
+  },
 ];
 
 

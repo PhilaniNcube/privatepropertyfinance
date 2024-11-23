@@ -38,13 +38,13 @@ export default function HomepageHero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4 text-center sm:justify-start justify-center">
-            <Link href="/contact-us">
+            <Link href="/get-a-quote">
               <Button
                 variant="secondary"
                 size="lg"
                 className="w-full sm:w-auto gap-2"
               >
-                Learn More
+                Get A Quote
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>

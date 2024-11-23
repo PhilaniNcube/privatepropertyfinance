@@ -1,17 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => (
   <section className="relative bg-gray-900 text-white">
     <div
       className="absolute inset-0 bg-cover bg-center"
       style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1506501139174-099022df5260?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-        opacity: 0.3,
+
+        opacity: 0.6,
       }}
-    />
-    <div className="relative mx-auto px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-4 max-w-7xl">
+    >
+      <Image
+        src="https://images.unsplash.com/photo-1506501139174-099022df5260?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Hero Image"
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        priority
+      />
+    </div>
+    <div className="relative mx-auto px-4 py-36 sm:px-6 lg:flex lg:items-center lg:px-4 max-w-7xl">
       <div className="max-w-xl text-center sm:text-left">
         <h1 className="text-3xl font-extrabold sm:text-5xl">
           Invest in UK Property
@@ -26,14 +36,21 @@ const HeroSection = () => (
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4 text-center">
-          <Button size="lg" className="w-full sm:w-auto">
-            Get Started
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/get-a-quote">
+            <Button size="lg" className="w-full sm:w-auto">
+              Get A Quote
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+          <Link href="/contact-us">
+            <Button
 
-          <Button variant="outline" size="lg" className="w-full text-zinc-700 sm:w-auto">
-            Learn More
-          </Button>
+              size="lg"
+              className="w-full text-zinc-700 hover:bg-accent sm:w-auto"
+            >
+              Contact Us
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

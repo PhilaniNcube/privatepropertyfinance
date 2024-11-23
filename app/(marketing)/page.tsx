@@ -1,3 +1,4 @@
+import FullWidthBanner from "@/components/quote-banner";
 import HomepageHero from "./_components/hero";
 import { LoanApplicationTimeline } from "./_components/loan-application-timeline";
 import WelcomeSection from "./_components/welcome-section";
@@ -10,6 +11,7 @@ export default function Home() {
      <HomepageHero />
      <WelcomeSection />
      <ServicesGrid />
+     <FullWidthBanner />
      <LoanApplicationTimeline />
     </div>
   );
