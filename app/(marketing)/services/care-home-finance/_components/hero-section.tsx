@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <header className="relative bg-primary text-primary-foreground">
       <Image
-        src="https://utfs.io/f/K39jtZpI79HT4oyoYcXZLsPJaSdIkOQM2RtgGDw3WUpl5oHV"
+        src="https://utfs.io/f/K39jtZpI79HTKxEK2tpI79HTC0EGhxwWPNok4Xn3MZUgY58B"
         alt="Background Image"
         quality={100}
         width={1920}
@@ -25,9 +25,9 @@ const HeroSection = () => {
           <p className="text-xl md:text-2xl mb-8">
             Navigate the complexities of care home financing with confidence.
           </p>
-          <Link href="/contact-us">
+          <Link href="/get-a-quote">
             <Button size="lg" variant="secondary" className="w-fit">
-              Get Started
+              Get A Quote
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>

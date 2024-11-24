@@ -1,3 +1,6 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,6 +24,8 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
+  const router = useRouter();
+
   return (
     <Link href={service.url} className="block h-full group ">
       <Card className="relative group-hover:bg-accent group-hover:text-white h-full overflow-hidden transition-all duration-300 hover:shadow-lg">
@@ -43,9 +48,12 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           </p>
         </CardContent>
         <CardFooter>
-          <Link href={service.url}>
-            <Button  className="bg-accent group-hover:text-white group-hover:bg-slate-500">Read More</Button>
-          </Link>
+          <Button
+            onClick={() => router.push(service.url)}
+            className="bg-accent group-hover:text-white group-hover:bg-slate-500"
+          >
+            Read More
+          </Button>
         </CardFooter>
       </Card>
     </Link>
