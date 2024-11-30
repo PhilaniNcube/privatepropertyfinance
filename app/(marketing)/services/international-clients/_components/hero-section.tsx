@@ -12,7 +12,7 @@ const HeroSection = () => (
       }}
     >
       <Image
-        src="https://images.unsplash.com/photo-1506501139174-099022df5260?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src="https://utfs.io/f/K39jtZpI79HTkHq1D0wGbJSmq85WjZYLfspR93DrwzQBMhuN"
         alt="Hero Image"
         layout="fill"
         objectFit="cover"

@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <header className="relative bg-primary text-primary-foreground">
       <Image
-        src="https://utfs.io/f/K39jtZpI79HTKxEK2tpI79HTC0EGhxwWPNok4Xn3MZUgY58B"
+        src="https://utfs.io/f/K39jtZpI79HT0XENHFRMWjZquCledaymVRfSigT4O2tnArz7"
         alt="Background Image"
         quality={100}
         width={1920}
