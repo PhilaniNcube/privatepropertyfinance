@@ -7,12 +7,11 @@ const HeroSection = () => {
   return (
     <header className="relative bg-primary text-primary-foreground">
       <Image
-        src="https://utfs.io/f/K39jtZpI79HT0XENHFRMWjZquCledaymVRfSigT4O2tnArz7"
+        src="https://utfs.io/f/K39jtZpI79HTC2tpqbQuOESQAsXGq74VjUNg8maR62yziKJW"
         alt="Background Image"
-        quality={100}
+        // quality={100}
         width={1920}
         height={1280}
-        property="image"
         priority
         className="z-0 min-h-[70vh] max-h-[72vh] object-cover"
       />
