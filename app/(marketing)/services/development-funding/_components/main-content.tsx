@@ -6,7 +6,7 @@ const MainContent = () => {
   return (
     <main className="bg-background">
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-12">
+        <h2 className="text-3xl font-bold text-center mb-12 text-accent">
           Funding Solutions for Every Development Stage
         </h2>
 
@@ -44,9 +44,9 @@ const MainContent = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card>
+          <Card className="bg-accent text-white">
             <CardHeader>
-              <Coins className="h-8 w-8 text-primary mb-2" />
+              <Coins className="h-8 w-8  mb-2" />
               <CardTitle>Flexible Financing Options</CardTitle>
             </CardHeader>
             <CardContent>
@@ -59,9 +59,9 @@ const MainContent = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-accent text-white">
             <CardHeader>
-              <Building className="h-8 w-8 text-primary mb-2" />
+              <Building className="h-8 w-8  mb-2" />
               <CardTitle>Experienced Development Lenders</CardTitle>
             </CardHeader>
             <CardContent>
@@ -72,9 +72,9 @@ const MainContent = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-accent text-white">
             <CardHeader>
-              <Users2 className="h-8 w-8 text-primary mb-2" />
+              <Users2 className="h-8 w-8 mb-2" />
               <CardTitle>Tailored Guidance & Support</CardTitle>
             </CardHeader>
             <CardContent>
