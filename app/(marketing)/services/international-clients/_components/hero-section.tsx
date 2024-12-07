@@ -22,7 +22,7 @@ const HeroSection = () => (
     </div>
     <div className="relative mx-auto px-4 py-36 sm:px-6 lg:flex lg:items-center lg:px-4 max-w-7xl">
       <div className="max-w-xl text-center sm:text-left">
-        <h1 className="text-3xl font-extrabold sm:text-5xl">
+        <h1 className="text-3xl font-extrabold sm:text-5xl mix-blend-screen">
           Invest in UK Property
           <strong className="block font-extrabold text-zinc-300">
             From Anywhere in the World

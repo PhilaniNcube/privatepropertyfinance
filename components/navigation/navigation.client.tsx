@@ -52,7 +52,7 @@ const Navigation = () => {
         scrolled ? "bg-white text-black" : "bg-transparent text-white"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center ">
         <div className="text-lg font-bold">
           <Link href="/" className="font-thin">
             Private Property Finance
@@ -95,7 +95,7 @@ const Navigation = () => {
                             <li key={sublink.text}>
                               <div
                                 onClick={() => router.push(sublink.url)}
-                                className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                                className="block px-4 py-2 cursor-pointer mix-blend-difference"
                               >
                                 {sublink.text}
                               </div>
@@ -126,7 +126,7 @@ const Navigation = () => {
                       <li key={sublink.text}>
                         <div
                           onClick={() => router.push(sublink.url)}
-                          className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                          className="block px-4 py-2 hover:bg-gray-200 mix-blend-difference cursor-pointer"
                         >
                           {sublink.text}
                         </div>
