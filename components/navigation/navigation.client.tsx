@@ -126,7 +126,7 @@ const Navigation = () => {
                       <li key={sublink.text}>
                         <div
                           onClick={() => router.push(sublink.url)}
-                          className="block px-4 py-2 hover:bg-gray-200 mix-blend-difference cursor-pointer"
+                          className="block px-4 py-2 hover:bg-gray-200  cursor-pointer"
                         >
                           {sublink.text}
                         </div>
