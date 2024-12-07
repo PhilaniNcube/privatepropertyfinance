@@ -19,15 +19,15 @@ const CommercialHero = () => {
       <div className="absolute inset-0 z-30">
         <div className="max-w-7xl mx-auto px-4 flex flex-col justify-center h-full py-16 md:py-24">
           <h1 className="text-3xl md:text-5xl text-accent font-bold mb-4 max-w-[27ch] text-balance mix-blend-darken">
-            Commercial Mortgages
+            Unlock Your Business Potential with a Tailored Commercial Mortgage
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-[45ch] mix-blend-difference text-slate-800 text-balance">
+          <p className="text-xl md:text-2xl mb-8 max-w-[45ch] mix-blend-difference text-white text-balance">
             We offer a range of commercial mortgage solutions to help you secure
             the financing you need for your business.
           </p>
           <Link href="/contact-us">
             <Button size="lg" variant="secondary" className="w-fit">
-              Contact Us
+              Speak to an Expert
               <PhoneCall className="ml-2 h-5 w-5" />
             </Button>
           </Link>
