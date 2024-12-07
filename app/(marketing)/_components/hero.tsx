@@ -8,9 +8,9 @@ export default function HomepageHero() {
     <section className="relative min-h-[600px] bg-cover bg-center bg-no-repeat">
       <div className="absolute inset-0">
         <Image
-          src="https://utfs.io/f/K39jtZpI79HTZuqhBpFYEmxTDPtCaG3Rre51gfLyB9KkIpUX"
+          src="https://utfs.io/f/K39jtZpI79HTrX0gyiLqlar1KWC04fZzOQD5p6wjtbicmyM2"
           width={1920}
-          height={1080}
+          height={1280}
           alt="Hero Image"
           className="object-cover object-center w-full h-full"
           priority
@@ -27,14 +27,14 @@ export default function HomepageHero() {
 
           <h1 className="text-3xl font-extrabold sm:text-5xl text-white">
             Property Finance
-            <strong className="block font-extrabold text-zinc-400">
+            <strong className="block font-extrabold text-zinc-700">
               Made Simple.
             </strong>
           </h1>
 
-          <p className="mt-4 max-w-lg sm:text-xl/relaxed text-gray-300">
+          <p className="mt-4 max-w-lg sm:text-xl/relaxed text-gray-700">
             Navigating the complexities of property financing with ease and
-            personalized support.
+            personalised support.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4 text-center sm:justify-start justify-center">

@@ -10,7 +10,7 @@ export default function AdditionalInfo() {
     <section>
       <div className="bg-black min-h-[45vh] flex items-center justify-center">
         <h1 className="text-3xl font-semibold lg:text-5xl text-white text-center py-12">
-        Privacy Policy
+          Privacy Policy
         </h1>
       </div>
       <div className="w-full max-w-2xl mx-auto space-y-8 py-20">
@@ -37,13 +37,31 @@ export default function AdditionalInfo() {
           <h2 className="text-2xl font-bold mb-4">Privacy Policy</h2>
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="item-1">
+              <AccordionTrigger>GDPR Statement</AccordionTrigger>
+              <AccordionContent>
+                <p>
+                  Data Protection Statement : We comply fully with the General
+                  Data Protection Regulations (GDPR) 2018 and all client data
+                  and information you provide to us will be managed, processed
+                  and kept secure in accordance with the GDPR. We will never
+                  share, sell or distribute client data to any other third party
+                  other than Banks, Lenders, Brokers or Packagers whom we
+                  believe may serve the best interests of you the client
+                </p>
+
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-1">
               <AccordionTrigger>Company Information</AccordionTrigger>
               <AccordionContent>
                 <p>
-                  We are a credit broker not a lender. Private Property Finance,
-                  registered at xxxxxxx. Company Register number is xxxxx. ICO
-                  registration number is xxxxxx which can be checked via
-                  www.ico.org.uk. Registered in England and Wales.
+                  Private Property Finance is an Appointed Representative of
+                  White Rose Group which is authorised and regulated by the
+                  Financial Conduct Authority under number 192852. We are a
+                  credit broker, not a lender. We may receive commission from
+                  the lender and this amount varies between lenders. The nature
+                  of any commission model will be confirmed to you before you
+                  proceed
                 </p>
                 <p className="mt-2">
                   We conduct both regulated and unregulated business and

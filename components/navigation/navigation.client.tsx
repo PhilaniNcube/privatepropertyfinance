@@ -21,14 +21,6 @@ const navigationLinks = [
       { text: "Commercial Mortgages", url: "/services/commercial-mortgages" },
     ],
   },
-  {
-    text: "Resources",
-    url: "#",
-    submenu: [
-      // { text: "Calculator", url: "/resources/calculator" },
-      { text: "Privacy Policy", url: "/resources/privacy-policy" },
-    ],
-  },
   { text: "Contact Us", url: "/contact-us" },
   { text: "Get a Quote", url: "/get-a-quote" },
 ];

@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Building, FileText, Globe, MessageCircle, UserCheck } from "lucide-react";
+import { ArrowRight, Building, FileText, Globe, MessageCircle, Phone, PhoneCall, UserCheck } from "lucide-react";
 import Link from "next/link";
 
 const ServicesSection = () => (
   <section className="bg-white mb-12">
-    <div className="container max-w-7xl mx-auto px-4">
+    <div className="container max-w-7xl mx-auto px-4  ">
       <h2 className="text-3xl font-bold mb-12 text-center">
         Our Dedicated Service for International Clients
       </h2>
@@ -25,15 +25,12 @@ const ServicesSection = () => (
               secure the most competitive rates and terms tailored to your
               unique situation.
             </p>
-            <Button variant="secondary" className="mt-4">
-              Learn More
-            </Button>
           </CardContent>
         </Card>
-        <Card className="col-span-2 md:col-span-1 bg-gray-100">
+        <Card className="col-span-2 md:col-span-1 bg-gray-100 hover:bg-accent hover:text-white">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <Building className="mr-2 h-5 w-5 text-primary" />
+              <Building className="mr-2 h-5 w-5 " />
               Expert Market Knowledge
             </CardTitle>
           </CardHeader>
@@ -42,10 +39,10 @@ const ServicesSection = () => (
             latest trends and regulations.
           </CardContent>
         </Card>
-        <Card className="col-span-2 md:col-span-1 bg-gray-100">
+        <Card className="col-span-2 md:col-span-1 bg-gray-100 hover:bg-accent hover:text-white">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <FileText className="mr-2 h-5 w-5 text-primary" />
+              <FileText className="mr-2 h-5 w-5 " />
               Streamlined Process
             </CardTitle>
           </CardHeader>
@@ -54,10 +51,10 @@ const ServicesSection = () => (
             taking the stress off your shoulders.
           </CardContent>
         </Card>
-        <Card className="col-span-2 md:col-span-1 bg-gray-100">
+        <Card className="col-span-2 md:col-span-1 bg-gray-100 hover:bg-accent hover:text-white">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <MessageCircle className="mr-2 h-5 w-5 text-primary" />
+              <MessageCircle className="mr-2 h-5 w-5 " />
               Clear Communication
             </CardTitle>
           </CardHeader>
@@ -66,10 +63,10 @@ const ServicesSection = () => (
             entire process.
           </CardContent>
         </Card>
-        <Card className="col-span-2 md:col-span-1 bg-gray-100">
+        <Card className="col-span-2 md:col-span-1 bg-gray-100 hover:bg-accent hover:text-white">
           <CardHeader>
             <CardTitle className="flex items-center">
-              <UserCheck className="mr-2 h-5 w-5 text-primary" />
+              <UserCheck className="mr-2 h-5 w-5 " />
               Personalized Solutions
             </CardTitle>
           </CardHeader>

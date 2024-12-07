@@ -11,12 +11,12 @@ const AboutHero = () => {
           alt="Hero Image"
           className="object-cover object-center w-full h-full"
           priority
-          src="https://utfs.io/f/K39jtZpI79HTyJaGQYU2PKF3prBbih4zLT658q2DGeJuUwAt"
+          src="https://utfs.io/f/K39jtZpI79HTt4BZE2qXzCiRBEdIquGgKwc53OnAm1lHx2pZ"
           width={1920}
           height={1280}
         />
       </div>
-      <div className="bg-slate-200/40 relative">
+      <div className="bg-slate-200/40 md:bg-transparent relative">
         <div className="relative container mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:flex lg:h-[70vh] lg:items-center lg:px-4">
           <div className="max-w-xl text-center sm:text-left">
             <h1 className="text-3xl font-extrabold sm:text-5xl text-black">
@@ -40,11 +40,7 @@ const AboutHero = () => {
               </Link>
 
               <Link href="contact-us">
-                <Button
-
-                  size="lg"
-                  className="w-full sm:w-auto gap-2 bg-accent"
-                >
+                <Button size="lg" className="w-full sm:w-auto gap-2 bg-accent">
                   Contact Us
                   <ArrowRight className="h-4 w-4" />
                 </Button>
