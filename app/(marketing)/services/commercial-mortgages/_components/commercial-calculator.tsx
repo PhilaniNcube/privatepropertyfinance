@@ -148,7 +148,6 @@ export default function CommercialCalculator() {
             )}
           </div>
 
-
           <div className="space-y-2">
             <Label htmlFor="interestRate">Interest Rate (%)</Label>
             <Controller
@@ -184,7 +183,6 @@ export default function CommercialCalculator() {
               <p className="text-red-500">{errors.loanRequired.message}</p>
             )}
           </div>
-
         </div>
         <Button type="submit" className="bg-accent" size="lg">
           Calculate
@@ -195,7 +193,10 @@ export default function CommercialCalculator() {
         <Dialog open={showModal} onOpenChange={setShowModal}>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Loan Details</DialogTitle>
+              <DialogTitle>
+                Great news we have lenders that can lend up to 75%
+                LTV.
+              </DialogTitle>
             </DialogHeader>
             <div className="space-y-2 p-4 bg-muted rounded-lg">
               <div className="flex justify-between">
