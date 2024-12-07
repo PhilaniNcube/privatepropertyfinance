@@ -1,4 +1,10 @@
+import CommercialHero from "./_components/commercial-hero";
+
 const CommercialMortgages = () => {
-  return <div>CommercialMortgages</div>;
+  return (
+    <div>
+      <CommercialHero />
+    </div>
+  );
 };
 export default CommercialMortgages;
