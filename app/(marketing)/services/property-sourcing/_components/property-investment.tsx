@@ -6,14 +6,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CheckCircle, Building, PiggyBank, TrendingUp } from "lucide-react";
+import { CheckCircle, Building, PiggyBank, TrendingUp, PhoneCall } from "lucide-react";
 import Cities from "./cities";
+import Link from "next/link";
 
 export default function PropertyInvestment() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <header className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">
+        <h1 className="text-4xl text-accent font-bold mb-4">
           UK Property Investment Made Easy
         </h1>
         <p className="text-xl text-muted-foreground">
@@ -25,7 +26,7 @@ export default function PropertyInvestment() {
       <section className="mb-16">
         <h2 className="text-3xl font-semibold mb-6">Our Services</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <Card>
+          <Card className="bg-accent text-white">
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Building className="mr-2" />
@@ -38,7 +39,7 @@ export default function PropertyInvestment() {
               requirements.
             </CardContent>
           </Card>
-          <Card>
+          <Card className="bg-accent text-white">
             <CardHeader>
               <CardTitle className="flex items-center">
                 <PiggyBank className="mr-2" />
@@ -51,7 +52,7 @@ export default function PropertyInvestment() {
               secure the best possible funding terms for your purchase.
             </CardContent>
           </Card>
-          <Card>
+          <Card className="bg-accent text-white">
             <CardHeader>
               <CardTitle className="flex items-center">
                 <CheckCircle className="mr-2" />
@@ -68,11 +69,11 @@ export default function PropertyInvestment() {
       </section>
 
       <section className="mb-16">
-        <h2 className="text-3xl font-semibold mb-6">
+        <h2 className="text-3xl font-semibold mb-6 text-accent">
           Why Invest in UK Property?
         </h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card>
+        <div className="grid md:grid-cols-2 gap-6 ">
+          <Card className="text-accent border-accent">
             <CardHeader>
               <CardTitle>Stable Economy</CardTitle>
             </CardHeader>
@@ -81,7 +82,7 @@ export default function PropertyInvestment() {
               foundation for your investment.
             </CardContent>
           </Card>
-          <Card>
+          <Card className="text-accent border-accent">
             <CardHeader>
               <CardTitle>Safe Investment Environment</CardTitle>
             </CardHeader>
@@ -90,7 +91,7 @@ export default function PropertyInvestment() {
               investment.
             </CardContent>
           </Card>
-          <Card>
+          <Card className="text-accent border-accent">
             <CardHeader>
               <CardTitle>Strong Rental Market</CardTitle>
             </CardHeader>
@@ -99,7 +100,7 @@ export default function PropertyInvestment() {
               steady income streams.
             </CardContent>
           </Card>
-          <Card>
+          <Card className="text-accent border-accent">
             <CardHeader>
               <CardTitle>Long-Term Growth Potential</CardTitle>
             </CardHeader>
@@ -112,7 +113,7 @@ export default function PropertyInvestment() {
       </section>
 
       <section className="text-center">
-        <h2 className="text-3xl font-semibold mb-4">
+        <h2 className="text-3xl font-semibold mb-4 text-accent">
           Discover a place you&apos;ll love to invest in
         </h2>
         <p className="mb-6 text-xl">
@@ -120,9 +121,11 @@ export default function PropertyInvestment() {
           journey towards owning a UK property.
         </p>
         <Cities />
-        <Button size="lg" className="text-lg">
+        <Link href="/contact-us">
+        <Button size="lg" className="text-lg bg-accent">
           Contact Us
-        </Button>
+          <PhoneCall className="ml-2" />
+        </Button></Link>
       </section>
     </div>
   );
