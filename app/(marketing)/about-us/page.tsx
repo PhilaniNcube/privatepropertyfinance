@@ -11,6 +11,15 @@ import {
 import AboutHero from "./_components/about-hero";
 import Image from "next/image";
 import FullWidthBanner from "@/components/quote-banner";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "About Us | Private Property Finance",
+  description: "Learn more about Private Property Finance and our team.",
+  keywords: ["mortgage loan", "mortgage loan calculator"],
+  metadataBase: new URL("https://privatepropertyfinance.com/contact-us"),
+};
 
 export default function AboutUs() {
   return (

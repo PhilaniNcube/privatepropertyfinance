@@ -17,6 +17,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "sonner";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Private Property Finance",
+  description: "Get in touch with us.",
+  keywords: ["mortgage loan", "mortgage loan calculator"],
+  metadataBase: new URL("https://privatepropertyfinance.com/get-a-quote"),
+};
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
