@@ -7,7 +7,26 @@ const Footer = () => {
   return (
     <footer className="bg-accent">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="py-12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="w-full">
+          <ul className="flex flex-col lg:flex-row justify-between items-center uppercase font-extrabold   gap-6 py-6 text-3xl">
+            <li>
+              <p className="text-white hover:text-zinc-500">London</p>
+            </li>
+            <li>
+              <p className="text-white hover:text-zinc-500">Manchester</p>
+            </li>
+            <li>
+              <p className="text-white hover:text-zinc-500">Edinburgh</p>
+            </li>
+            <li>
+              <p className="text-white hover:text-zinc-500">Cape Town</p>
+            </li>
+            <li>
+              <p className="text-white hover:text-zinc-500">Dubai</p>
+            </li>
+          </ul>
+        </div>
+        <div className="pb-12 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
           <div>
             <h3 className="text-white text-xl font-semibold">Company</h3>
             <ul className="mt-4 space-y-2">
@@ -81,26 +100,6 @@ const Footer = () => {
                 >
                   Privacy Policy
                 </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-white text-xl font-semibold">Locations</h3>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <p className="text-white hover:text-zinc-500">London</p>
-              </li>
-              <li>
-                <p className="text-white hover:text-zinc-500">Manchester</p>
-              </li>
-              <li>
-                <p className="text-white hover:text-zinc-500">Edinburgh</p>
-              </li>
-              <li>
-                <p className="text-white hover:text-zinc-500">Cape Town</p>
-              </li>
-              <li>
-                <p className="text-white hover:text-zinc-500">Dubai</p>
               </li>
             </ul>
           </div>
