@@ -11,7 +11,7 @@ const AboutHero = () => {
           alt="Hero Image"
           className="object-cover object-center w-full h-full"
           priority
-          src="https://utfs.io/f/K39jtZpI79HTt4BZE2qXzCiRBEdIquGgKwc53OnAm1lHx2pZ"
+          src="https://utfs.io/f/K39jtZpI79HTALYdDEcCinjXpwHJv5Uyr6SBzdsWPGEcumT3"
           width={1920}
           height={1280}
         />
