@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     ],
   },
   robots: {
-    index: false,
+    index: true,
     follow: true,
     nocache: true,
     googleBot: {
