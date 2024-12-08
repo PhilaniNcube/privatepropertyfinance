@@ -18,10 +18,83 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Private Property Finance",
+  metadataBase: new URL("https://privatepropertyfinance.com"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-GB": "/",
+    },
+  },
+  title: {
+    template: "%s | Private Property Finance",
+    default: "Private Property Finance",
+  },
   description:
     "Navigating the complexities of property financing with ease and personalized support.",
-  keywords: ["property finance", "mortgage", "property investment", "finance", "international property finance", "care home finance", "property development finance", "bridging finance", "commercial property finance", "property finance broker", "property investments", "property finance UK", "property finance London",  "property"],
+  keywords: [
+    "property finance",
+    "mortgage",
+    "property investment",
+    "finance",
+    "international property finance",
+    "care home finance",
+    "property development finance",
+    "bridging finance",
+    "commercial property finance",
+    "property finance broker",
+    "property investments",
+    "property finance UK",
+    "property finance London",
+    "property",
+  ],
+  applicationName: "Private Property Finance",
+  creator: "Private Property Finance",
+  publisher: "Athena Media",
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: "Private Property Finance",
+    title: "Private Property Finance",
+    url: "https://privatepropertyfinance.com",
+    description:
+      "Navigating the complexities of property financing with ease and personalized support.",
+    images: [
+      {
+        url: "https://utfs.io/f/K39jtZpI79HT3zgjTtMRMqKJwoliFUYbNI70yz63B8XZPOej",
+        width: 366,
+        height: 360,
+        alt: "Private Property Finance",
+      },
+    ],
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "https://utfs.io/f/K39jtZpI79HT3zgjTtMRMqKJwoliFUYbNI70yz63B8XZPOej",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Private Property Finance",
+    description:
+      "Navigating the complexities of property financing with ease and personalized support.",
+    images: [
+      "https://utfs.io/f/K39jtZpI79HT3zgjTtMRMqKJwoliFUYbNI70yz63B8XZPOej",
+    ],
+  },
+  verification: {
+    google: "sTDXQDPKtwNl5tCTtd61llxGnld0iK1awlisRgjP0Qc",
+  },
 };
 
 export default function RootLayout({
