@@ -9,7 +9,7 @@ const AboutHero = () => {
       <div className="absolute inset-0">
         <Image
           alt="Hero Image"
-          className="object-cover object-center w-full h-full"
+          className="object-cover object-top w-full h-full"
           priority
           src="https://utfs.io/f/K39jtZpI79HTALYdDEcCinjXpwHJv5Uyr6SBzdsWPGEcumT3"
           width={1920}
