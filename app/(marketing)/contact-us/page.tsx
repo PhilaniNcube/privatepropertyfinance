@@ -18,8 +18,7 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner";
 import { Metadata } from "next";
-
-
+import { Mail, Phone } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -125,6 +124,29 @@ export default function ContactUs() {
               </Button>
             </form>
           </Form>
+          <div>
+            <h2 className="text-lg font-extrabold text-white">
+              Or contact us directly at{" "}
+            </h2>
+            <p className="text-sm mt-3 text-gray-100">
+              <a href="tel:+447351088358">
+                <span>
+                  <Phone size={16} className="inline-block -mt-1 mr-1" />
+                </span>
+                <span className="text-white">+44 7351 088358</span>
+              </a>
+            </p>
+            <p className="text-sm mt-3 text-gray-100">
+              <a href="mailto:info@privatepropertyfinance.com">
+                <span>
+                  <Mail size={16} className="inline-block -mt-1 mr-1" />
+                </span>
+                <span className="text-white">
+                  info@privatepropertyfinance.com
+                </span>
+              </a>
+            </p>
+          </div>
         </div>
       </div>
       <div className="hidden lg:block relative w-0 flex-1">

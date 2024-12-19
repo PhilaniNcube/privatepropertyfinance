@@ -51,14 +51,7 @@ const Footer = () => {
                   Contact Us
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="https://wa.me/447464882447"
-                  className="text-white hover:text-zinc-500"
-                >
-                  WhatsApp Us
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="https://athenamedia.co.uk"

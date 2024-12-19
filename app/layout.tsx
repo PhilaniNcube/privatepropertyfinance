@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "@/components/navigation/navigation.client";
 import Footer from "@/components/navigation/footer";
 import { Toaster } from "@/components/ui/sonner";
+import Whatsapp from "@/components/navigation/whatsapp";
 
 
 const geistSans = localFont({
@@ -111,12 +112,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${aptosMono.className} antialiased`}
+        className={`${aptosMono.className} antialiased relative`}
       >
         <Navigation />
         {children}
         <Toaster />
         <Footer />
+        <Whatsapp />
       </body>
     </html>
   );
