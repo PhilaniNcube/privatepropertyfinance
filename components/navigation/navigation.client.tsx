@@ -54,7 +54,7 @@ const Navigation = () => {
     >
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center ">
         <div className="text-lg font-bold">
-          <Link href="/" className="font-thin">
+          <Link href="/" className="font-thin text-xl">
             Private Property Finance
           </Link>
         </div>
@@ -116,7 +116,7 @@ const Navigation = () => {
               <li key={link.text} className="relative group">
                 <Link
                   href={link.url!}
-                  className="hover:underline block px-4 py-2"
+                  className="hover:underline block text-lg px-4 py-2"
                 >
                   {link.text}
                 </Link>
@@ -126,7 +126,7 @@ const Navigation = () => {
                       <li key={sublink.text}>
                         <div
                           onClick={() => router.push(sublink.url)}
-                          className="block px-4 py-2 hover:bg-gray-200  cursor-pointer"
+                          className="block px-4 py-2 hover:bg-gray-200 text-md  cursor-pointer"
                         >
                           {sublink.text}
                         </div>

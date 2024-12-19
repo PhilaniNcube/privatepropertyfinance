@@ -17,6 +17,12 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const aptosMono = localFont({
+  src: "./fonts/Aptos.ttf",
+  variable: "--font-aptos-mono",
+  weight: "100 200 300 400 900",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://privatepropertyfinance.com"),
   alternates: {
@@ -105,7 +111,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${aptosMono.className} antialiased`}
       >
         <Navigation />
         {children}
