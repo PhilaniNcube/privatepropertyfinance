@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -19,6 +19,7 @@ import {
 import { toast } from "sonner";
 import { Metadata } from "next";
 import { Mail, Phone } from "lucide-react";
+import { contactUsAction } from "@/actions/emails/contact-us";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -31,6 +32,8 @@ const formSchema = z.object({
 export default function ContactUs() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [state, formAction, isPending] = useActionState(contactUsAction, null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,14 +43,7 @@ export default function ContactUs() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsSubmitting(false);
-    toast("We'll get back to you as soon as possible.");
-    form.reset();
-  }
+
 
   return (
     <div className="flex min-h-screen bg-accent">
@@ -64,7 +60,13 @@ export default function ContactUs() {
           </div>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmit)}
+              action={(formData) => {
+                startTransition(() => {
+                  formAction(formData);
+                });
+
+                toast.info("Sending message...");
+              }}
               className="mt-8 space-y-6"
             >
               <FormField
@@ -119,8 +121,8 @@ export default function ContactUs() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send Message"}
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {isPending ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </Form>
