@@ -446,8 +446,8 @@ export default function DevelopmentLoanCalculator() {
             </div>
           </div>
 
-          <Button type="submit" className="w-full">
-            Calculate Loan
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending ? "Calculating..." : "Calculate Loan"}
           </Button>
         </form>
         <div

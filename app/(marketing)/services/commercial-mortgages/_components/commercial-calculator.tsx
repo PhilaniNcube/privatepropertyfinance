@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { commercialLoanCalculatorAction } from "@/actions/emails/commercial-loan";
 
 const formSchema = z.object({
   fullName: z.string(),
@@ -39,6 +40,11 @@ export default function CommercialCalculator() {
   const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
   const [showModal, setShowModal] = useState(false);
 
+  const [state, formAction, isPending] = useActionState(
+    commercialLoanCalculatorAction,
+    null
+  );
+
   const {
     control,
     handleSubmit,
@@ -54,32 +60,52 @@ export default function CommercialCalculator() {
       interestRate: 7.5,
       loanTerm: 12,
       loanRequired: 0,
-
     },
   });
 
-  const onSubmit = (data: FormData) => {
+      const calculateMonthlyPayment = (
+        loanAmount: number,
+        interestRate: number,
+        loanTerm: number
+      ): number => {
+        const monthlyInterest = (loanAmount * (interestRate / 100)) / 12;
+        const monthlyPayment = loanAmount / loanTerm + monthlyInterest;
+        return monthlyPayment;
+      };
 
+
+  const onSubmit = (data: FormData) => {
     console.log(data);
 
     const loanAmount = Number(data.loanRequired);
 
+       const formData = new FormData();
+       formData.append("fullName", data.fullName);
+       formData.append("email", data.email);
+       formData.append("companyName", data.companyName);
+       formData.append("loanReason", data.loanReason);
+       formData.append("interestRate", data.interestRate.toString());
+       formData.append("loanTerm", data.loanTerm.toString());
+       formData.append("loanRequired", data.loanRequired.toString());
+
+       startTransition(() => {
+         formAction(formData);
+      });
+
     // write a function to calculate the monthly payment
-    const calculateMonthlyPayment = (
-      loanAmount: number,
-      interestRate: number,
-      loanTerm: number
-    ): number => {
-      const monthlyInterest = (loanAmount * (interestRate / 100)) / 12;
-      const monthlyPayment = loanAmount / loanTerm + monthlyInterest;
-      return monthlyPayment;
-    };
 
     // Calculate total interest
-    const totalInterest = calculateMonthlyPayment(loanAmount, data.interestRate, data.loanTerm) * data.loanTerm - loanAmount;
+    const totalInterest =
+      calculateMonthlyPayment(loanAmount, data.interestRate, data.loanTerm) *
+        data.loanTerm -
+      loanAmount;
 
     // Calculate monthly interest
-    const repayment = calculateMonthlyPayment(loanAmount, data.interestRate, data.loanTerm);
+    const repayment = calculateMonthlyPayment(
+      loanAmount,
+      data.interestRate,
+      data.loanTerm
+    );
 
     setLoanDetails({
       totalRequired: loanAmount.toLocaleString(),
@@ -88,6 +114,8 @@ export default function CommercialCalculator() {
       monthlyPayment: repayment.toLocaleString(),
       totalInterest: totalInterest.toLocaleString(),
     });
+
+
 
     setShowModal(true);
   };
@@ -194,8 +222,7 @@ export default function CommercialCalculator() {
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>
-                Great news we have lenders that can lend up to 75%
-                LTV.
+                Great news we have lenders that can lend up to 75% LTV.
               </DialogTitle>
             </DialogHeader>
             <div className="space-y-2 p-4 bg-muted rounded-lg">
