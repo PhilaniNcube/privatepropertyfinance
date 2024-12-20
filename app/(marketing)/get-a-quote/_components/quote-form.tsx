@@ -45,6 +45,9 @@ const formSchema = z.object({
 });
 
 export default function QuoteForm() {
+
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,7 +61,8 @@ export default function QuoteForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+
+
   }
 
   return (

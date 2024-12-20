@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/select";
 import Image from "next/image";
 import { toast } from "sonner";
+import { propertyLoanCalculatorAction } from "@/actions/emails/buy-to-let";
 
 const formSchema = z.object({
   propertyValue: z.coerce
@@ -51,6 +52,11 @@ const formSchema = z.object({
 });
 
 export default function PropertyLoanCalculator() {
+  const [state, formAction, isPending] = useActionState(
+    propertyLoanCalculatorAction,
+    null
+  );
+
   const [loanDetails, setLoanDetails] = useState<{
     monthlyRepayment: number;
     totalLoanAmount: number;
@@ -96,20 +102,37 @@ export default function PropertyLoanCalculator() {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     const loanCalculation = calculateLoan(data);
-    setLoanDetails(loanCalculation);
+
     toast(
       <div className="flex flex-col items-start">
         <h3 className="text-lg font-semibold mb-2">
           We have lenders that can lend up to 80% lTV:
         </h3>
-        <p>Approximate Monthly Repayment: £{loanDetails?.monthlyRepayment}</p>
-        <p>Total Loan Amount: £{loanDetails?.totalLoanAmount}</p>
+        <p>
+          Approximate Monthly Repayment: £{loanCalculation?.monthlyRepayment}
+        </p>
+        <p>Total Loan Amount: £{loanCalculation?.totalLoanAmount}</p>
       </div>,
       {
         position: "top-center",
         duration: 12000,
       }
     );
+
+    const formData = new FormData();
+    formData.append("propertyValue", data.propertyValue.toString());
+    formData.append("propertyType", data.propertyType);
+    formData.append("location", data.location);
+    formData.append("rentalPerMonth", data.rentalPerMonth.toString());
+    formData.append("depositAvailable", data.depositAvailable.toString());
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("contact", data.contact);
+
+    startTransition(() => {
+      formAction(formData);
+      setLoanDetails(loanCalculation);
+    });
   }
 
   return (

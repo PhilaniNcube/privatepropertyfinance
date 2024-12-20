@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 import {
   Card,
   CardContent,
@@ -11,14 +11,33 @@ import {
 import { CalculationResult, MortgageFormData } from "@/types/mortgage";
 import { calculateMortgage } from "@/lib/utils";
 import { MortgageForm } from "./mortgage-form";
+import { getAQuoteAction } from "@/actions/emails/get-a-quote";
 
 export default function MortgageLoanCalculator() {
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [formData, setFormData] = useState<MortgageFormData | null>(null);
 
-  const handleSubmit = (data: MortgageFormData) => {
+  const [state, formAction, isPending ] = useActionState(getAQuoteAction, null);
+
+
+
+  const handleSubmit = async (data: MortgageFormData) => {
+    const formData = new FormData();
+    formData.append("loanPurpose", data.loanPurpose);
+    formData.append("propertyValue", data.propertyValue.toString());
+    formData.append("loanValue", data.loanValue.toString());
+    formData.append("name", data.name);
+    formData.append("phoneNumber", data.phoneNumber);
+    formData.append("email", data.email);
+    formData.append("interestRate", data.interestRate.toString());
+    formData.append("loanTerm", data.loanTerm.toString());
+    formData.append("sector", data.sector);
+    formData.append("turnover", data.turnover.toString());
+    startTransition(async () => await formAction(formData));
+
     const calculationResult = calculateMortgage(data);
     setResult(calculationResult);
+
     setFormData(data);
   };
 
@@ -32,7 +51,7 @@ export default function MortgageLoanCalculator() {
             <CardDescription>Enter your loan details below</CardDescription>
           </CardHeader>
           <CardContent>
-            <MortgageForm onSubmit={handleSubmit} />
+            <MortgageForm onSubmit={handleSubmit} isPending={isPending} />
           </CardContent>
         </Card>
         {result && formData ? (

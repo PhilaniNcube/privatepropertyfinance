@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useActionState, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -23,6 +23,7 @@ import {
 } from "./ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { developmentFinanceAction } from "@/actions/emails/development-finance";
 
 const formSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -85,6 +86,11 @@ type LoanDetails = {
 export default function DevelopmentLoanCalculator() {
   const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
   const [showModal, setShowModal] = useState(false);
+
+  const [state, formAction, isPending] = useActionState(
+    developmentFinanceAction,
+    null
+  );
 
   const {
     control,
@@ -150,6 +156,31 @@ export default function DevelopmentLoanCalculator() {
       totalCostOfFinance: parseFloat(costs.totalCostOfFinance),
       ltv: parseFloat(costs.ltv),
      });
+
+     const formData = new FormData()
+
+     formData.append("fullName", data.fullName)
+     formData.append("companyName", data.companyName)
+     formData.append("completedDevelopments", data.completedDevelopments);
+     formData.append("constructionCosts", data.constructionCosts.toString());
+     formData.append("contactNumber", data.contactNumber);
+     formData.append("email", data.email);
+     formData.append("exitStrategy", data.exitStrategy);
+     formData.append("gdv", data.gdv.toString());
+     formData.append("landValue", data.landValue.toString());
+     formData.append("location", data.location);
+     formData.append("planningApproved", data.planningApproved);
+     formData.append("ownsLand", data.ownsLand);
+     formData.append("loanRequired", data.loanRequired.toString());
+     formData.append("numberOfUnits", data.numberOfUnits.toString());
+     formData.append("loanTerm", data.numberOfUnits.toString());
+
+
+
+     startTransition(() => {
+       formAction(formData);
+     })
+
     setShowModal(true);
   };
 

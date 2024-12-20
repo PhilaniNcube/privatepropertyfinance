@@ -19,6 +19,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
 import Image from "next/image";
 import { Card } from "./ui/card";
+import { bridgingFinanceAction } from "@/actions/emails/bridging-finance";
 
 const formSchema = z.object({
   estimatedValue: z.coerce.number().min(1, "Estimated value is required"),
@@ -37,51 +38,7 @@ const formSchema = z.object({
 const BridgingFinanceCalculator = () => {
 
   const [state, formAction, isPending] = useActionState(
-    async (previousState:unknown, formData:FormData) => {
-
-      console.log("Form data", formData, previousState);
-      startTransition(() => {
-        console.log("Submitting form data", formData);
-      });
-      const monthlyRepayment = calculateMonthlyRepayment();
-
-      const gtv = calculateGrossLTV();
-
-      // format the monthly repayment to 2 decimal places
-      const formated = Intl.NumberFormat("en-GB", {
-        style: "currency",
-        currency: "GBP",
-      }).format(monthlyRepayment);
-
-      const formatedGTV = Intl.NumberFormat("en-GB", {
-        style: "percent",
-        minimumFractionDigits: 2,
-      }).format(gtv); ;
-
-       toast(
-         <div>
-           <div className="p-4">
-             <h3 className="text-xl font-bold">Estimated Monthly Repayment</h3>
-             <p className="text-lg font-semibold">{formated}</p>
-             <h3 className="text-xl font-bold">Gross Loan to Value (LTV)</h3>
-              <p className="text-lg font-semibold">{formatedGTV}</p>
-           </div>
-         </div>,
-         {
-           position: "top-center",
-
-           duration: 12000,
-           action: {
-             label: "Close",
-             onClick: () => console.log("Undo"),
-           },
-         }
-       );
-      return {
-        monthlyRepayment,
-        success: true,
-      }
-    },
+    bridgingFinanceAction,
     null
   );
 
@@ -122,11 +79,53 @@ const BridgingFinanceCalculator = () => {
 
   return (
     <div className="py-10">
-      <div className="max-w-7xl px-4 mx-auto grid md:grid-cols-2">
+      <div className="max-w-7xl px-4 mx-auto grid md:grid-cols-2 gap-6">
         <div className="w-full">
           <h1 className="text-2xl font-bold mb-6">Property Loan Inquiry</h1>
           <Form {...form}>
-            <form action={formAction} className="space-y-6">
+            <form action={(formData:FormData) => {
+
+      const monthlyRepayment = calculateMonthlyRepayment();
+
+      const gtv = calculateGrossLTV();
+
+      // format the monthly repayment to 2 decimal places
+      const formated = Intl.NumberFormat("en-GB", {
+        style: "currency",
+        currency: "GBP",
+      }).format(monthlyRepayment);
+
+      const formatedGTV = Intl.NumberFormat("en-GB", {
+        style: "percent",
+        minimumFractionDigits: 2,
+      }).format(gtv);
+
+      toast(
+        <div>
+          <div className="p-4">
+            <h3 className="text-xl font-bold">Estimated Monthly Repayment</h3>
+            <p className="text-lg font-semibold">{formated}</p>
+            <h3 className="text-xl font-bold">Gross Loan to Value (LTV)</h3>
+            <p className="text-lg font-semibold">{formatedGTV}</p>
+          </div>
+        </div>,
+        {
+          position: "top-center",
+
+          duration: 12000,
+          action: {
+            label: "Close",
+            onClick: () => console.log("Undo"),
+          },
+        }
+      );
+
+              startTransition( () => {
+                 formAction(formData);
+              });
+
+
+            }} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 {" "}
                 <FormField
@@ -223,8 +222,9 @@ const BridgingFinanceCalculator = () => {
                   render={({ field }) => (
                     <FormItem className="space-y-3">
                       <FormLabel>Can you service the interest?</FormLabel>
-                      <FormControl>
+                      <FormControl >
                         <RadioGroup
+                        name="canServiceInterest"
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                           className="flex flex-col space-y-1"
@@ -254,7 +254,7 @@ const BridgingFinanceCalculator = () => {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input  placeholder="Enter your full name" {...field} />
+                        <Input placeholder="Enter your full name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -294,14 +294,25 @@ const BridgingFinanceCalculator = () => {
                 />
               </div>
 
-              <Button type="submit" className="bg-accent" size="lg" disabled={isPending}>
+              <Button
+                type="submit"
+                className="bg-accent"
+                size="lg"
+                disabled={isPending}
+              >
                 {isPending ? "Submitting..." : "Submit Inquiry"}
               </Button>
             </form>
           </Form>
         </div>
         <div className="w-full">
-          <Image src="/images/bridging-finance.jpg" alt="Bridging Finance" width={500} height={500} className="w-full object-cover" />
+          <Image
+            src="https://utfs.io/f/K39jtZpI79HTALYdDEcCinjXpwHJv5Uyr6SBzdsWPGEcumT3"
+            alt="Bridging Finance"
+            width={500}
+            height={500}
+            className="w-full object-cover h-full"
+          />
         </div>
       </div>
     </div>

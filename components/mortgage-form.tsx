@@ -16,9 +16,10 @@ import { MortgageFormData, mortgageFormSchema } from "../types/mortgage";
 
 interface MortgageFormProps {
   onSubmit: (data: MortgageFormData) => void;
+  isPending: boolean;
 }
 
-export function MortgageForm({ onSubmit }: MortgageFormProps) {
+export function MortgageForm({ onSubmit, isPending }: MortgageFormProps) {
   const {
     control,
     handleSubmit,
@@ -38,6 +39,8 @@ export function MortgageForm({ onSubmit }: MortgageFormProps) {
       turnover: 0,
     },
   });
+
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -235,8 +238,8 @@ export function MortgageForm({ onSubmit }: MortgageFormProps) {
         </div>
       </div>
 
-      <Button className="bg-accent w-1/2" type="submit">
-        Calculate
+      <Button className="bg-accent w-1/2" type="submit" disabled={isPending}>
+        {isPending ? "Submitting..." : "Submit"}
       </Button>
     </form>
   );
