@@ -27,7 +27,7 @@ export async function commercialLoanCalculatorAction(prevState: unknown, formDat
     loanRequired: formData.get("loanRequired"),
   });
 
-  console.log({validatedFields});
+
 
 
   if (!validatedFields.success) {
@@ -54,7 +54,6 @@ export async function commercialLoanCalculatorAction(prevState: unknown, formDat
     `,
   });
 
-  console.log({error, data});
 
   if (error) {
     return {
