@@ -34,7 +34,10 @@ export async function getAQuoteAction(prevState:unknown, formData:FormData) {
     turnover: formData.get('turnover'),
   });
 
+
+
   if (!validatedFields.success) {
+    console.log(validatedFields.error.flatten().fieldErrors);
     return {
       success: false,
       errors: validatedFields.error.errors,

@@ -2,6 +2,13 @@ import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { MortgageFormData, CalculationResult } from "../types/mortgage";
 
+export function formatCurrency(value: number): string {
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
+  }).format(value);
+}
+
 
 export function calculateMortgage(data: MortgageFormData): CalculationResult {
   const principal = data.loanValue;

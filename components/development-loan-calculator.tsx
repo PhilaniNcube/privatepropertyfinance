@@ -122,14 +122,7 @@ export default function DevelopmentLoanCalculator() {
     // Total cost of finance
     const totalCostOfFinance = totalInterest + arrangementFee;
 
-    console.log({
-      loanAmount: loanAmount.toFixed(2),
-      monthlyPayment: monthlyInterest.toFixed(2),
-      totalInterest: totalInterest.toFixed(2),
-      arrangementFee: arrangementFee.toFixed(2),
-      totalCostOfFinance: totalCostOfFinance.toFixed(2),
-      ltv: ((loanAmount / totalCost) * 100).toFixed(1),
-    });
+
 
     // scroll to the loan details section
     const loanDetailsSection = document.getElementById("loan-details");

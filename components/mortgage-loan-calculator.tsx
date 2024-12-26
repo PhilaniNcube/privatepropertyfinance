@@ -13,7 +13,7 @@ import {
   MortgageFormData,
   mortgageFormSchema,
 } from "@/types/mortgage";
-import { calculateMortgage } from "@/lib/utils";
+import { calculateMortgage, formatCurrency } from "@/lib/utils";
 import { MortgageForm } from "./mortgage-form";
 import { getAQuoteAction } from "@/actions/emails/get-a-quote";
 import { useForm, Controller } from "react-hook-form";
@@ -87,6 +87,7 @@ export default function MortgageLoanCalculator() {
                     control={control}
                     render={({ field }) => (
                       <Select
+                        name="loanPurpose"
                         onValueChange={field.onChange}
                         value={field.value}
                       >
@@ -322,16 +323,16 @@ export default function MortgageLoanCalculator() {
             <CardContent>
               <div className="space-y-2">
                 <p>
-                  <strong>Monthly Payment:</strong> £
-                  {state.data?.monthlyPayment.toLocaleString()}
+                  <strong>Monthly Payment:</strong>{" "}
+                  {formatCurrency(state.data.monthlyPayment)}
                 </p>
                 <p>
-                  <strong>Total Payment:</strong> £
-                  {state.data.totalPayment.toLocaleString()}
+                  <strong>Total Payment:</strong>{" "}
+                  {formatCurrency(state.data.totalPayment)}
                 </p>
                 <p>
-                  <strong>Total Interest:</strong> £
-                  {state.data.totalInterest.toLocaleString()}
+                  <strong>Total Interest:</strong>{" "}
+                  {formatCurrency(state.data.totalInterest)}
                 </p>
               </div>
               <div className="w-full bg-accent p-4  mt-4 rounded-md">
