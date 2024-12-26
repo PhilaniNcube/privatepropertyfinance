@@ -41,6 +41,13 @@ export async function getAQuoteAction(prevState:unknown, formData:FormData) {
     }
   }
 
+  // caclulate the monthly payment, total payment and total interest
+  const monthlyPayment = validatedFields.data.loanValue * (validatedFields.data.interestRate / 100 / 12) / (1 - (1 + validatedFields.data.interestRate / 100 / 12) ** (-validatedFields.data.loanTerm * 12));
+
+  const totalPayment = monthlyPayment * validatedFields.data.loanTerm * 12;
+
+  const totalInterest = totalPayment - validatedFields.data.loanValue;
+
   // Send email
   const { error, data } = await resend.emails.send({
     from: "info@privatepropertyfinance.com",
@@ -80,7 +87,9 @@ export async function getAQuoteAction(prevState:unknown, formData:FormData) {
       loanTerm: validatedFields.data.loanTerm,
       sector: validatedFields.data.sector,
       turnover: validatedFields.data.turnover,
-
+      monthlyPayment,
+      totalPayment,
+      totalInterest
     }
   }
 

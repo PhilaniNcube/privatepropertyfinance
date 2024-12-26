@@ -8,36 +8,56 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CalculationResult, MortgageFormData } from "@/types/mortgage";
+import {
+  CalculationResult,
+  MortgageFormData,
+  mortgageFormSchema,
+} from "@/types/mortgage";
 import { calculateMortgage } from "@/lib/utils";
 import { MortgageForm } from "./mortgage-form";
 import { getAQuoteAction } from "@/actions/emails/get-a-quote";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { start } from "repl";
+
+interface MortgageFormProps {
+  onSubmit: (data: MortgageFormData) => void;
+  isPending: boolean;
+}
 
 export default function MortgageLoanCalculator() {
+  const {
+    control,
+    formState: { errors },
+  } = useForm<MortgageFormData>({
+    resolver: zodResolver(mortgageFormSchema),
+    defaultValues: {
+      loanPurpose: undefined,
+      propertyValue: 0,
+      loanValue: 0,
+      name: "",
+      phoneNumber: "",
+      email: "",
+      interestRate: 3.5,
+      loanTerm: 10,
+      sector: "",
+      turnover: 0,
+    },
+  });
 
   const [result, setResult] = useState<CalculationResult | null>(null);
 
-  const [state, formAction, isPending ] = useActionState(getAQuoteAction, null);
-
-
-
-  const handleSubmit = async (data: MortgageFormData) => {
-    const formData = new FormData();
-    formData.append("loanPurpose", data.loanPurpose);
-    formData.append("propertyValue", data.propertyValue.toString());
-    formData.append("loanValue", data.loanValue.toString());
-    formData.append("name", data.name);
-    formData.append("phoneNumber", data.phoneNumber);
-    formData.append("email", data.email);
-    formData.append("interestRate", data.interestRate.toString());
-    formData.append("loanTerm", data.loanTerm.toString());
-    formData.append("sector", data.sector);
-    formData.append("turnover", data.turnover.toString());
-    startTransition(async () => await formAction(formData));
-
-    const calculationResult = calculateMortgage(data);
-    setResult(calculationResult);
-  };
+  const [state, formAction, isPending] = useActionState(getAQuoteAction, null);
 
   return (
     <div className="container mx-auto p-4">
@@ -51,10 +71,264 @@ export default function MortgageLoanCalculator() {
             <CardDescription>Enter your loan details below</CardDescription>
           </CardHeader>
           <CardContent>
-            <MortgageForm onSubmit={handleSubmit} isPending={isPending} />
+            <form
+              action={(formData: FormData) => {
+                const calculationResult = calculateMortgage({
+                  loanValue: Number(formData.get("loanValue")),
+                  interestRate: Number(formData.get("interestRate")),
+                  loanTerm: Number(formData.get("loanTerm")),
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  loanPurpose: formData.get("loanPurpose") as any,
+                  propertyValue: Number(formData.get("propertyValue")),
+                  name: formData.get("name") as string,
+                  phoneNumber: formData.get("phoneNumber") as string,
+                  email: formData.get("email") as string,
+                  sector: formData.get("sector") as string,
+                  turnover: Number(formData.get("turnover")),
+                });
+
+
+
+                setResult(calculationResult);
+                startTransition(() => {
+                  formAction(formData);
+                });
+              }}
+              className="space-y-6"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-6">
+                <div>
+                  <Label htmlFor="loanPurpose">Loan Purpose</Label>
+                  <Controller
+                    name="loanPurpose"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select loan purpose" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="purchase" className="bg-slate-50">
+                            Purchase
+                          </SelectItem>
+                          <SelectItem value="refinance" className="bg-slate-50">
+                            Refinance
+                          </SelectItem>
+                          <SelectItem
+                            value="homeEquity"
+                            className="bg-slate-50"
+                          >
+                            Home Equity
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  {errors.loanPurpose && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.loanPurpose.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="propertyValue">Property Value (£)</Label>
+                  <Controller
+                    name="propertyValue"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="number"
+                        id="propertyValue"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(parseFloat(e.target.value))
+                        }
+                      />
+                    )}
+                  />
+                  {errors.propertyValue && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.propertyValue.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-6">
+                <div>
+                  <Label htmlFor="loanValue">Loan Value (£)</Label>
+                  <Controller
+                    name="loanValue"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="number"
+                        id="loanValue"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(parseFloat(e.target.value))
+                        }
+                      />
+                    )}
+                  />
+                  {errors.loanValue && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.loanValue.message}
+                    </p>
+                  )}
+                </div>{" "}
+                <div>
+                  <Label htmlFor="name">Name</Label>
+                  <Controller
+                    name="name"
+                    control={control}
+                    render={({ field }) => (
+                      <Input type="text" id="name" {...field} />
+                    )}
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.name.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-6">
+                <div>
+                  <Label htmlFor="phoneNumber">Phone Number</Label>
+                  <Controller
+                    name="phoneNumber"
+                    control={control}
+                    render={({ field }) => (
+                      <Input type="tel" id="phoneNumber" {...field} />
+                    )}
+                  />
+                  {errors.phoneNumber && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.phoneNumber.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Controller
+                    name="email"
+                    control={control}
+                    render={({ field }) => (
+                      <Input type="email" id="email" {...field} />
+                    )}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-6">
+                <div>
+                  <Label htmlFor="interestRate">Interest Rate (%)</Label>
+                  <Controller
+                    name="interestRate"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="number"
+                        id="interestRate"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(parseFloat(e.target.value))
+                        }
+                        step="0.1"
+                      />
+                    )}
+                  />
+                  {errors.interestRate && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.interestRate.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="loanTerm">Loan Term (years)</Label>
+                  <Controller
+                    name="loanTerm"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="number"
+                        id="loanTerm"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(parseInt(e.target.value))
+                        }
+                      />
+                    )}
+                  />
+                  {errors.loanTerm && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.loanTerm.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-6">
+                <div>
+                  <Label htmlFor="sector">Sector</Label>
+                  <Controller
+                    name="sector"
+                    control={control}
+                    render={({ field }) => (
+                      <Input type="text" id="sector" {...field} />
+                    )}
+                  />
+                  {errors.sector && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.sector.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <Label htmlFor="turnover">Turnover (£)</Label>
+                  <Controller
+                    name="turnover"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="number"
+                        id="turnover"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(parseFloat(e.target.value))
+                        }
+                      />
+                    )}
+                  />
+                  {errors.turnover && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.turnover.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <Button
+                className="bg-accent w-1/2"
+                type="submit"
+                disabled={isPending}
+              >
+                {isPending ? "Submitting..." : "Submit"}
+              </Button>
+            </form>
           </CardContent>
         </Card>
-        {result ? (
+        { state?.data ? (
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">Calculation Result</CardTitle>
@@ -66,26 +340,18 @@ export default function MortgageLoanCalculator() {
               <div className="space-y-2">
                 <p>
                   <strong>Monthly Payment:</strong> £
-                  {result.monthlyPayment.toLocaleString()}
+                  {state.data?.monthlyPayment.toLocaleString()}
                 </p>
                 <p>
                   <strong>Total Payment:</strong> £
-                  {result.totalPayment.toLocaleString()}
+                  {state.data.totalPayment.toLocaleString()}
                 </p>
                 <p>
                   <strong>Total Interest:</strong> £
-                  {result.totalInterest.toLocaleString()}
+                  {state.data.totalInterest.toLocaleString()}
                 </p>
-                <p>
-                  <strong>Sector:</strong>{" "}
-                  {isPending ? "Loading" : state?.data?.sector}
-                </p>
-                <p>
-                  <strong>Turnover:</strong> £
-                  {isPending
-                    ? "Loading"
-                    : state?.data?.turnover.toLocaleString()}
-                </p>
+
+
               </div>
               <div className="w-full bg-accent p-4  mt-4 rounded-md">
                 {/* Add a banner saying great news we have lenders that can lend up to 80% LTV */}
