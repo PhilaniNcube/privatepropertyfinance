@@ -69,6 +69,19 @@ export async function getAQuoteAction(prevState:unknown, formData:FormData) {
 
   return {
     success: true,
+    data :{
+      loanPurpose: validatedFields.data.loanPurpose,
+      propertyValue: validatedFields.data.propertyValue,
+      loanValue: validatedFields.data.loanValue,
+      name: validatedFields.data.name,
+      phoneNumber: validatedFields.data.phoneNumber,
+      email: validatedFields.data.email,
+      interestRate: validatedFields.data.interestRate,
+      loanTerm: validatedFields.data.loanTerm,
+      sector: validatedFields.data.sector,
+      turnover: validatedFields.data.turnover,
+
+    }
   }
 
 }

@@ -14,8 +14,8 @@ import { MortgageForm } from "./mortgage-form";
 import { getAQuoteAction } from "@/actions/emails/get-a-quote";
 
 export default function MortgageLoanCalculator() {
+
   const [result, setResult] = useState<CalculationResult | null>(null);
-  const [formData, setFormData] = useState<MortgageFormData | null>(null);
 
   const [state, formAction, isPending ] = useActionState(getAQuoteAction, null);
 
@@ -37,13 +37,13 @@ export default function MortgageLoanCalculator() {
 
     const calculationResult = calculateMortgage(data);
     setResult(calculationResult);
-
-    setFormData(data);
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 text-accent">Mortgage Loan Calculator</h1>
+      <h1 className="text-3xl font-bold mb-6 text-accent">
+        Mortgage Loan Calculator
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
@@ -54,7 +54,7 @@ export default function MortgageLoanCalculator() {
             <MortgageForm onSubmit={handleSubmit} isPending={isPending} />
           </CardContent>
         </Card>
-        {result && formData ? (
+        {result ? (
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">Calculation Result</CardTitle>
@@ -77,11 +77,14 @@ export default function MortgageLoanCalculator() {
                   {result.totalInterest.toLocaleString()}
                 </p>
                 <p>
-                  <strong>Sector:</strong> {formData.sector}
+                  <strong>Sector:</strong>{" "}
+                  {isPending ? "Loading" : state?.data?.sector}
                 </p>
                 <p>
                   <strong>Turnover:</strong> £
-                  {formData.turnover.toLocaleString()}
+                  {isPending
+                    ? "Loading"
+                    : state?.data?.turnover.toLocaleString()}
                 </p>
               </div>
               <div className="w-full bg-accent p-4  mt-4 rounded-md">
