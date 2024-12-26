@@ -54,7 +54,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  href="https://athenamedia.co.uk"
+                  href="https://athenamedia.co.za"
                   className="text-white hover:text-zinc-500 text-xs"
                 >
                   Developed By Athena Media &copy; {year}
