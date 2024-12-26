@@ -20,6 +20,7 @@ interface MortgageFormProps {
 }
 
 export function MortgageForm({ onSubmit, isPending }: MortgageFormProps) {
+
   const {
     control,
     handleSubmit,
@@ -34,7 +35,7 @@ export function MortgageForm({ onSubmit, isPending }: MortgageFormProps) {
       phoneNumber: "",
       email: "",
       interestRate: 3.5,
-      loanTerm: 30,
+      loanTerm: 10,
       sector: "",
       turnover: 0,
     },
