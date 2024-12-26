@@ -73,23 +73,6 @@ export default function MortgageLoanCalculator() {
           <CardContent>
             <form
               action={(formData: FormData) => {
-                const calculationResult = calculateMortgage({
-                  loanValue: Number(formData.get("loanValue")),
-                  interestRate: Number(formData.get("interestRate")),
-                  loanTerm: Number(formData.get("loanTerm")),
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  loanPurpose: formData.get("loanPurpose") as any,
-                  propertyValue: Number(formData.get("propertyValue")),
-                  name: formData.get("name") as string,
-                  phoneNumber: formData.get("phoneNumber") as string,
-                  email: formData.get("email") as string,
-                  sector: formData.get("sector") as string,
-                  turnover: Number(formData.get("turnover")),
-                });
-
-
-
-                setResult(calculationResult);
                 startTransition(() => {
                   formAction(formData);
                 });
@@ -328,7 +311,7 @@ export default function MortgageLoanCalculator() {
             </form>
           </CardContent>
         </Card>
-        { state?.data ? (
+        {state?.data ? (
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">Calculation Result</CardTitle>
@@ -350,8 +333,6 @@ export default function MortgageLoanCalculator() {
                   <strong>Total Interest:</strong> £
                   {state.data.totalInterest.toLocaleString()}
                 </p>
-
-
               </div>
               <div className="w-full bg-accent p-4  mt-4 rounded-md">
                 {/* Add a banner saying great news we have lenders that can lend up to 80% LTV */}
