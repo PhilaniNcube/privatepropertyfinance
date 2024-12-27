@@ -11,6 +11,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Minus, Plus } from "lucide-react";
+import {
+  Button as ButtonField,
+  Group as GroupField,
+  Input as InputField,
+  Label as LabelField,
+  NumberField,
+} from "react-aria-components";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -83,6 +91,19 @@ type LoanDetails = {
   ltv: number;
 };
 
+// Add currency formatter utility
+const formatCurrency = (value: number | string): string => {
+  const numericValue = typeof value === 'string' ? parseFloat(value) : value;
+  return new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'GBP',
+  }).format(numericValue || 0);
+};
+
+const parseCurrencyString = (value: string): number => {
+  return Number(value.replace(/[^0-9.-]+/g, ''));
+};
+
 export default function DevelopmentLoanCalculator() {
   const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -96,15 +117,29 @@ export default function DevelopmentLoanCalculator() {
     control,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues,
   });
 
+  const watchLandValue = watch("landValue");
+  const watchConstructionCosts = watch("constructionCosts");
+  const watchGdv = watch("gdv");
+  const watchLoanRequired = watch("loanRequired");
+
+
+
   const calculateLoanCosts = (data: FormData) => {
     // Total project cost
     const totalCost = data.gdv
+
+    // interest rate 10%
+    // arrangement fee 2%
+    // exit fee 1%
+    // drop total cost of finance
+
 
     // Maximum loan (75% LTV)
     const maxLoanAmount = totalCost * 0.65;
@@ -118,9 +153,11 @@ export default function DevelopmentLoanCalculator() {
 
     // Arrangement fee (2%)
     const arrangementFee = loanAmount * 0.02;
+    const exitFee = loanAmount * 0.01;
+
 
     // Total cost of finance
-    const totalCostOfFinance = totalInterest + arrangementFee;
+    const totalCostOfFinance = totalInterest + arrangementFee + exitFee;
 
 
 
@@ -344,8 +381,21 @@ export default function DevelopmentLoanCalculator() {
                 <Controller
                   name="landValue"
                   control={control}
-                  render={({ field }) => <Input type="number" {...field} />}
+                  render={({ field }) => (
+                    <Input
+                      className="w-full tabular-nums"
+                      type="number"
+                      onChangeCapture={(e) => {
+                        formatCurrency(watchLandValue);
+                      }}
+                      {...field}
+                      placeholder="0.00"
+                    />
+                  )}
                 />
+                <p className="text-sm text-muted-foreground">
+                  {formatCurrency(watchLandValue)}
+                </p>
                 {errors.landValue && (
                   <p className="text-red-500">{errors.landValue.message}</p>
                 )}
@@ -360,6 +410,9 @@ export default function DevelopmentLoanCalculator() {
                   control={control}
                   render={({ field }) => <Input type="number" {...field} />}
                 />
+                <p className="text-sm text-muted-foreground">
+                  {formatCurrency(watchConstructionCosts)}
+                </p>
                 {errors.constructionCosts && (
                   <p className="text-red-500">
                     {errors.constructionCosts.message}
@@ -374,6 +427,9 @@ export default function DevelopmentLoanCalculator() {
                   control={control}
                   render={({ field }) => <Input type="number" {...field} />}
                 />
+                <p className="text-sm text-muted-foreground">
+                  {formatCurrency(watchGdv)}
+                </p>
                 {errors.gdv && (
                   <p className="text-red-500">{errors.gdv.message}</p>
                 )}
@@ -386,6 +442,9 @@ export default function DevelopmentLoanCalculator() {
                   control={control}
                   render={({ field }) => <Input type="number" {...field} />}
                 />
+                <p className="text-sm text-muted-foreground">
+                  {formatCurrency(watchLoanRequired)}
+                </p>
                 {errors.loanRequired && (
                   <p className="text-red-500">{errors.loanRequired.message}</p>
                 )}
@@ -465,8 +524,8 @@ export default function DevelopmentLoanCalculator() {
               <p>Total Interest: £{loanDetails.totalInterest}</p>
 
               <h2 className="text-xl font-semibold mt-6">Fees</h2>
-              <p>Arrangement Fee: £{loanDetails.arrangementFee}</p>
-              <p>Total Cost of Finance: £{loanDetails.totalCostOfFinance}</p>
+              <p>Arrangement Fee: 2%</p>
+              <p>Exit Fee: 1%</p>
 
               <h2 className="text-xl font-semibold mt-6">
                 Great news we have lenders that can lend up to 65% of GDV
@@ -479,3 +538,5 @@ export default function DevelopmentLoanCalculator() {
     </div>
   );
 }
+
+
