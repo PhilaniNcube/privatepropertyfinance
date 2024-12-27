@@ -104,7 +104,7 @@ export default function DevelopmentLoanCalculator() {
 
   const calculateLoanCosts = (data: FormData) => {
     // Total project cost
-    const totalCost = data.landValue + data.constructionCosts;
+    const totalCost = data.gdv
 
     // Maximum loan (75% LTV)
     const maxLoanAmount = totalCost * 0.65;
