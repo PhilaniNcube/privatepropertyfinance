@@ -107,7 +107,7 @@ export default function DevelopmentLoanCalculator() {
     const totalCost = data.landValue + data.constructionCosts;
 
     // Maximum loan (75% LTV)
-    const maxLoanAmount = totalCost * 0.75;
+    const maxLoanAmount = totalCost * 0.65;
     const loanAmount = Math.min(data.loanRequired, maxLoanAmount);
 
     // Interest calculations
