@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { Metadata } from "next";
 import { Mail, Phone } from "lucide-react";
 import { contactUsAction } from "@/actions/emails/contact-us";
+import Link from "next/link";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -131,22 +132,30 @@ export default function ContactUs() {
               Or contact us directly at{" "}
             </h2>
             <p className="text-sm mt-3 text-gray-100">
-              <a href="tel:+447351088358">
+              <Link href="tel:+447351088358">
                 <span>
                   <Phone size={16} className="inline-block -mt-1 mr-1" />
                 </span>
                 <span className="text-white">+44 7351 088358</span>
-              </a>
+              </Link>
             </p>
             <p className="text-sm mt-3 text-gray-100">
-              <a href="mailto:info@privatepropertyfinance.com">
+              <Link href="tel:+441613990207">
+                <span>
+                  <Phone size={16} className="inline-block -mt-1 mr-1" />
+                </span>
+                <span className="text-white">+44 1613 990207</span>
+              </Link>
+            </p>
+            <p className="text-sm mt-3 text-gray-100">
+              <Link href="mailto:info@privatepropertyfinance.com">
                 <span>
                   <Mail size={16} className="inline-block -mt-1 mr-1" />
                 </span>
                 <span className="text-white">
                   info@privatepropertyfinance.com
                 </span>
-              </a>
+              </Link>
             </p>
           </div>
         </div>

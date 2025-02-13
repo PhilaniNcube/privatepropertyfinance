@@ -48,20 +48,16 @@ export default function AdditionalInfo() {
                   other than Banks, Lenders, Brokers or Packagers whom we
                   believe may serve the best interests of you the client
                 </p>
-
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-1">
               <AccordionTrigger>Company Information</AccordionTrigger>
               <AccordionContent>
                 <p>
-                  Private Property Finance is an Appointed Representative of
-                  White Rose Group which is authorised and regulated by the
-                  Financial Conduct Authority under number 192852. We are a
-                  credit broker, not a lender. We may receive commission from
-                  the lender and this amount varies between lenders. The nature
-                  of any commission model will be confirmed to you before you
-                  proceed
+                  Private Property Finance is a credit broker, not a lender. We
+                  may receive commission from the lender and this amount varies
+                  between lenders. The nature of any commission model will be
+                  confirmed to you before you proceed
                 </p>
                 <p className="mt-2">
                   We conduct both regulated and unregulated business and
