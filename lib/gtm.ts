@@ -1,21 +1,17 @@
 // Google Tag Manager utility functions for tracking form submissions
 
-declare global {
-  interface Window {
-    dataLayer: any[];
-  }
-}
-
 // Initialize dataLayer if it doesn't exist
 export const initializeDataLayer = () => {
-  window.dataLayer = window.dataLayer || [];
+  if (typeof window !== "undefined") {
+    (window as any).dataLayer = (window as any).dataLayer || [];
+  }
 };
 
 // Generic function to push events to dataLayer
 export const gtmPush = (event: Record<string, any>) => {
   if (typeof window !== "undefined") {
     initializeDataLayer();
-    window.dataLayer.push(event);
+    (window as any).dataLayer.push(event);
   }
 };
 
