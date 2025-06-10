@@ -5,7 +5,7 @@ import Navigation from "@/components/navigation/navigation.client";
 import Footer from "@/components/navigation/footer";
 import { Toaster } from "@/components/ui/sonner";
 import Whatsapp from "@/components/navigation/whatsapp";
-
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -111,9 +111,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${aptosMono.className} antialiased relative`}
-      >
+      <body className={`${aptosMono.className} antialiased relative`}>
+        <GoogleTagManager gtmId="GTM-N255JSLF" />
         <Navigation />
         {children}
         <Toaster />
