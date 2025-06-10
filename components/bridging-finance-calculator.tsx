@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import Image from "next/image";
 import { Card } from "./ui/card";
 import { bridgingFinanceAction } from "@/actions/emails/bridging-finance";
+import { trackFormSubmission } from "@/lib/gtm";
 
 const formSchema = z.object({
   estimatedValue: z.coerce.number().min(1, "Estimated value is required"),
@@ -36,96 +37,114 @@ const formSchema = z.object({
 });
 
 const BridgingFinanceCalculator = () => {
-
   const [state, formAction, isPending] = useActionState(
     bridgingFinanceAction,
     null
   );
 
-    const form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
-      defaultValues: {
-        // estimatedValue: 0,
-        location: "",
-        // loanAmount: 30000,
-        // term: "",
-        interestRate: 5.5,
-        canServiceInterest: undefined,
-        name: "",
-        email: "",
-        contact: "",
-      },
-    });
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      // estimatedValue: 0,
+      location: "",
+      // loanAmount: 30000,
+      // term: "",
+      interestRate: 5.5,
+      canServiceInterest: undefined,
+      name: "",
+      email: "",
+      contact: "",
+    },
+  });
 
-    const interestRate = form.watch("interestRate");
-    const loanAmount = form.watch("loanAmount");
-    const term = form.watch("term");
-    const estimatedValue = form.watch("estimatedValue");
+  const interestRate = form.watch("interestRate");
+  const loanAmount = form.watch("loanAmount");
+  const term = form.watch("term");
+  const estimatedValue = form.watch("estimatedValue");
 
-    // calculate the Gross LTV
-    function calculateGrossLTV () {
-      const grossLTV = (loanAmount / estimatedValue);
-      return grossLTV;
-    };
+  // calculate the Gross LTV
+  function calculateGrossLTV() {
+    const grossLTV = loanAmount / estimatedValue;
+    return grossLTV;
+  }
 
-    // write a function to calculate the monthly repayment
-    function calculateMonthlyRepayment () {
-      const monthlyInterestRate = interestRate / 100 / 12;
-      const monthlyRepayment =
-        (loanAmount * monthlyInterestRate) /
-        (1 - Math.pow(1 + monthlyInterestRate, -term));
-      return monthlyRepayment;
-    };
+  // write a function to calculate the monthly repayment
+  function calculateMonthlyRepayment() {
+    const monthlyInterestRate = interestRate / 100 / 12;
+    const monthlyRepayment =
+      (loanAmount * monthlyInterestRate) /
+      (1 - Math.pow(1 + monthlyInterestRate, -term));
+    return monthlyRepayment;
+  }
 
   return (
     <div className="py-10">
       <div className="max-w-7xl px-4 mx-auto grid md:grid-cols-2 gap-6">
         <div className="w-full">
-          <h1 className="text-2xl font-bold mb-6">Property Loan Inquiry</h1>
+          <h1 className="text-2xl font-bold mb-6">Property Loan Inquiry</h1>{" "}
           <Form {...form}>
-            <form action={(formData:FormData) => {
+            <form
+              action={(formData: FormData) => {
+                // Track form submission
+                const name = formData.get("name") as string;
+                const email = formData.get("email") as string;
+                const estimatedValue = Number(formData.get("estimatedValue"));
+                const loanAmount = Number(formData.get("loanAmount"));
+                const location = formData.get("location") as string;
 
-      const monthlyRepayment = calculateMonthlyRepayment();
+                trackFormSubmission.bridgingFinance({
+                  name,
+                  email,
+                  estimatedValue,
+                  loanAmount,
+                  location,
+                });
 
-      const gtv = calculateGrossLTV();
+                const monthlyRepayment = calculateMonthlyRepayment();
 
-      // format the monthly repayment to 2 decimal places
-      const formated = Intl.NumberFormat("en-GB", {
-        style: "currency",
-        currency: "GBP",
-      }).format(monthlyRepayment);
+                const gtv = calculateGrossLTV();
 
-      const formatedGTV = Intl.NumberFormat("en-GB", {
-        style: "percent",
-        minimumFractionDigits: 2,
-      }).format(gtv);
+                // format the monthly repayment to 2 decimal places
+                const formated = Intl.NumberFormat("en-GB", {
+                  style: "currency",
+                  currency: "GBP",
+                }).format(monthlyRepayment);
 
-      toast(
-        <div>
-          <div className="p-4">
-            <h3 className="text-xl font-bold">Estimated Monthly Repayment</h3>
-            <p className="text-lg font-semibold">{formated}</p>
-            <h3 className="text-xl font-bold">Gross Loan to Value (LTV)</h3>
-            <p className="text-lg font-semibold">{formatedGTV}</p>
-          </div>
-        </div>,
-        {
-          position: "top-center",
+                const formatedGTV = Intl.NumberFormat("en-GB", {
+                  style: "percent",
+                  minimumFractionDigits: 2,
+                }).format(gtv);
 
-          duration: 12000,
-          action: {
-            label: "Close",
-            onClick: () => console.log("Undo"),
-          },
-        }
-      );
+                toast(
+                  <div>
+                    <div className="p-4">
+                      <h3 className="text-xl font-bold">
+                        Estimated Monthly Repayment
+                      </h3>
+                      <p className="text-lg font-semibold">{formated}</p>
+                      <h3 className="text-xl font-bold">
+                        Gross Loan to Value (LTV)
+                      </h3>
+                      <p className="text-lg font-semibold">{formatedGTV}</p>
+                    </div>
+                  </div>,
+                  {
+                    position: "top-center",
 
-              startTransition( () => {
-                 formAction(formData);
-              });
+                    duration: 12000,
+                    action: {
+                      label: "Close",
+                      onClick: () => console.log("Undo"),
+                    },
+                  }
+                );
 
-
-            }} className="space-y-6">
+                startTransition(() => {
+                  formAction(formData);
+                });
+              }}
+              className="space-y-6"
+            >
               <div className="grid md:grid-cols-2 gap-6">
                 {" "}
                 <FormField
@@ -222,9 +241,9 @@ const BridgingFinanceCalculator = () => {
                   render={({ field }) => (
                     <FormItem className="space-y-3">
                       <FormLabel>Can you service the interest?</FormLabel>
-                      <FormControl >
+                      <FormControl>
                         <RadioGroup
-                        name="canServiceInterest"
+                          name="canServiceInterest"
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                           className="flex flex-col space-y-1"
@@ -319,5 +338,3 @@ const BridgingFinanceCalculator = () => {
   );
 };
 export default BridgingFinanceCalculator;
-
-

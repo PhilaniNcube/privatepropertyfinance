@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { trackFormSubmission } from "@/lib/gtm";
 
 const formSchema = z.object({
   propertyValue: z.string().min(1, "Property value is required"),
@@ -45,9 +46,6 @@ const formSchema = z.object({
 });
 
 export default function QuoteForm() {
-
-
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -59,10 +57,16 @@ export default function QuoteForm() {
       adverseCredit: "no",
     },
   });
-
   function onSubmit(values: z.infer<typeof formSchema>) {
+    // Track form submission
+    trackFormSubmission.getAQuote({
+      name: values.name,
+      email: values.email,
+      propertyValue: values.propertyValue,
+      loanRequired: values.loanRequired,
+    });
 
-
+    console.log("Form submitted with values:", values);
   }
 
   return (

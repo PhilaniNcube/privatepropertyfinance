@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { commercialLoanCalculatorAction } from "@/actions/emails/commercial-loan";
+import { trackFormSubmission } from "@/lib/gtm";
 
 const formSchema = z.object({
   fullName: z.string(),
@@ -63,34 +64,42 @@ export default function CommercialCalculator() {
     },
   });
 
-      const calculateMonthlyPayment = (
-        loanAmount: number,
-        interestRate: number,
-        loanTerm: number
-      ): number => {
-        const monthlyInterest = (loanAmount * (interestRate / 100)) / 12;
-        const monthlyPayment = loanAmount / loanTerm + monthlyInterest;
-        return monthlyPayment;
-      };
-
+  const calculateMonthlyPayment = (
+    loanAmount: number,
+    interestRate: number,
+    loanTerm: number
+  ): number => {
+    const monthlyInterest = (loanAmount * (interestRate / 100)) / 12;
+    const monthlyPayment = loanAmount / loanTerm + monthlyInterest;
+    return monthlyPayment;
+  };
 
   const onSubmit = (data: FormData) => {
     console.log(data);
 
+    // Track form submission
+    trackFormSubmission.commercialLoan({
+      fullName: data.fullName,
+      email: data.email,
+      loanRequired: data.loanRequired,
+      companyName: data.companyName,
+      loanReason: data.loanReason,
+    });
+
     const loanAmount = Number(data.loanRequired);
 
-       const formData = new FormData();
-       formData.append("fullName", data.fullName);
-       formData.append("email", data.email);
-       formData.append("companyName", data.companyName);
-       formData.append("loanReason", data.loanReason);
-       formData.append("interestRate", data.interestRate.toString());
-       formData.append("loanTerm", data.loanTerm.toString());
-       formData.append("loanRequired", data.loanRequired.toString());
+    const formData = new FormData();
+    formData.append("fullName", data.fullName);
+    formData.append("email", data.email);
+    formData.append("companyName", data.companyName);
+    formData.append("loanReason", data.loanReason);
+    formData.append("interestRate", data.interestRate.toString());
+    formData.append("loanTerm", data.loanTerm.toString());
+    formData.append("loanRequired", data.loanRequired.toString());
 
-       startTransition(() => {
-         formAction(formData);
-      });
+    startTransition(() => {
+      formAction(formData);
+    });
 
     // write a function to calculate the monthly payment
 
@@ -114,8 +123,6 @@ export default function CommercialCalculator() {
       monthlyPayment: repayment.toLocaleString(),
       totalInterest: totalInterest.toLocaleString(),
     });
-
-
 
     setShowModal(true);
   };

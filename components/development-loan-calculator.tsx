@@ -32,6 +32,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { developmentFinanceAction } from "@/actions/emails/development-finance";
+import { trackFormSubmission } from "@/lib/gtm";
 
 const formSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -93,15 +94,15 @@ type LoanDetails = {
 
 // Add currency formatter utility
 const formatCurrency = (value: number | string): string => {
-  const numericValue = typeof value === 'string' ? parseFloat(value) : value;
-  return new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP',
+  const numericValue = typeof value === "string" ? parseFloat(value) : value;
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP",
   }).format(numericValue || 0);
 };
 
 const parseCurrencyString = (value: string): number => {
-  return Number(value.replace(/[^0-9.-]+/g, ''));
+  return Number(value.replace(/[^0-9.-]+/g, ""));
 };
 
 export default function DevelopmentLoanCalculator() {
@@ -129,17 +130,14 @@ export default function DevelopmentLoanCalculator() {
   const watchGdv = watch("gdv");
   const watchLoanRequired = watch("loanRequired");
 
-
-
   const calculateLoanCosts = (data: FormData) => {
     // Total project cost
-    const totalCost = data.gdv
+    const totalCost = data.gdv;
 
     // interest rate 10%
     // arrangement fee 2%
     // exit fee 1%
     // drop total cost of finance
-
 
     // Maximum loan (75% LTV)
     const maxLoanAmount = totalCost * 0.65;
@@ -155,11 +153,8 @@ export default function DevelopmentLoanCalculator() {
     const arrangementFee = loanAmount * 0.02;
     const exitFee = loanAmount * 0.01;
 
-
     // Total cost of finance
     const totalCostOfFinance = totalInterest + arrangementFee + exitFee;
-
-
 
     // scroll to the loan details section
     const loanDetailsSection = document.getElementById("loan-details");
@@ -174,42 +169,48 @@ export default function DevelopmentLoanCalculator() {
       ltv: ((loanAmount / totalCost) * 100).toFixed(1),
     };
   };
-
   const onSubmit = (data: FormData) => {
     console.log(data);
     const costs = calculateLoanCosts(data);
-     setLoanDetails({
+    setLoanDetails({
       loanAmount: parseFloat(costs.loanAmount),
       monthlyPayment: parseFloat(costs.monthlyPayment),
       totalInterest: parseFloat(costs.totalInterest),
       arrangementFee: parseFloat(costs.arrangementFee),
       totalCostOfFinance: parseFloat(costs.totalCostOfFinance),
       ltv: parseFloat(costs.ltv),
-     });
+    });
 
-     const formData = new FormData()
+    // Track form submission
+    trackFormSubmission.developmentFinance({
+      fullName: data.fullName,
+      email: data.email,
+      loanRequired: data.loanRequired,
+      gdv: data.gdv,
+      location: data.location,
+    });
 
-     formData.append("fullName", data.fullName)
-     formData.append("companyName", data.companyName)
-     formData.append("completedDevelopments", data.completedDevelopments);
-     formData.append("constructionCosts", data.constructionCosts.toString());
-     formData.append("contactNumber", data.contactNumber);
-     formData.append("email", data.email);
-     formData.append("exitStrategy", data.exitStrategy);
-     formData.append("gdv", data.gdv.toString());
-     formData.append("landValue", data.landValue.toString());
-     formData.append("location", data.location);
-     formData.append("planningApproved", data.planningApproved);
-     formData.append("ownsLand", data.ownsLand);
-     formData.append("loanRequired", data.loanRequired.toString());
-     formData.append("numberOfUnits", data.numberOfUnits.toString());
-     formData.append("loanTerm", data.numberOfUnits.toString());
+    const formData = new FormData();
 
+    formData.append("fullName", data.fullName);
+    formData.append("companyName", data.companyName);
+    formData.append("completedDevelopments", data.completedDevelopments);
+    formData.append("constructionCosts", data.constructionCosts.toString());
+    formData.append("contactNumber", data.contactNumber);
+    formData.append("email", data.email);
+    formData.append("exitStrategy", data.exitStrategy);
+    formData.append("gdv", data.gdv.toString());
+    formData.append("landValue", data.landValue.toString());
+    formData.append("location", data.location);
+    formData.append("planningApproved", data.planningApproved);
+    formData.append("ownsLand", data.ownsLand);
+    formData.append("loanRequired", data.loanRequired.toString());
+    formData.append("numberOfUnits", data.numberOfUnits.toString());
+    formData.append("loanTerm", data.numberOfUnits.toString());
 
-
-     startTransition(() => {
-       formAction(formData);
-     })
+    startTransition(() => {
+      formAction(formData);
+    });
 
     setShowModal(true);
   };
@@ -538,5 +539,3 @@ export default function DevelopmentLoanCalculator() {
     </div>
   );
 }
-
-

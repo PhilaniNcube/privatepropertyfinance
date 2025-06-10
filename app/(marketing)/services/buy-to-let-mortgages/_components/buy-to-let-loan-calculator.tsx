@@ -33,6 +33,7 @@ import {
 import Image from "next/image";
 import { toast } from "sonner";
 import { propertyLoanCalculatorAction } from "@/actions/emails/buy-to-let";
+import { trackFormSubmission } from "@/lib/gtm";
 
 const formSchema = z.object({
   propertyValue: z.coerce
@@ -99,9 +100,17 @@ export default function PropertyLoanCalculator() {
       totalLoanAmount: Math.round(totalLoanAmount),
     };
   }
-
   function onSubmit(data: z.infer<typeof formSchema>) {
     const loanCalculation = calculateLoan(data);
+
+    // Track form submission
+    trackFormSubmission.buyToLet({
+      name: data.name,
+      email: data.email,
+      propertyValue: data.propertyValue,
+      propertyType: data.propertyType,
+      location: data.location,
+    });
 
     toast(
       <div className="flex flex-col items-start">

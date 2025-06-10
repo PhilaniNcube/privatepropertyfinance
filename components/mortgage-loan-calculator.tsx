@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { start } from "repl";
+import { trackFormSubmission } from "@/lib/gtm";
 
 interface MortgageFormProps {
   onSubmit: (data: MortgageFormData) => void;
@@ -71,8 +72,24 @@ export default function MortgageLoanCalculator() {
             <CardDescription>Enter your loan details below</CardDescription>
           </CardHeader>
           <CardContent>
+            {" "}
             <form
               action={(formData: FormData) => {
+                // Track form submission
+                const name = formData.get("name") as string;
+                const email = formData.get("email") as string;
+                const propertyValue = Number(formData.get("propertyValue"));
+                const loanValue = Number(formData.get("loanValue"));
+                const loanPurpose = formData.get("loanPurpose") as string;
+
+                trackFormSubmission.mortgageLoan({
+                  name,
+                  email,
+                  propertyValue,
+                  loanValue,
+                  loanPurpose,
+                });
+
                 startTransition(() => {
                   formAction(formData);
                 });

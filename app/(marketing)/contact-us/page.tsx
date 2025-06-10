@@ -21,6 +21,7 @@ import { Metadata } from "next";
 import { Mail, Phone } from "lucide-react";
 import { contactUsAction } from "@/actions/emails/contact-us";
 import Link from "next/link";
+import { trackFormSubmission } from "@/lib/gtm";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -44,8 +45,6 @@ export default function ContactUs() {
     },
   });
 
-
-
   return (
     <div className="flex min-h-screen bg-accent">
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
@@ -58,10 +57,15 @@ export default function ContactUs() {
               We&apos;d love to hear from you. Send us a message and we&apos;ll
               respond as soon as possible.
             </p>
-          </div>
+          </div>{" "}
           <Form {...form}>
             <form
               action={(formData) => {
+                // Track form submission
+                const name = formData.get("name") as string;
+                const email = formData.get("email") as string;
+                trackFormSubmission.contactUs({ name, email });
+
                 startTransition(() => {
                   formAction(formData);
                 });
