@@ -22,6 +22,7 @@ const navigationLinks = [
     ],
   },
   { text: "Contact Us", url: "/contact-us" },
+  { text: "Blog", url: "/blogs" },
   { text: "Get a Quote", url: "/get-a-quote" },
 ];
 
