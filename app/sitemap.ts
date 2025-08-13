@@ -1,6 +1,18 @@
 import type { MetadataRoute } from "next";
+import { client } from "@/sanity/lib/client";
+import { groq } from "next-sanity";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts: { slug: { current: string }; _updatedAt?: string }[] =
+    await client.fetch(
+      groq`*[_type=='post' && defined(slug.current)]{ slug, _updatedAt }`
+    );
+  const blogEntries: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `https://privatepropertyfinance.com/blogs/${p.slug.current}`,
+    lastModified: p._updatedAt ? new Date(p._updatedAt) : new Date(),
+    changeFrequency: "weekly",
+    priority: 0.4,
+  }));
   return [
     {
       url: "https://privatepropertyfinance.com/",
@@ -80,5 +92,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.5,
     },
+    ...blogEntries,
   ];
 }

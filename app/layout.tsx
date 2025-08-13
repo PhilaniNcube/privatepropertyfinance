@@ -7,17 +7,6 @@ import { Toaster } from "@/components/ui/sonner";
 import Whatsapp from "@/components/navigation/whatsapp";
 import { GoogleTagManager } from "@next/third-parties/google";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
 const aptosMono = localFont({
   src: "./fonts/Aptos.ttf",
   variable: "--font-aptos-mono",
