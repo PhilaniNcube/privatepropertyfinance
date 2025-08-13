@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 // Relaxed param typing to align with Next.js internal PageProps checks
-type BlogPageParams = { slug: string };
+type BlogPageParams = Promise<{ slug: string }>;
 
 export const revalidate = 60;
 
@@ -34,7 +34,7 @@ export async function generateMetadata({
 }: {
   params: BlogPageParams;
 }): Promise<Metadata> {
-  const post = await client.fetch(postQuery, { slug: params?.slug });
+  const post = await client.fetch(postQuery, { slug: (await params)?.slug });
   if (!post) return { title: "Post not found | Private Property Finance" };
   return {
     title: `${post.title} | Private Property Finance`,
@@ -62,7 +62,7 @@ export default async function BlogPostPage({
 }: {
   params: BlogPageParams;
 }) {
-  const post = await client.fetch(postQuery, { slug: params?.slug });
+  const post = await client.fetch(postQuery, { slug: (await params)?.slug });
   if (!post) return notFound();
   const imageUrl = post.mainImage
     ? urlFor(post.mainImage).width(1200).height(600).fit("crop").url()
