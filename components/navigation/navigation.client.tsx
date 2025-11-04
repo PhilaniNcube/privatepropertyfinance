@@ -21,6 +21,7 @@ const navigationLinks = [
       { text: "Commercial Mortgages", url: "/services/commercial-mortgages" },
     ],
   },
+  { text: "Projects", url: "/projects" },
   { text: "Contact Us", url: "/contact-us" },
   { text: "Blog", url: "/blogs" },
   { text: "Get a Quote", url: "/get-a-quote" },
