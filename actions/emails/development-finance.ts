@@ -1,6 +1,7 @@
 "use server";
 import z from 'zod'
 import { Resend } from "resend";
+import { checkBotId } from 'botid/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -25,6 +26,11 @@ const formSchema = z.object({
 });
 
 export async function developmentFinanceAction(prevState: unknown, formData: FormData) {
+    // Bot detection
+  const verification = await checkBotId();
+  if (verification.isBot) {
+    throw new Error("Access denied");
+  }
 
   const validatedFields = formSchema.safeParse({
     fullName: formData.get("fullName"),

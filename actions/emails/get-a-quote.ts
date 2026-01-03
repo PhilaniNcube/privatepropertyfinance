@@ -1,8 +1,8 @@
-"use server"
+"use server";
 
-
+import { checkBotId } from "botid/server";
 import { Resend } from "resend";
-import z from 'zod'
+import z from "zod";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -19,33 +19,41 @@ const formSchema = z.object({
   turnover: z.coerce.number(),
 });
 
-export async function getAQuoteAction(prevState:unknown, formData:FormData) {
+export async function getAQuoteAction(prevState: unknown, formData: FormData) {
+  // Bot detection
+  const verification = await checkBotId();
+  if (verification.isBot) {
+    throw new Error("Access denied");
+  }
 
   const validatedFields = formSchema.safeParse({
-    loanPurpose: formData.get('loanPurpose'),
-    propertyValue: formData.get('propertyValue'),
-    loanValue: formData.get('loanValue'),
-    name: formData.get('name'),
-    phoneNumber: formData.get('phoneNumber'),
-    email: formData.get('email'),
-    interestRate: formData.get('interestRate'),
-    loanTerm: formData.get('loanTerm'),
-    sector: formData.get('sector'),
-    turnover: formData.get('turnover'),
+    loanPurpose: formData.get("loanPurpose"),
+    propertyValue: formData.get("propertyValue"),
+    loanValue: formData.get("loanValue"),
+    name: formData.get("name"),
+    phoneNumber: formData.get("phoneNumber"),
+    email: formData.get("email"),
+    interestRate: formData.get("interestRate"),
+    loanTerm: formData.get("loanTerm"),
+    sector: formData.get("sector"),
+    turnover: formData.get("turnover"),
   });
-
-
 
   if (!validatedFields.success) {
     console.log(validatedFields.error.flatten().fieldErrors);
     return {
       success: false,
       errors: validatedFields.error.errors,
-    }
+    };
   }
 
   // caclulate the monthly payment, total payment and total interest
-  const monthlyPayment = validatedFields.data.loanValue * (validatedFields.data.interestRate / 100 / 12) / (1 - (1 + validatedFields.data.interestRate / 100 / 12) ** (-validatedFields.data.loanTerm * 12));
+  const monthlyPayment =
+    (validatedFields.data.loanValue *
+      (validatedFields.data.interestRate / 100 / 12)) /
+    (1 -
+      (1 + validatedFields.data.interestRate / 100 / 12) **
+        (-validatedFields.data.loanTerm * 12));
 
   const totalPayment = monthlyPayment * validatedFields.data.loanTerm * 12;
 
@@ -74,12 +82,12 @@ export async function getAQuoteAction(prevState:unknown, formData:FormData) {
     return {
       success: false,
       error: "An error occurred while sending the email",
-    }
+    };
   }
 
   return {
     success: true,
-    data :{
+    data: {
       loanPurpose: validatedFields.data.loanPurpose,
       propertyValue: validatedFields.data.propertyValue,
       loanValue: validatedFields.data.loanValue,
@@ -92,8 +100,7 @@ export async function getAQuoteAction(prevState:unknown, formData:FormData) {
       turnover: validatedFields.data.turnover,
       monthlyPayment,
       totalPayment,
-      totalInterest
-    }
-  }
-
+      totalInterest,
+    },
+  };
 }
