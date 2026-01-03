@@ -54,7 +54,7 @@ export default function ContactUs() {
               Contact Us
             </h2>
             <p className="mt-2 text-sm text-gray-100">
-              We&apos;d love to hear from you. Send us a message and we&apos;ll
+              We&apos;d love to hear from you. Send us a message and we will
               respond as soon as possible.
             </p>
           </div>{" "}
