@@ -101,6 +101,7 @@ function MoneyInput({
   required,
   error,
   help,
+  labelClassName = "",
 }: {
   id: string;
   label: string;
@@ -109,12 +110,19 @@ function MoneyInput({
   required?: boolean;
   error?: string;
   help?: string;
+  labelClassName?: string;
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-        {label} {required ? <span className="text-gold-ink">*</span> : null}
-      </label>
+      <div className={`mb-2 flex items-end ${labelClassName}`}>
+        <label
+          htmlFor={id}
+          className="block w-full font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy"
+        >
+          {label}
+          {required ? <span className="text-gold-ink">&nbsp;*</span> : null}
+        </label>
+      </div>
       <div className="relative">
         <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-sans text-sm text-ink/70">
           £
@@ -526,7 +534,7 @@ export function EnquiryForm({
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
                         <label htmlFor="propertyType" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                          Property type <span className="text-gold-ink">*</span>
+                          Property type<span className="text-gold-ink">&nbsp;*</span>
                         </label>
                         <select
                           id="propertyType"
@@ -546,7 +554,7 @@ export function EnquiryForm({
                       </div>
                       <div>
                         <label htmlFor="occupancy" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                          Use <span className="text-gold-ink">*</span>
+                          Use<span className="text-gold-ink">&nbsp;*</span>
                         </label>
                         <select
                           id="occupancy"
@@ -636,7 +644,7 @@ export function EnquiryForm({
                     </div>
                     <div>
                       <label htmlFor="exitRoute" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                        Exit route <span className="text-gold-ink">*</span>
+                        Exit route<span className="text-gold-ink">&nbsp;*</span>
                       </label>
                       <select
                         id="exitRoute"
@@ -657,7 +665,7 @@ export function EnquiryForm({
 
                 {dealType === "development" ? (
                   <>
-                    <div className="grid gap-5 sm:grid-cols-3">
+                    <div className="grid gap-5 sm:grid-cols-2">
                       <MoneyInput
                         id="landCost"
                         label="Land or purchase cost"
@@ -665,6 +673,7 @@ export function EnquiryForm({
                         onChange={(value) => update("landCost", value)}
                         required
                         error={errors.landCost}
+                        labelClassName="sm:min-h-[2.6rem]"
                       />
                       <MoneyInput
                         id="buildCost"
@@ -673,16 +682,18 @@ export function EnquiryForm({
                         onChange={(value) => update("buildCost", value)}
                         required
                         error={errors.buildCost}
+                        labelClassName="sm:min-h-[2.6rem]"
                       />
+                    </div>
+                    <div className="grid gap-5 sm:grid-cols-2">
                       <MoneyInput
                         id="otherCosts"
                         label="Other costs"
                         value={values.otherCosts ?? ""}
                         onChange={(value) => update("otherCosts", value)}
                         help="Fees, contingency"
+                        labelClassName="sm:min-h-[2.6rem]"
                       />
-                    </div>
-                    <div className="grid gap-5 sm:grid-cols-2">
                       <MoneyInput
                         id="gdv"
                         label="GDV"
@@ -690,19 +701,20 @@ export function EnquiryForm({
                         onChange={(value) => update("gdv", value)}
                         required
                         error={errors.gdv}
-                      />
-                      <MoneyInput
-                        id="loanWanted"
-                        label="Loan wanted"
-                        value={values.loanWanted ?? ""}
-                        onChange={(value) => update("loanWanted", value)}
-                        help="Optional. Leave blank to see the rough maximum."
+                        labelClassName="sm:min-h-[2.6rem]"
                       />
                     </div>
+                    <MoneyInput
+                      id="loanWanted"
+                      label="Loan wanted"
+                      value={values.loanWanted ?? ""}
+                      onChange={(value) => update("loanWanted", value)}
+                      help="Optional. Leave blank to see the rough maximum."
+                    />
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
                         <label htmlFor="planning" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                          Planning <span className="text-gold-ink">*</span>
+                          Planning<span className="text-gold-ink">&nbsp;*</span>
                         </label>
                         <select
                           id="planning"
@@ -720,7 +732,7 @@ export function EnquiryForm({
                       </div>
                       <div>
                         <label htmlFor="experience" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                          Experience <span className="text-gold-ink">*</span>
+                          Experience<span className="text-gold-ink">&nbsp;*</span>
                         </label>
                         <select
                           id="experience"
@@ -796,9 +808,11 @@ export function EnquiryForm({
                     />
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
-                        <label htmlFor="buyingAs" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                          Buying as <span className="text-gold-ink">*</span>
-                        </label>
+                        <div className="mb-2 flex items-end sm:min-h-[2.4rem]">
+                          <label htmlFor="buyingAs" className="block w-full font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
+                            Buying as<span className="text-gold-ink">&nbsp;*</span>
+                          </label>
+                        </div>
                         <select
                           id="buyingAs"
                           value={values.buyingAs ?? ""}
@@ -813,9 +827,11 @@ export function EnquiryForm({
                         <FieldError error={errors.buyingAs} />
                       </div>
                       <div>
-                        <label htmlFor="country" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                          Country of residence <span className="text-gold-ink">*</span>
-                        </label>
+                        <div className="mb-2 flex items-end sm:min-h-[2.4rem]">
+                          <label htmlFor="country" className="block w-full font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
+                            Country of residence<span className="text-gold-ink">&nbsp;*</span>
+                          </label>
+                        </div>
                         <select
                           id="country"
                           value={values.country ?? ""}
@@ -931,7 +947,7 @@ export function EnquiryForm({
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               <div>
                 <label htmlFor="name" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                  Name <span className="text-gold-ink">*</span>
+                  Name<span className="text-gold-ink">&nbsp;*</span>
                 </label>
                 <input
                   id="name"
@@ -946,7 +962,7 @@ export function EnquiryForm({
               </div>
               <div>
                 <label htmlFor="email" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                  Email <span className="text-gold-ink">*</span>
+                  Email<span className="text-gold-ink">&nbsp;*</span>
                 </label>
                 <input
                   id="email"
@@ -961,7 +977,7 @@ export function EnquiryForm({
               </div>
               <div>
                 <label htmlFor="phone" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                  Phone <span className="text-gold-ink">*</span>
+                  Phone<span className="text-gold-ink">&nbsp;*</span>
                 </label>
                 <input
                   id="phone"
@@ -976,7 +992,7 @@ export function EnquiryForm({
               </div>
               <div>
                 <label htmlFor="timescale" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                  Timescale <span className="text-gold-ink">*</span>
+                  Timescale<span className="text-gold-ink">&nbsp;*</span>
                 </label>
                 <select
                   id="timescale"
@@ -998,7 +1014,7 @@ export function EnquiryForm({
 
             <div className="mt-5">
               <label htmlFor="details" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                Brief details <span className="text-gold-ink">*</span>
+                Brief details<span className="text-gold-ink">&nbsp;*</span>
               </label>
               <textarea
                 id="details"
