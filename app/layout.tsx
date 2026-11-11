@@ -1,96 +1,87 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import type { Metadata, Viewport } from "next";
+import { Playfair_Display, Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
-import Navigation from "@/components/navigation/navigation.client";
-import Footer from "@/components/navigation/footer";
+import Header from "@/components/site/header";
+import Footer from "@/components/site/footer";
+import { ConsentManager } from "@/components/consent/consent-manager";
 import { Toaster } from "@/components/ui/sonner";
-import Whatsapp from "@/components/navigation/whatsapp";
-import { GoogleTagManager } from "@next/third-parties/google";
+import { JsonLd } from "@/components/seo/json-ld";
+import { organisationSchema, websiteSchema } from "@/lib/schema";
+import { SITE } from "@/lib/content/site";
 
-const aptosMono = localFont({
-  src: "./fonts/Aptos.ttf",
-  variable: "--font-aptos-mono",
-  weight: "100 200 300 400 900",
+const serif = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-serif",
+  weight: ["400", "500", "600", "700"],
+});
+
+const sans = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://privatepropertyfinance.com"),
-  alternates: {
-    canonical: "/",
-    languages: {
-      "en-GB": "/",
-    },
-  },
-  title: {
-    template: "%s | Private Property Finance",
-    default: "Private Property Finance",
-  },
-  description:
-    "Navigating the complexities of property financing with ease and personalized support.",
-  keywords: [
-    "property finance",
-    "mortgage",
-    "property investment",
-    "finance",
-    "international property finance",
-    "care home finance",
-    "property development finance",
-    "bridging finance",
-    "commercial property finance",
-    "property finance broker",
-    "property investments",
-    "property finance UK",
-    "property finance London",
-    "property",
-  ],
-  applicationName: "Private Property Finance",
-  creator: "Private Property Finance",
+  metadataBase: new URL(SITE.url),
+  title: "Private Property Finance | UK Property Finance Broker",
+  description: SITE.description,
+  applicationName: SITE.name,
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
   publisher: "Athena Media",
   openGraph: {
     type: "website",
     locale: "en_GB",
-    siteName: "Private Property Finance",
-    title: "Private Property Finance",
-    url: "https://privatepropertyfinance.com",
-    description:
-      "Navigating the complexities of property financing with ease and personalized support.",
+    siteName: SITE.name,
+    title: "Private Property Finance | UK Property Finance Broker",
+    description: SITE.description,
+    url: SITE.url,
     images: [
       {
-        url: "https://utfs.io/f/K39jtZpI79HT3zgjTtMRMqKJwoliFUYbNI70yz63B8XZPOej",
-        width: 366,
-        height: 360,
-        alt: "Private Property Finance",
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Private Property Finance — UK property finance brokers",
       },
     ],
   },
-  robots: {
-    index: true,
-    follow: true,
-    nocache: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      noimageindex: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  icons: {
-    icon: "https://utfs.io/f/K39jtZpI79HT3zgjTtMRMqKJwoliFUYbNI70yz63B8XZPOej",
-  },
   twitter: {
     card: "summary_large_image",
-    title: "Private Property Finance",
-    description:
-      "Navigating the complexities of property financing with ease and personalized support.",
-    images: [
-      "https://utfs.io/f/K39jtZpI79HT3zgjTtMRMqKJwoliFUYbNI70yz63B8XZPOej",
+    title: "Private Property Finance | UK Property Finance Broker",
+    description: SITE.description,
+    images: ["/opengraph-image"],
+  },
+  robots:
+    process.env.VERCEL_ENV === "preview" ||
+    process.env.NEXT_PUBLIC_NOINDEX === "true"
+      ? { index: false, follow: false }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
+        },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
     ],
   },
   verification: {
     google: "sTDXQDPKtwNl5tCTtd61llxGnld0iK1awlisRgjP0Qc",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0B1F3A",
 };
 
 export default function RootLayout({
@@ -99,14 +90,40 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${aptosMono.className} antialiased relative`}>
-        <GoogleTagManager gtmId="GTM-N255JSLF" />
-        <Navigation />
-        {children}
-        <Toaster />
+    <html
+      lang="en-GB"
+      data-scroll-behavior="smooth"
+      className={`${serif.variable} ${sans.variable}`}
+    >
+      <body className="relative bg-cream font-sans text-ink antialiased">
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              wait_for_update: 500
+            });
+          `}
+        </Script>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-navy focus:px-5 focus:py-3 focus:font-sans focus:text-sm focus:text-cream"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main-content" className="min-h-screen pt-20">
+          {children}
+        </main>
         <Footer />
-        <Whatsapp />
+        <Toaster />
+        <ConsentManager />
+        <JsonLd data={organisationSchema()} />
+        <JsonLd data={websiteSchema()} />
       </body>
     </html>
   );

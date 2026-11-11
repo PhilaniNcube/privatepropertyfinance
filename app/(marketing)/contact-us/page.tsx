@@ -1,179 +1,205 @@
-"use client";
-
-import { startTransition, useActionState, useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { toast } from "sonner";
-import { Metadata } from "next";
-import { Mail, Phone } from "lucide-react";
-import { contactUsAction } from "@/actions/emails/contact-us";
+import type { Metadata } from "next";
 import Link from "next/link";
-import { trackFormSubmission } from "@/lib/gtm";
+import {
+  Clock,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
+import { PageHero } from "@/components/site/page-hero";
+import { Container, Section, SectionHeading } from "@/components/site/section";
+import { EnquiryForm } from "@/components/forms/enquiry-form";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
+import { SITE } from "@/lib/content/site";
 
-const formSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  email: z.string().email({ message: "Please enter a valid email address." }),
-  message: z
-    .string()
-    .min(10, { message: "Message must be at least 10 characters." }),
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Us | Private Property Finance, Manchester & London",
+  description:
+    "Speak to a property finance broker in Manchester or London. Call 0161 399 0207 or email info@privatepropertyfinance.com.",
+  path: "/contact-us",
 });
 
-export default function ContactUs() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [state, formAction, isPending] = useActionState(contactUsAction, null);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
-
+export default function ContactUsPage() {
   return (
-    <div className="flex min-h-screen bg-accent">
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <h2 className="mt-6 text-3xl font-extrabold text-white">
-              Contact Us
-            </h2>
-            <p className="mt-2 text-sm text-gray-100">
-              We&apos;d love to hear from you. Send us a message and we will
-              respond as soon as possible.
-            </p>
-          </div>{" "}
-          <Form {...form}>
-            <form
-              action={(formData) => {
-                // Track form submission
-                const name = formData.get("name") as string;
-                const email = formData.get("email") as string;
-                trackFormSubmission.contactUs({ name, email });
-
-                startTransition(() => {
-                  formAction(formData);
-                });
-
-                toast.info("Sending message...");
-              }}
-              className="mt-8 space-y-6"
+    <>
+      <PageHero
+        eyebrow="Contact"
+        title="Contact us"
+        intro="Whether you have a live deal or just want to sense-check an idea, we're happy to talk. We aim to reply the same working day."
+        crumbs={[{ name: "Contact Us" }]}
+        facts={[
+          { label: "Call", value: SITE.phone },
+          { label: "Email", value: SITE.email },
+          { label: "Hours", value: SITE.hours },
+        ]}
+        actions={
+          <>
+            <a href={`tel:${SITE.phoneHref}`} className="btn-gold">
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call {SITE.phone}
+            </a>
+            <a
+              href={`https://wa.me/${SITE.mobileHref.replace("+", "")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-outline"
             >
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-200">Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="text-slate-100"
-                        placeholder="Your name"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              WhatsApp
+            </a>
+          </>
+        }
+      />
+
+      <Section tone="cream">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-5">
+              <SectionHeading
+                eyebrow="Speak to a broker"
+                title="Tell us about the deal"
+                intro="The form takes two or three minutes. You'll see an indicative position before you're asked for contact details, and nothing is sent until you choose to send it."
               />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-200">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="Your email"
-                        className="text-slate-100"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-200">Message</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        className="text-slate-100"
-                        placeholder="Your message"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-full" disabled={isPending}>
-                {isPending ? "Sending..." : "Send Message"}
-              </Button>
-            </form>
-          </Form>
-          <div>
-            <h2 className="text-lg font-extrabold text-white">
-              Or contact us directly at{" "}
-            </h2>
-            <p className="text-sm mt-3 text-gray-100">
-              <Link href="tel:+447351088358">
-                <span>
-                  <Phone size={16} className="inline-block -mt-1 mr-1" />
-                </span>
-                <span className="text-white">+44 7351 088358</span>
-              </Link>
-            </p>
-            <p className="text-sm mt-3 text-gray-100">
-              <Link href="tel:+441613990207">
-                <span>
-                  <Phone size={16} className="inline-block -mt-1 mr-1" />
-                </span>
-                <span className="text-white">+44 1613 990207</span>
-              </Link>
-            </p>
-            <p className="text-sm mt-3 text-gray-100">
-              <Link href="mailto:info@privatepropertyfinance.com">
-                <span>
-                  <Mail size={16} className="inline-block -mt-1 mr-1" />
-                </span>
-                <span className="text-white">
-                  info@privatepropertyfinance.com
-                </span>
-              </Link>
-            </p>
+
+              <div className="mt-8 space-y-6 border-t border-line pt-6">
+                <div className="flex gap-4">
+                  <Phone className="mt-0.5 h-5 w-5 shrink-0 text-gold-ink" aria-hidden="true" />
+                  <div>
+                    <p className="font-sans text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-ink/70">
+                      Office
+                    </p>
+                    <a
+                      href={`tel:${SITE.phoneHref}`}
+                      className="mt-1 block font-serif text-2xl text-navy hover:text-gold-ink"
+                    >
+                      {SITE.phone}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold-ink" aria-hidden="true" />
+                  <div>
+                    <p className="font-sans text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-ink/70">
+                      Mobile / WhatsApp
+                    </p>
+                    <a
+                      href={`https://wa.me/${SITE.mobileHref.replace("+", "")}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-1 block font-serif text-2xl text-navy hover:text-gold-ink"
+                    >
+                      {SITE.mobile}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <Mail className="mt-0.5 h-5 w-5 shrink-0 text-gold-ink" aria-hidden="true" />
+                  <div>
+                    <p className="font-sans text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-ink/70">
+                      Email
+                    </p>
+                    <a
+                      href={`mailto:${SITE.email}`}
+                      className="mt-1 block text-sm font-semibold text-navy underline decoration-gold/50 underline-offset-4"
+                    >
+                      {SITE.email}
+                    </a>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <Clock className="mt-0.5 h-5 w-5 shrink-0 text-gold-ink" aria-hidden="true" />
+                  <div>
+                    <p className="font-sans text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-ink/70">
+                      Opening hours
+                    </p>
+                    <p className="mt-1 text-sm text-ink/70">{SITE.hours}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 border-t border-line pt-6">
+                <div className="flex gap-4">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold-ink" aria-hidden="true" />
+                  <div className="space-y-4">
+                    <div>
+                      <p className="font-semibold text-navy">{SITE.manchester.label}</p>
+                      <p className="mt-0.5 text-sm text-ink/70">
+                        {SITE.manchester.lines.join(", ")}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-navy">{SITE.london.label}</p>
+                      <p className="mt-0.5 text-sm text-ink/70">
+                        By appointment. Meetings can be arranged in central
+                        London.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 overflow-hidden border border-line bg-cream-dark">
+                  <iframe
+                    title="Private Property Finance, Cubo, 1 Spinningfields, Manchester M3 3EB"
+                    src="https://www.google.com/maps?q=Cubo%2C%201%20Spinningfields%2C%20Manchester%20M3%203EB&output=embed"
+                    width="100%"
+                    height="260"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="block w-full grayscale-[35%]"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
+              <EnquiryForm source="/contact-us" />
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="hidden lg:block relative w-0 flex-1">
-        <Image
-          className="absolute inset-0 h-full w-full object-cover"
-          src="https://utfs.io/f/K39jtZpI79HTCVIaRaLQuOESQAsXGq74VjUNg8maR62yziKJ"
-          alt="Contact us background image"
-          width={1080}
-          height={1980}
-          priority
-        />
-      </div>
-    </div>
+        </Container>
+      </Section>
+
+      <Section tone="white">
+        <Container>
+          <div className="grid gap-8 sm:grid-cols-3">
+            {[
+              {
+                n: "01",
+                title: "We read the case",
+                body: "A broker reviews your figures and the property before calling, so the first conversation is useful.",
+              },
+              {
+                n: "02",
+                title: "We come back with options",
+                body: "If we can help, we'll explain which lenders fit and what they'll need. If we can't, we'll say so.",
+              },
+              {
+                n: "03",
+                title: "We manage it through",
+                body: "Valuers, solicitors and lender queries are handled by the same broker to completion.",
+              },
+            ].map((step) => (
+              <div key={step.n} className="border-t border-line pt-5">
+                <span className="font-serif text-2xl text-gold-ink">{step.n}</span>
+                <h2 className="mt-3 font-serif text-xl text-navy">{step.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-ink/70">{step.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 max-w-3xl text-xs leading-relaxed text-ink/70">
+            {SITE.legalStatement} {SITE.riskWarning}
+          </p>
+        </Container>
+      </Section>
+
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact Us", path: "/contact-us" },
+        ])}
+      />
+    </>
   );
 }

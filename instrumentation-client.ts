@@ -1,32 +1,15 @@
-import { initBotId } from 'botid/client/core';
- 
-// Define the paths that need bot protection.
-// These are paths that are routed to by your app.
-// These can be:
-// - API endpoints (e.g., '/api/checkout')
-// - Server actions invoked from a page (e.g., '/dashboard')
-// - Dynamic routes (e.g., '/api/create/*')
- 
+import { initBotId } from "botid/client/core";
+
+// Server actions post back to the page they were submitted from, so every
+// page with an enquiry form needs bot protection.
 initBotId({
   protect: [
-    {
-      path: '/contact-us',
-      method: 'POST',
-    },
-    {
-      // Wildcards can be used to expand multiple segments
-      // /team/*/activate will match
-      // /team/a/activate
-      // /team/a/b/activate
-      // /team/a/b/c/activate
-      // ...
-      path: '/team/*/activate',
-      method: 'POST',
-    },
-    {
-      // Wildcards can also be used at the end for dynamic routes
-      path: '/api/user/*',
-      method: 'POST',
-    },
+    { path: "/contact-us", method: "POST" },
+    { path: "/services", method: "POST" },
+    { path: "/commercial-mortgages", method: "POST" },
+    { path: "/bridging-loans", method: "POST" },
+    { path: "/development-finance", method: "POST" },
+    { path: "/foreign-national-buy-to-let-mortgages", method: "POST" },
+    { path: "/luxury-asset-finance", method: "POST" },
   ],
 });

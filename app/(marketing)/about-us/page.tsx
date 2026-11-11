@@ -1,149 +1,226 @@
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { PageHero } from "@/components/site/page-hero";
 import {
-  Building,
-  Users,
-  Network,
-  Briefcase,
-  ShieldCheck,
-} from "lucide-react";
+  Container,
+  Eyebrow,
+  Section,
+  SectionHeading,
+  Stat,
+} from "@/components/site/section";
+import { CtaBand } from "@/components/site/cta-band";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
+import { SITE } from "@/lib/content/site";
+import { PRINCIPLES, REVIEWERS } from "@/lib/content/team";
 
-import AboutHero from "./_components/about-hero";
-import Image from "next/image";
-import FullWidthBanner from "@/components/quote-banner";
-import { Metadata } from "next";
+export const metadata: Metadata = pageMetadata({
+  title: "About Us | Independent Property Finance Broker",
+  description:
+    "Former bank and specialist-lender relationship managers arranging bridging, development and commercial property finance across the UK.",
+  path: "/about-us",
+});
 
-
-export const metadata: Metadata = {
-  title: "About Us | Private Property Finance",
-  description: "Learn more about Private Property Finance and our team.",
-  keywords: ["mortgage loan", "mortgage loan calculator"],
-  metadataBase: new URL("https://privatepropertyfinance.com/contact-us"),
-};
-
-export default function AboutUs() {
+export default function AboutUsPage() {
   return (
-    <div className="bg-gray-50">
-      <AboutHero />
+    <>
+      <PageHero
+        eyebrow="About us"
+        title="About Private Property Finance"
+        intro="Private Property Finance is an independent property finance broker based in Manchester and London. We arrange bridging loans, development finance, commercial mortgages and buy-to-let mortgages for overseas investors, typically between £100,000 and £20 million."
+        crumbs={[{ name: "About Us" }]}
+        image={{
+          src: "/images/london-street.jpg",
+          alt: "A London street of red-brick townhouses",
+        }}
+        actions={
+          <>
+            <Link href="/team" className="btn-gold">
+              Meet the team
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link href="/contact-us" className="btn-outline">
+              Discuss a deal
+            </Link>
+          </>
+        }
+      />
 
-      <main className="container max-w-7xl mx-auto px-4 py-12">
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div>
-            <section className="mb-12">
-              <h2 className="text-3xl font-semibold mb-6 text-accent">Our Expertise</h2>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start mb-4">
-                    <Briefcase className="h-6 w-6 text-primary mr-4 mt-1 flex-shrink-0" />
-                    <p className="text-gray-700">
-                      With over 30 years of combined experience in property
-                      finance, our team offers extensive expertise acquired
-                      through years as Relationship Managers at leading high
-                      street banks and specialist property lenders. Our
-                      background allows us to understand the unique nuances of
-                      the property finance market, ensuring we deliver tailored
-                      finance solutions that meet the diverse needs of property
-                      investors, developers, and homeowners alike.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-
-            <section className="mb-12">
-              <h2 className="text-3xl font-semibold mb-6 text-accent">Our Approach</h2>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="flex items-start mb-4">
-                    <ShieldCheck className="h-6 w-6 text-primary mr-4 mt-1 flex-shrink-0" />
-                    <p className="text-gray-700">
-                      At Private Property Finance we believe in a transparent
-                      and open approach in every partnership. Working closely
-                      with high street banks, specialist lenders, and trusted
-                      alternative finance providers, we are dedicated to
-                      securing the ideal funding solution tailored to your goal.
-                      With our extensive network and commitment to clarity, we
-                      ensure you stay informed and confident at every step of
-                      the journey, making the process as seamless as possible.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
+      <Section tone="cream">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <Eyebrow>Why we started</Eyebrow>
+              <h2 className="mt-4 font-serif text-[clamp(1.9rem,3.2vw,2.9rem)] leading-[1.1] text-navy">
+                A phone that gets answered
+              </h2>
+            </div>
+            <div className="lg:col-span-8">
+              <p className="text-xl leading-relaxed text-ink/75 sm:text-2xl sm:leading-[1.55]">
+                Property finance has become faster and more automated, and in
+                the process a lot of brokers have stopped picking up the phone.
+              </p>
+              <p className="mt-6 body-copy">
+                We set up Private Property Finance to do the opposite. Give
+                investors, developers and business owners one experienced person
+                who understands their deal, knows the lenders, and takes the
+                proposal through to completion.
+              </p>
+            </div>
           </div>
-          <Image
-            src="https://utfs.io/f/K39jtZpI79HTb11kod4qdzt8pi6j1IcBg7LxQJD053V2slOn"
-            width={1000}
-            height={1500}
-            alt="About Us"
-            className="h-full w-full object-cover max-h-[640px] rounded-md"
-          />
-        </div>
 
-        <section className="mt-8">
-          <h2 className="text-3xl font-semibold mb-6 text-accent">Why Choose Us</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Users className="h-5 w-5 text-primary mr-2" />
-                  Experienced Team
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">
-                  Our team brings over 30 years of combined experience in
-                  property finance, ensuring expert guidance for your needs.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Building className="h-5 w-5 text-primary mr-2" />
-                  Diverse Expertise
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">
-                  We cater to property investors, developers, and homeowners,
-                  understanding the unique needs of each client segment.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Network className="h-5 w-5 text-primary mr-2" />
-                  Extensive Network
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">
-                  Our partnerships with high street banks, specialist lenders,
-                  and alternative finance providers ensure we find the best
-                  solution for you.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <ShieldCheck className="h-5 w-5 text-primary mr-2" />
-                  Transparency
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700">
-                  We believe in open communication, keeping you informed and
-                  confident throughout the entire process.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="mt-16 grid gap-8 border-t border-line pt-8 sm:grid-cols-3">
+            <Stat value="20+" label="Years' combined lender-side experience" />
+            <Stat value="£100k–£20m" label="Facilities arranged" />
+            <Stat value="UK-wide" label="From Manchester and London" />
           </div>
-        </section>
-      </main>
-      <FullWidthBanner />
-    </div>
+        </Container>
+      </Section>
+
+      <Section tone="white">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <SectionHeading
+                eyebrow="Where our experience comes from"
+                title="We've written the papers lenders read"
+              />
+            </div>
+            <div className="lg:col-span-7">
+              <p className="body-copy">
+                Between us we have more than 20 years in property finance, much
+                of it as relationship managers at leading high street banks and
+                specialist property lenders. We&apos;ve sat in credit meetings
+                and written the papers. That means we know what lenders need to
+                see, which risks they&apos;ll take, and how to present a case so
+                it&apos;s judged on its strengths.
+              </p>
+              <div className="mt-8 grid gap-5 sm:grid-cols-2">
+                <div className="border-t border-line pt-4">
+                  <h3 className="font-serif text-xl text-navy">Lender-side insight</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/70">
+                    We know how credit committees think, what they question and
+                    where a case usually falls down.
+                  </p>
+                </div>
+                <div className="border-t border-line pt-4">
+                  <h3 className="font-serif text-xl text-navy">Broker independence</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/70">
+                    We are not tied to one lender. We place the case where it
+                    fits, not where it is easiest.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section tone="navy">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <Eyebrow light>How we work</Eyebrow>
+              <h2 className="mt-4 font-serif text-[clamp(1.9rem,3.2vw,2.9rem)] leading-[1.1] text-cream">
+                Four commitments, every case
+              </h2>
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream/60">
+                These are not values on a wall. They are how we run a deal from
+                the first call to drawdown.
+              </p>
+            </div>
+            <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
+              {PRINCIPLES.map((principle, index) => (
+                <div key={principle.title} className="border-t border-cream/15 pt-5">
+                  <span className="font-serif text-xl text-gold-soft">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-3 font-serif text-xl text-cream">
+                    {principle.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-cream/60">
+                    {principle.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section tone="cream">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <Eyebrow>Who we work with</Eyebrow>
+              <h2 className="mt-4 font-serif text-[clamp(1.9rem,3.2vw,2.9rem)] leading-[1.1] text-navy">
+                Clients, not categories
+              </h2>
+            </div>
+            <div className="lg:col-span-8">
+              <ul className="border-t border-line">
+                {REVIEWERS.map((reviewer) => (
+                  <li
+                    key={reviewer}
+                    className="flex items-center justify-between gap-4 border-b border-line py-4"
+                  >
+                    <span className="font-serif text-xl text-navy">{reviewer}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-gold-ink/60" aria-hidden="true" />
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 body-copy">
+                Most of our work comes from repeat clients and referrals. If
+                your situation doesn&apos;t fit a standard lender&apos;s box,
+                that is usually where we are most useful.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section tone="white">
+        <Container>
+          <div className="mx-auto max-w-4xl">
+            <Eyebrow>Regulatory information</Eyebrow>
+            <h2 className="mt-4 font-serif text-[clamp(1.7rem,2.8vw,2.4rem)] leading-[1.12] text-navy">
+              Company and regulatory details
+            </h2>
+            <p className="mt-6 text-sm leading-relaxed text-ink/70">
+              {SITE.legalStatement}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-ink/70">
+              {SITE.riskWarning}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-5">
+              <Link href="/privacy-policy" className="link-arrow">
+                Privacy Policy
+              </Link>
+              <Link href="/cookie-policy" className="link-arrow">
+                Cookie Policy
+              </Link>
+              <Link href="/complaints" className="link-arrow">
+                Complaints
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <CtaBand
+        title="Prefer to talk it through?"
+        body="Call us and ask for a named broker. We'll tell you honestly whether we can help."
+        primaryLabel="Meet the team"
+        primaryHref="/team"
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About Us", path: "/about-us" },
+        ])}
+      />
+    </>
   );
 }

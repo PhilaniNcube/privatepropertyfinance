@@ -1,97 +1,33 @@
 import type { MetadataRoute } from "next";
-import { client } from "@/sanity/lib/client";
-import { groq } from "next-sanity";
+import { SITE } from "@/lib/content/site";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts: { slug: { current: string }; _updatedAt?: string }[] =
-    await client.fetch(
-      groq`*[_type=='post' && defined(slug.current)]{ slug, _updatedAt }`
-    );
-  const blogEntries: MetadataRoute.Sitemap = posts.map((p) => ({
-    url: `https://privatepropertyfinance.com/blogs/${p.slug.current}`,
-    lastModified: p._updatedAt ? new Date(p._updatedAt) : new Date(),
-    changeFrequency: "weekly",
-    priority: 0.4,
-  }));
-  return [
+const lastModified = new Date("2026-11-10");
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const pages: { path: string; priority: number; changeFrequency: "yearly" | "monthly" | "weekly" }[] = [
+    { path: "/", priority: 1, changeFrequency: "monthly" },
+    { path: "/services", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/commercial-mortgages", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/bridging-loans", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/development-finance", priority: 0.9, changeFrequency: "monthly" },
     {
-      url: "https://privatepropertyfinance.com/",
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 1,
-    },
-    {
-      url: "https://privatepropertyfinance.com/about-us",
-      lastModified: new Date(),
+      path: "/foreign-national-buy-to-let-mortgages",
+      priority: 0.9,
       changeFrequency: "monthly",
-      priority: 0.8,
     },
-    {
-      url: "https://privatepropertyfinance.com/contact-us",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/get-a-quote",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/services",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/services/bridging-finance",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/services/buy-to-let-mortgages",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/services/care-home-finance",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/services/commercial-mortgages",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/services/development-funding",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/services/international-clients",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/services/property-sourcing",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    {
-      url: "https://privatepropertyfinance.com/resources/privacy-policy",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
-    },
-    ...blogEntries,
+    { path: "/case-studies", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/about-us", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/team", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/contact-us", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/privacy-policy", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/cookie-policy", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/complaints", priority: 0.3, changeFrequency: "yearly" },
   ];
+
+  return pages.map((page) => ({
+    url: `${SITE.url}${page.path === "/" ? "" : page.path}`,
+    lastModified,
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+  }));
 }
