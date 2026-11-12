@@ -72,7 +72,7 @@ export const TEAM: TeamMember[] = [
       "Shamiso has helped onboard clients from markets including Hong Kong, Nigeria, Malaysia and the UAE, providing a welcoming point of contact as they begin their UK property investment journey.",
     ],
     image: {
-      src: "/images/team/charlie.jpg",
+      src: "/images/team/shamiso.jpg",
       alt: "Shamiso, International Business Development Manager at Private Property Finance",
     },
     focus: [
@@ -91,7 +91,7 @@ export const TEAM: TeamMember[] = [
       "Charlie keeps spirits high at the PPF office and takes his role as chief entertainer very seriously. He's always happy to welcome visitors, particularly those arriving with dog biscuits. Bring a treat, and you'll have a best friend for the day!",
     ],
     image: {
-      src: "/images/team/shamiso.jpg",
+      src: "/images/team/charlie.jpg",
       alt: "Charlie, the Private Property Finance office dog",
     },
     focus: ["Office morale", "Visitor welcome", "Dog biscuits"],
