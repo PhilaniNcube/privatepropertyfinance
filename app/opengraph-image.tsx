@@ -17,8 +17,8 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0B1F3A",
-          color: "#F7F5F0",
+          background: "#00332E",
+          color: "#F7F6F2",
           padding: "64px 72px",
         }}
       >
@@ -27,11 +27,11 @@ export default function OpenGraphImage() {
             style={{
               width: 64,
               height: 64,
-              border: "1px solid #A8863B",
+              border: "1.5px solid #A7D7CE",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#C9AE74",
+              color: "#F7F6F2",
               fontSize: 32,
               fontFamily: "Georgia, serif",
             }}
@@ -46,22 +46,22 @@ export default function OpenGraphImage() {
               style={{
                 fontSize: 13,
                 letterSpacing: 4,
-                color: "rgba(247,245,240,0.5)",
+                color: "#A7D7CE",
                 textTransform: "uppercase",
               }}
             >
-              Property finance brokers
+              Specialist property finance across the UK
             </div>
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ width: 64, height: 1, background: "#A8863B", marginBottom: 28 }} />
+          <div style={{ width: 64, height: 2, background: "#A7D7CE", marginBottom: 28 }} />
           <div
             style={{
-              fontSize: 64,
-              lineHeight: 1.05,
-              letterSpacing: -1.5,
+              fontSize: 60,
+              lineHeight: 1.08,
+              letterSpacing: -1.2,
               maxWidth: 940,
               fontFamily: "Georgia, serif",
             }}
@@ -76,13 +76,13 @@ export default function OpenGraphImage() {
             display: "flex",
             justifyContent: "space-between",
             fontSize: 18,
-            color: "rgba(247,245,240,0.6)",
-            borderTop: "1px solid rgba(247,245,240,0.15)",
+            color: "rgba(247,246,242,0.75)",
+            borderTop: "1px solid rgba(167,215,206,0.25)",
             paddingTop: 24,
           }}
         >
-          <span>Bridging · Development · Commercial · Foreign national BTL</span>
-          <span>£100k – £20m · Manchester &amp; London</span>
+          <span>Commercial · Bridging · Development · Foreign National BTL</span>
+          <span>£100k – £20m · UK-Wide Coverage</span>
         </div>
       </div>
     ),

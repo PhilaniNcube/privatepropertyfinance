@@ -11,21 +11,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        ppf: {
+          green: "#00332E",
+          mid: "#00665C",
+          ink: "#005249",
+          deep: "#002420",
+          soft: "#A7D7CE",
+          wash: "#EDF3F1",
+        },
         navy: {
-          DEFAULT: "#0B1F3A",
-          light: "#16304F",
+          DEFAULT: "#00332E",
+          light: "#00665C",
         },
         gold: {
-          DEFAULT: "#A8863B",
-          ink: "#7D6127",
-          soft: "#C9AE74",
+          DEFAULT: "#00665C",
+          ink: "#005249",
+          soft: "#A7D7CE",
         },
         cream: {
-          DEFAULT: "#F7F5F0",
-          dark: "#EFEBE2",
+          DEFAULT: "#F7F6F2",
+          dark: "#ECEAE3",
         },
-        ink: "#222222",
-        line: "#DED8CB",
+        ink: "#18181B",
+        line: "#D8DDD9",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

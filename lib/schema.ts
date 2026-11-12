@@ -112,8 +112,12 @@ export function personSchema(member: TeamMember) {
     "@type": "Person",
     name: member.name,
     jobTitle: member.role,
+    description: member.experienceSummary,
     email: member.email,
+    ...(member.phone ? { telephone: member.phone } : {}),
+    ...(member.image ? { image: `${SITE.url}${member.image.src}` } : {}),
     worksFor: { "@id": ORGANISATION_ID },
+    knowsAbout: member.focus,
     ...(member.linkedin ? { sameAs: [member.linkedin] } : {}),
   };
 }

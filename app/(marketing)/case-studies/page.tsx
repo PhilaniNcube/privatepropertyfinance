@@ -46,8 +46,8 @@ export default function CaseStudiesPage() {
         }}
         actions={
           <>
-            <Link href="/contact-us" className="btn-gold">
-              Discuss a deal
+            <Link href="/contact-us#enquiry-form" className="btn-primary">
+              Discuss your finance requirements
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link href="/services" className="btn-outline">

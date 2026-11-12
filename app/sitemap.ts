@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/content/site";
 
-const lastModified = new Date("2026-11-10");
+const lastModified = new Date("2026-11-12");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: { path: string; priority: number; changeFrequency: "yearly" | "monthly" | "weekly" }[] = [

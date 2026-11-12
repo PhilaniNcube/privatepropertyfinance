@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
@@ -10,9 +9,16 @@ import {
   Landmark,
   Phone,
 } from "lucide-react";
-import { Container, Section, SectionHeading, Eyebrow, TextLink, Stat } from "@/components/site/section";
-import { ServiceCard } from "@/components/site/service-card";
+import {
+  Container,
+  Section,
+  SectionHeading,
+  Eyebrow,
+  TextLink,
+  Stat,
+} from "@/components/site/section";
 import { CaseStudyCard } from "@/components/site/case-study-card";
+import { PropertyFilmHeroMedia } from "@/components/site/property-film-hero";
 import { CtaBand } from "@/components/site/cta-band";
 import { FaqList } from "@/components/site/faq-list";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -25,37 +31,37 @@ import { SITE } from "@/lib/content/site";
 export const metadata: Metadata = pageMetadata({
   title: "Private Property Finance | UK Property Finance Broker",
   description:
-    "Bridging, development finance, commercial and foreign national buy-to-let mortgages from £100k to £20m. Speak to an experienced property finance broker.",
+    "Bridging, development finance, commercial and foreign national buy-to-let mortgages from £100k to £20m across the UK. Speak to an experienced property finance broker.",
   path: "/",
 });
 
 const reasons = [
   {
-    title: "Lender experience, broker independence",
-    body: "Our team spent 20 years as relationship managers at high street banks and specialist property lenders. We know how credit committees think, and we package your case so it gets the best chance to succeed on terms that work for you.",
+    title: "Lender-side credit experience, broker independence",
+    body: "With more than 20 years in property finance—including senior relationship management roles at high street banks and specialist property lenders—we know how credit committees assess risk, and we write the credit paper so your proposal is judged on its strengths.",
   },
   {
-    title: "The whole market, not one lender's shelf",
-    body: "We work with high street banks, specialist lenders, challenger banks, private credit funds and family offices, giving you the options you need to succeed.",
+    title: "High street, challenger, specialist and private lenders",
+    body: "We work across high street banks, challenger banks, specialist property lenders, private credit funds and family offices, matching your property and timescale to lenders with genuine appetite.",
   },
   {
-    title: "A person, not a portal",
-    body: "You deal with one named broker from first call to completion. We will pick up the phone, and we will tell you early if a deal won't work.",
+    title: "A named broker, not a portal",
+    body: "You deal directly with one experienced broker from first conversation to completion. We pick up the phone, and we will tell you early if a deal will not work.",
   },
 ];
 
 const steps = [
   {
     title: "Tell us about the deal",
-    body: "A 15-minute call or a short form: property, amount, timescale.",
+    body: "A 15-minute call or our short enquiry form: property, loan amount, and timescale.",
   },
   {
-    title: "We find the right lenders",
-    body: "We shortlist suitable lenders and present terms in plain English.",
+    title: "We approach the right lenders",
+    body: "We shortlist suitable lenders, sense-check the structure and present indicative terms in plain English.",
   },
   {
     title: "We manage it to completion",
-    body: "We handle valuers, solicitors and the lender so you can get on with the project.",
+    body: "We coordinate valuers, monitoring surveyors, solicitors and the lender through to drawdown.",
   },
 ];
 
@@ -68,54 +74,62 @@ const homeFaqs = [
   {
     question: "Do I need a solicitor if I use a broker?",
     answer:
-      "Yes. A broker arranges the finance; a solicitor handles the legal work, searches and security. We work alongside your solicitor and can recommend firms who are experienced in property finance if you don't already have one.",
+      "Yes. A broker arranges the finance; a solicitor handles the legal work, searches and security. We work alongside your solicitor and can introduce firms experienced in commercial and specialist property finance if needed.",
   },
   {
     question: "How much can I borrow?",
     answer:
-      "It depends on the deal type, the property, your experience and the lender. We arrange facilities from £100,000 to £20 million. Use the enquiry form for an indicative position, then we'll confirm what's realistic.",
+      "It depends on the deal type, the property, your experience and the lender. We arrange facilities from £100,000 to £20 million. Use our enquiry form for an indicative position, then we will confirm what is realistic.",
   },
   {
-    question: "Do you only work in Manchester and London?",
+    question: "Where in the UK do you arrange property finance?",
     answer:
-      "No. We are based in Manchester with meetings in London by appointment, but we arrange finance across the UK. Most of the process can be handled remotely.",
+      "We arrange property finance across the UK. We are based in Manchester, with London meetings by appointment, and work with investors, developers and businesses nationwide as well as overseas clients investing in UK property.",
   },
 ];
 
 export default function Home() {
+  const [featuredStudy, ...otherStudies] = CASE_STUDIES;
+
   return (
     <>
       <section className="relative overflow-hidden bg-cream pb-0 pt-10 sm:pt-14 lg:pt-16">
         <Container>
-          <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
-            <div className="flex flex-col justify-center pb-6 lg:col-span-6 lg:py-10">
-              <Eyebrow>Property finance broker · Manchester &amp; London</Eyebrow>
-              <h1 className="mt-6 font-serif text-[clamp(2.6rem,4.4vw,4.1rem)] leading-[1.03] tracking-[-0.03em] text-navy">
+          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+            <div className="flex flex-col justify-center pb-4 lg:col-span-6 lg:py-8">
+              <Eyebrow>Specialist property finance across the UK</Eyebrow>
+              <h1 className="mt-5 font-serif text-[clamp(2.35rem,3.8vw,3.65rem)] leading-[1.06] tracking-[-0.02em] text-navy">
                 Property finance, arranged by people who&apos;ve sat on the
                 lender&apos;s side
               </h1>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/70 sm:text-lg">
-                Bridging loans, development finance, commercial mortgages and
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-ink/80 sm:text-[1.08rem]">
+                Commercial mortgages, bridging loans, development finance and
                 buy-to-let for overseas investors, from £100,000 to £20 million.
                 One experienced broker, a wide panel of lenders, and a straight
                 answer from the first call.
               </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link href="/contact-us" className="btn-gold">
-                  Discuss a deal
+              <p className="mt-4 max-w-xl border-l-2 border-gold pl-4 text-sm leading-relaxed text-ink/75">
+                Based in Manchester, with London meetings by appointment. We
+                work with investors, developers and businesses across the UK,
+                and overseas clients investing in UK property.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Link href="/contact-us#enquiry-form" className="btn-primary">
+                  Discuss your finance requirements
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
-                <Link href="/case-studies" className="btn-outline">
+                <Link href="/case-studies" className="link-arrow py-2">
                   See completed transactions
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
-              <div className="mt-8 flex items-center gap-3 text-sm text-ink/70">
+              <div className="mt-7 flex items-center gap-3 text-sm text-ink/75">
                 <Phone className="h-4 w-4 text-gold-ink" aria-hidden="true" />
                 <span>
                   Or call{" "}
                   <a
                     href={`tel:${SITE.phoneHref}`}
-                    className="font-semibold text-navy underline decoration-gold/50 underline-offset-4"
+                    className="font-semibold text-navy underline decoration-gold/50 underline-offset-4 hover:text-gold-ink"
                   >
                     {SITE.phone}
                   </a>
@@ -124,40 +138,34 @@ export default function Home() {
             </div>
 
             <div className="relative lg:col-span-6">
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-cream-dark lg:aspect-[4/5]">
-                <Image
-                  src="/images/hero-architecture.jpg"
-                  alt="Curved contemporary architecture against a clear sky"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative -mt-10 ml-4 mr-4 border border-line bg-white p-5 shadow-[0_18px_45px_rgba(11,31,58,0.08)] sm:ml-8 sm:mr-8 lg:absolute lg:bottom-6 lg:left-6 lg:mt-0 lg:ml-0 lg:mr-0 lg:w-64">
-                <p className="font-serif text-4xl leading-none text-navy">20+</p>
-                <p className="mt-2 font-sans text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-ink/70">
-                  Years&apos; combined experience at high street banks and
-                  specialist lenders
+              <PropertyFilmHeroMedia mode="static" />
+              <div className="relative mt-4 border border-line bg-white p-5 sm:max-w-xs lg:mt-4">
+                <p className="font-serif text-3xl leading-none text-navy">20+ years</p>
+                <p className="mt-1.5 font-sans text-xs leading-relaxed text-ink/75">
+                  Lender-side experience across high street banks and specialist
+                  property lenders
                 </p>
               </div>
             </div>
           </div>
         </Container>
 
-        <div className="mt-12 border-y border-line bg-cream-dark/60 lg:mt-16">
+        <div className="mt-12 border-y border-line bg-cream-dark/60 lg:mt-14">
           <Container>
-            <ul className="grid gap-4 py-5 sm:grid-cols-3">
+            <ul className="grid gap-4 py-4 sm:grid-cols-3">
               {[
-                "£100,000 – £20m facilities",
+                "£100,000 – £20 million facilities",
                 "High street, specialist and private lenders",
-                "Manchester & London",
+                "UK-wide coverage · Overseas investors welcome",
               ].map((item) => (
                 <li
                   key={item}
-                  className="flex items-center gap-2.5 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-navy/75"
+                  className="flex items-center gap-2.5 font-sans text-xs font-semibold tracking-[0.04em] text-navy"
                 >
-                  <Check className="h-3.5 w-3.5 shrink-0 text-gold-ink" aria-hidden="true" />
+                  <Check
+                    className="h-4 w-4 shrink-0 text-gold-ink"
+                    aria-hidden="true"
+                  />
                   {item}
                 </li>
               ))}
@@ -166,79 +174,162 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Editorial Introduction */}
       <Section tone="cream">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
               <Eyebrow>Independent, specialist, accountable</Eyebrow>
-              <h2 className="mt-4 font-serif text-[clamp(2rem,3.6vw,3.35rem)] leading-[1.08] tracking-[-0.02em] text-navy">
-                One experienced broker, a wide lender panel, and a straight
-                answer from the first call.
+              <h2 className="mt-4 font-serif text-[clamp(1.85rem,3.1vw,2.75rem)] leading-[1.12] tracking-[-0.015em] text-navy">
+                A credit paper written properly opens doors that a standard
+                application form will not.
               </h2>
-            </div>
-            <div className="lg:col-span-5">
-              <p className="body-copy">
-                Private Property Finance is an independent property finance
-                broker based in Manchester and London. We arrange bridging
-                loans, development finance, commercial mortgages and buy-to-let
-                mortgages for overseas investors, typically between £100,000 and
-                £20 million.
+              <p className="mt-5 body-copy max-w-2xl">
+                Private Property Finance is a founder-led property finance
+                brokerage arranging commercial mortgages, non-regulated bridging
+                loans, development finance and buy-to-let mortgages for
+                foreign nationals and expats across the UK.
               </p>
-              <TextLink href="/about-us" className="mt-6">
-                More about us
-              </TextLink>
+            </div>
+            <div className="flex flex-col justify-between border-t border-line pt-6 lg:col-span-5 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <div>
+                <p className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-gold-ink">
+                  International &amp; complex structures
+                </p>
+                <p className="mt-3 font-serif text-xl leading-snug text-navy">
+                  &ldquo;Buying through a UK company while living overseas? We
+                  can help you explore the available finance.&rdquo;
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-ink/75">
+                  Whether you are a UK developer acquiring a site with planning,
+                  a trading business buying its own premises, or an overseas
+                  investor purchasing via a UK SPV, we match the case to
+                  lenders who understand the structure.
+                </p>
+              </div>
+              <div className="mt-6">
+                <TextLink href="/about-us">More about how we work</TextLink>
+              </div>
             </div>
           </div>
 
           <div className="mt-12 grid gap-8 border-t border-line pt-8 sm:grid-cols-3">
-            <Stat value="£100k–£20m" label="Facilities we arrange" />
-            <Stat value="Four" label="Core property finance services" />
-            <Stat value="One" label="Named broker, start to finish" />
+            <Stat value="£100k–£20m" label="Typical facility range" />
+            <Stat value="Four" label="Core UK property finance services" />
+            <Stat value="Direct" label="Founder-led contact from call to completion" />
           </div>
         </Container>
       </Section>
 
+      {/* Editorial Service List (replaces repeated 4-card grid) */}
       <Section tone="white" id="services">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
               eyebrow="What we arrange"
-              title="Four ways we fund property"
-              intro="Commercial, bridging, development and overseas buy-to-let. If you're not sure which fits, call us and we'll talk it through."
+              title="Four specialist property finance lines"
+              intro="Each facility type is judged on different fundamentals. Select a service to see how lenders assess it, or talk to us if your deal spans more than one."
             />
             <TextLink href="/services" className="mb-1">
-              All services
+              Compare all services
             </TextLink>
           </div>
-          <div className="mt-10 grid gap-x-6 gap-y-0 sm:grid-cols-2 lg:grid-cols-4">
+
+          <div className="mt-10 divide-y divide-line border-y border-line">
             {SERVICES.map((service, index) => (
-              <ServiceCard key={service.slug} service={service} index={index} />
+              <article
+                key={service.slug}
+                className="group grid items-start gap-6 py-8 transition-colors hover:bg-cream/50 sm:px-4 lg:grid-cols-12 lg:items-center lg:gap-10"
+              >
+                <div className="flex items-baseline gap-4 lg:col-span-4">
+                  <span className="font-serif text-xl text-gold-ink">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="font-serif text-2xl text-navy sm:text-[1.65rem]">
+                      <Link
+                        href={`/${service.slug}`}
+                        className="hover:text-gold-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#00665C]"
+                      >
+                        {service.card.title}
+                      </Link>
+                    </h3>
+                    <p className="mt-1 font-sans text-xs font-medium text-ink/65">
+                      {service.facts[0]?.value} · {service.facts[2]?.value}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-sm leading-relaxed text-ink/80 lg:col-span-5">
+                  {service.card.body}
+                </p>
+
+                <div className="flex items-center justify-start lg:col-span-3 lg:justify-end">
+                  <Link
+                    href={`/${service.slug}`}
+                    className="link-arrow"
+                  >
+                    Explore {service.navLabel.toLowerCase()}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              </article>
             ))}
           </div>
         </Container>
       </Section>
 
+      {/* Featured Transactions — Larger Editorial Presentation */}
+      <Section tone="cream">
+        <Container>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHeading
+              eyebrow="Completed transactions"
+              title="Recent deals we have arranged"
+              intro="Real examples showing the property, loan amount, leverage, challenge and how PPF helped. Photographs are illustrative to protect client confidentiality."
+            />
+            <TextLink href="/case-studies" className="mb-1">
+              View all completed transactions
+            </TextLink>
+          </div>
+
+          {featuredStudy ? (
+            <div className="mt-10">
+              <CaseStudyCard study={featuredStudy} featured />
+            </div>
+          ) : null}
+
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {otherStudies.map((study) => (
+              <CaseStudyCard key={study.slug} study={study} />
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* Restrained Deep Green Section — Why Clients Use Us */}
       <Section tone="navy">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-4">
               <Eyebrow light>Why clients use us</Eyebrow>
-              <h2 className="mt-4 font-serif text-[clamp(2rem,3.6vw,3.2rem)] leading-[1.08] text-cream">
+              <h2 className="mt-4 font-serif text-[clamp(1.85rem,3.1vw,2.75rem)] leading-[1.1] text-cream">
                 Experience on both sides of the credit table
               </h2>
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream/60">
-                We have arranged finance for investors, developers and business
-                owners across the UK, and we know what makes a lender say yes.
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream/80">
+                We arrange finance for investors, developers and business owners
+                across the UK, and we know what makes a credit committee say
+                yes.
               </p>
               <TextLink href="/team" light className="mt-7">
-                Meet the team
+                Meet the founder
               </TextLink>
             </div>
             <div className="grid gap-8 sm:grid-cols-1 lg:col-span-8">
               {reasons.map((reason, index) => (
                 <div
                   key={reason.title}
-                  className="grid gap-4 border-t border-cream/15 pt-6 sm:grid-cols-[auto_1fr] sm:gap-8"
+                  className="grid gap-4 border-t border-cream/20 pt-6 sm:grid-cols-[auto_1fr] sm:gap-8"
                 >
                   <span className="font-serif text-2xl text-gold-soft">
                     {String(index + 1).padStart(2, "0")}
@@ -247,7 +338,7 @@ export default function Home() {
                     <h3 className="font-serif text-2xl text-cream">
                       {reason.title}
                     </h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-cream/60">
+                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-cream/80">
                       {reason.body}
                     </p>
                   </div>
@@ -258,26 +349,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      <Section tone="cream">
-        <Container>
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading
-              eyebrow="Recent completions"
-              title="Deals we've completed"
-              intro="A selection of recent transactions. Every case is different, so if your situation is similar, let's talk."
-            />
-            <TextLink href="/case-studies" className="mb-1">
-              See all completed transactions
-            </TextLink>
-          </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {CASE_STUDIES.map((study) => (
-              <CaseStudyCard key={study.slug} study={study} />
-            ))}
-          </div>
-        </Container>
-      </Section>
-
+      {/* Process Section */}
       <Section tone="white">
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
@@ -285,11 +357,14 @@ export default function Home() {
               <SectionHeading
                 eyebrow="How it works"
                 title="Three steps, one point of contact"
-                intro="The process is straightforward. You stay with one broker who knows the case."
+                intro="The process is straightforward. You stay with one experienced broker who owns the file from first call to completion."
               />
               <div className="mt-8 flex flex-col gap-3">
-                <Link href="/contact-us" className="btn-primary w-fit">
-                  Start a conversation
+                <Link
+                  href="/contact-us#enquiry-form"
+                  className="btn-primary w-fit"
+                >
+                  Discuss your finance requirements
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -304,24 +379,35 @@ export default function Home() {
                     0{index + 1}
                   </span>
                   <div>
-                    <h3 className="font-serif text-2xl text-navy">{step.title}</h3>
-                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">
+                    <h3 className="font-serif text-2xl text-navy">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/75">
                       {step.body}
                     </p>
                   </div>
                 </div>
               ))}
               <div className="flex flex-wrap gap-8 border-t border-line pt-6">
-                <div className="flex items-center gap-2 text-sm text-ink/70">
-                  <Landmark className="h-4 w-4 text-gold-ink" aria-hidden="true" />
+                <div className="flex items-center gap-2 text-sm text-ink/80">
+                  <Landmark
+                    className="h-4 w-4 text-gold-ink"
+                    aria-hidden="true"
+                  />
                   High street, specialist and private lenders
                 </div>
-                <div className="flex items-center gap-2 text-sm text-ink/70">
-                  <Building2 className="h-4 w-4 text-gold-ink" aria-hidden="true" />
-                  Residential, commercial and land
+                <div className="flex items-center gap-2 text-sm text-ink/80">
+                  <Building2
+                    className="h-4 w-4 text-gold-ink"
+                    aria-hidden="true"
+                  />
+                  Commercial, investment residential and land
                 </div>
-                <div className="flex items-center gap-2 text-sm text-ink/70">
-                  <BadgeCheck className="h-4 w-4 text-gold-ink" aria-hidden="true" />
+                <div className="flex items-center gap-2 text-sm text-ink/80">
+                  <BadgeCheck
+                    className="h-4 w-4 text-gold-ink"
+                    aria-hidden="true"
+                  />
                   Straight answers, early
                 </div>
               </div>

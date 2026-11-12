@@ -29,7 +29,7 @@ export default function AboutUsPage() {
       <PageHero
         eyebrow="About us"
         title="About Private Property Finance"
-        intro="Private Property Finance is an independent property finance broker based in Manchester and London. We arrange bridging loans, development finance, commercial mortgages and buy-to-let mortgages for overseas investors, typically between £100,000 and £20 million."
+        intro="Private Property Finance is an independent, founder-led property finance broker based in Manchester, with London meetings by appointment. We arrange commercial mortgages, bridging loans, development finance and buy-to-let mortgages for overseas investors across the UK, typically between £100,000 and £20 million."
         crumbs={[{ name: "About Us" }]}
         image={{
           src: "/images/london-street.jpg",
@@ -37,12 +37,12 @@ export default function AboutUsPage() {
         }}
         actions={
           <>
-            <Link href="/team" className="btn-gold">
-              Meet the team
+            <Link href="/contact-us#enquiry-form" className="btn-primary">
+              Discuss your finance requirements
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-            <Link href="/contact-us" className="btn-outline">
-              Discuss a deal
+            <Link href="/team" className="btn-outline">
+              Meet the founder
             </Link>
           </>
         }
@@ -53,28 +53,28 @@ export default function AboutUsPage() {
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-4">
               <Eyebrow>Why we started</Eyebrow>
-              <h2 className="mt-4 font-serif text-[clamp(1.9rem,3.2vw,2.9rem)] leading-[1.1] text-navy">
+              <h2 className="mt-4 font-serif text-[clamp(1.85rem,3vw,2.7rem)] leading-[1.1] text-navy">
                 A phone that gets answered
               </h2>
             </div>
             <div className="lg:col-span-8">
-              <p className="text-xl leading-relaxed text-ink/75 sm:text-2xl sm:leading-[1.55]">
+              <p className="text-xl leading-relaxed text-ink/80 sm:text-2xl sm:leading-[1.55]">
                 Property finance has become faster and more automated, and in
                 the process a lot of brokers have stopped picking up the phone.
               </p>
               <p className="mt-6 body-copy">
-                We set up Private Property Finance to do the opposite. Give
-                investors, developers and business owners one experienced person
-                who understands their deal, knows the lenders, and takes the
-                proposal through to completion.
+                Private Property Finance was founded to do the opposite: give
+                investors, developers and business owners across the UK one
+                experienced broker who understands their deal, knows the
+                lenders, and takes the proposal through to completion.
               </p>
             </div>
           </div>
 
           <div className="mt-16 grid gap-8 border-t border-line pt-8 sm:grid-cols-3">
-            <Stat value="20+" label="Years' combined lender-side experience" />
+            <Stat value="20+" label="Years' lender-side & property finance experience" />
             <Stat value="£100k–£20m" label="Facilities arranged" />
-            <Stat value="UK-wide" label="From Manchester and London" />
+            <Stat value="UK-wide" label="Based in Manchester · London by appointment" />
           </div>
         </Container>
       </Section>
@@ -90,12 +90,12 @@ export default function AboutUsPage() {
             </div>
             <div className="lg:col-span-7">
               <p className="body-copy">
-                Between us we have more than 20 years in property finance, much
-                of it as relationship managers at leading high street banks and
-                specialist property lenders. We&apos;ve sat in credit meetings
-                and written the papers. That means we know what lenders need to
-                see, which risks they&apos;ll take, and how to present a case so
-                it&apos;s judged on its strengths.
+                With more than 20 years in property finance—much of it spent as
+                a relationship manager at high street banks and specialist
+                property lenders—we have sat in credit meetings and written the
+                credit papers ourselves. That means we know what underwriters
+                need to see, which risks they will take, and how to present a
+                case so it is judged on its strengths.
               </p>
               <div className="mt-8 grid gap-5 sm:grid-cols-2">
                 <div className="border-t border-line pt-4">

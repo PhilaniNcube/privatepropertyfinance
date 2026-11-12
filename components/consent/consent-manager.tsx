@@ -99,7 +99,7 @@ export function ConsentManager() {
 
       {visible ? (
         <div
-          className="fixed inset-x-0 bottom-0 z-[60] border-t border-cream/15 bg-navy text-cream shadow-[0_-10px_40px_rgba(11,31,58,0.25)]"
+          className="fixed inset-x-0 bottom-0 z-[60] border-t border-cream/20 bg-navy text-cream shadow-[0_-10px_40px_rgba(0,51,46,0.28)]"
           role="dialog"
           aria-modal="false"
           aria-label="Cookie preferences"
@@ -112,31 +112,31 @@ export function ConsentManager() {
                   <p className="font-sans text-sm font-semibold text-cream">
                     Cookies and analytics
                   </p>
-                  <p className="mt-1 text-xs leading-relaxed text-cream/60">
+                  <p className="mt-1 text-xs leading-relaxed text-cream/80">
                     We use essential cookies to make the site work. With your
                     permission, we also use Google Analytics to understand how
                     the site is used. You can accept, reject or manage this now, and
                     change it at any time.{" "}
-                    <Link href="/cookie-policy" className="underline decoration-cream/30 underline-offset-2 hover:text-cream">
+                    <Link href="/cookie-policy" className="underline decoration-cream/40 underline-offset-2 hover:text-cream">
                       Cookie Policy
                     </Link>
                   </p>
                   {panelOpen ? (
                     <div className="mt-4 space-y-3 border-t border-cream/15 pt-4">
-                      <label className="flex items-start gap-3 text-xs text-cream/70">
-                        <input type="checkbox" checked disabled className="mt-0.5 h-4 w-4 accent-[#A8863B]" />
+                      <label className="flex items-start gap-3 text-xs text-cream/80">
+                        <input type="checkbox" checked disabled className="mt-0.5 h-4 w-4 accent-[#A7D7CE]" />
                         <span>
                           <span className="font-semibold text-cream">Essential</span>
                           <br />
                           Required for the site and enquiry form to work.
                         </span>
                       </label>
-                      <label className="flex items-start gap-3 text-xs text-cream/70">
+                      <label className="flex items-start gap-3 text-xs text-cream/80">
                         <input
                           type="checkbox"
                           checked={analytics}
                           onChange={(event) => setAnalytics(event.target.checked)}
-                          className="mt-0.5 h-4 w-4 accent-[#A8863B]"
+                          className="mt-0.5 h-4 w-4 accent-[#A7D7CE]"
                         />
                         <span>
                           <span className="font-semibold text-cream">Analytics</span>
@@ -149,20 +149,20 @@ export function ConsentManager() {
                 </div>
               </div>
 
-              <div className="flex shrink-0 flex-wrap items-center gap-2">
+              <div className="flex shrink-0 flex-wrap items-center gap-2.5">
                 {panelOpen ? (
-                  <button type="button" onClick={() => save(analytics)} className="btn-gold min-h-10 px-4 py-2 text-[0.68rem]">
+                  <button type="button" onClick={() => save(analytics)} className="btn-light min-h-10 px-4 py-2 text-xs">
                     Save choices
                   </button>
                 ) : (
                   <>
-                    <button type="button" onClick={() => save(false)} className="btn border-cream/35 bg-transparent px-4 py-2 text-[0.68rem] text-cream hover:bg-cream hover:text-navy">
+                    <button type="button" onClick={() => save(false)} className="btn min-h-10 border-cream/45 bg-transparent px-4 py-2 text-xs text-cream hover:bg-cream hover:text-navy">
                       Reject
                     </button>
-                    <button type="button" onClick={() => setPanelOpen(true)} className="btn border-cream/35 bg-transparent px-4 py-2 text-[0.68rem] text-cream hover:bg-cream hover:text-navy">
+                    <button type="button" onClick={() => setPanelOpen(true)} className="btn min-h-10 border-cream/45 bg-transparent px-4 py-2 text-xs text-cream hover:bg-cream hover:text-navy">
                       Manage
                     </button>
-                    <button type="button" onClick={() => save(true)} className="btn-gold px-4 py-2 text-[0.68rem]">
+                    <button type="button" onClick={() => save(true)} className="btn-light min-h-10 px-4 py-2 text-xs">
                       Accept
                     </button>
                   </>

@@ -32,8 +32,8 @@ export default function ServicesPage() {
         }}
         actions={
           <>
-            <Link href="#enquiry" className="btn-gold">
-              Discuss a deal
+            <Link href="#enquiry" className="btn-primary">
+              Discuss your finance requirements
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link href="/case-studies" className="btn-outline">

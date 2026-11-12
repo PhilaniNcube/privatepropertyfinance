@@ -43,13 +43,13 @@ export function ServicePage({ service }: { service: Service }) {
         facts={service.facts}
         actions={
           <>
-            <Link href="#enquiry" className="btn-gold">
-              Discuss this deal
+            <Link href="#enquiry" className="btn-primary">
+              Discuss your finance requirements
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <a href={`tel:${SITE.phoneHref}`} className="btn-outline">
               <Phone className="h-4 w-4" aria-hidden="true" />
-              {SITE.phone}
+              Call {SITE.phone}
             </a>
           </>
         }
@@ -133,13 +133,16 @@ export function ServicePage({ service }: { service: Service }) {
           <Container>
             <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-5">
-                <Eyebrow>Real example</Eyebrow>
-                <h2 className="mt-4 font-serif text-[clamp(1.9rem,3.2vw,2.9rem)] leading-[1.1] text-navy">
-                  A recent {service.navLabel.toLowerCase()} case
+                <Eyebrow>
+                  {service.example?.eyebrow ?? "Completed transaction"}
+                </Eyebrow>
+                <h2 className="mt-4 font-serif text-[clamp(1.85rem,3vw,2.65rem)] leading-[1.1] text-navy">
+                  {service.example?.heading ??
+                    `A recent ${service.navLabel.toLowerCase()} case`}
                 </h2>
                 <p className="mt-5 body-copy">{service.example?.text}</p>
                 <TextLink href="/case-studies" className="mt-6">
-                  See more completed transactions
+                  View all completed transactions
                 </TextLink>
               </div>
               <div className="lg:col-span-7">

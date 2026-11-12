@@ -33,7 +33,7 @@ export default function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 bg-cream/95 backdrop-blur-sm transition-shadow ${
-        scrolled ? "border-b border-line shadow-[0_1px_18px_rgba(11,31,58,0.06)]" : "border-b border-transparent"
+        scrolled ? "border-b border-line shadow-[0_1px_18px_rgba(0,51,46,0.07)]" : "border-b border-transparent"
       }`}
     >
       <div className="container-ppf flex h-20 items-center justify-between gap-6">
@@ -54,7 +54,7 @@ export default function Header() {
                   />
                 </Link>
                 <div className="invisible absolute left-1/2 top-full z-50 w-72 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  <div className="border border-line bg-white p-2 shadow-[0_20px_50px_rgba(11,31,58,0.14)]">
+                  <div className="border border-line bg-white p-2 shadow-[0_20px_50px_rgba(0,51,46,0.14)]">
                     {link.children.map((child) => (
                       <Link
                         key={child.href}
@@ -97,10 +97,10 @@ export default function Header() {
             {SITE.phone}
           </a>
           <Link
-            href="/contact-us"
-            className="btn-primary min-h-11 whitespace-nowrap px-4 py-2.5 text-[0.68rem]"
+            href="/contact-us#enquiry-form"
+            className="btn-primary min-h-11 whitespace-nowrap px-4 py-2.5 text-[0.82rem]"
           >
-            Discuss a deal
+            Discuss your finance requirements
           </Link>
         </div>
 
@@ -161,8 +161,8 @@ export default function Header() {
                   <a href={`tel:${SITE.phoneHref}`} className="btn-primary w-full">
                     Call {SITE.phone}
                   </a>
-                  <Link href="/contact-us" className="btn-gold w-full">
-                    Discuss a deal
+                  <Link href="/contact-us#enquiry-form" className="btn-outline w-full">
+                    Discuss your finance requirements
                   </Link>
                   <p className="text-center font-sans text-xs leading-relaxed text-ink/70">
                     {SITE.hours}

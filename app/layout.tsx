@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Source_Serif_4, Source_Sans_3 } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/site/header";
@@ -10,17 +10,18 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { organisationSchema, websiteSchema } from "@/lib/schema";
 import { SITE } from "@/lib/content/site";
 
-const serif = Playfair_Display({
+const serif = Source_Serif_4({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-serif",
   weight: ["400", "500", "600", "700"],
 });
 
-const sans = Inter({
+const sans = Source_Sans_3({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -81,7 +82,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B1F3A",
+  themeColor: "#00332E",
 };
 
 export default function RootLayout({

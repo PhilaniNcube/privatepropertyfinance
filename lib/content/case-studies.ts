@@ -9,7 +9,12 @@ export type CaseStudy = {
   borrower: string;
   challenge: string;
   outcome: string;
-  image: { src: string; alt: string };
+  image: {
+    src: string;
+    alt: string;
+    /** True when the image is illustrative photography rather than a photo of the actual financed property. */
+    illustrative?: boolean;
+  };
   serviceSlug: string;
   serviceLabel: string;
 };
@@ -20,20 +25,21 @@ export const CASE_STUDIES: CaseStudy[] = [
     headline: "£286,000 bridging loan",
     amount: "£286,000",
     location: "London",
-    loanType: "Bridging (purchase)",
+    loanType: "Bridging loan (investment purchase)",
     ltv: "70% LTV",
     term: "Short-term bridge",
-    borrower: "Limited company borrower",
+    borrower: "Limited company investor",
     challenge:
-      "The original lender withdrew two weeks before completion.",
+      "The original lender withdrew two weeks before completion on a London investment purchase.",
     outcome:
-      "We found a lender who could complete in time. The client kept their deposit and the purchase completed.",
+      "We placed the deal with a bridging lender able to complete within the deadline. The client protected their deposit and completed the acquisition.",
     image: {
       src: "/images/london-street.jpg",
-      alt: "Period townhouses in central London",
+      alt: "Illustrative view of period townhouses in central London",
+      illustrative: true,
     },
     serviceSlug: "bridging-loans",
-    serviceLabel: "Bridging loans",
+    serviceLabel: "Explore bridging loans",
   },
   {
     slug: "development-birmingham-405k",
@@ -45,35 +51,37 @@ export const CASE_STUDIES: CaseStudy[] = [
     term: "12 months, interest retained",
     borrower: "Sole-trader developer",
     challenge:
-      "A sole-trader developer needed to refinance an existing facility and raise more money to finish a residential scheme.",
+      "A sole-trader developer needed to refinance an existing facility and raise additional funds to finish a residential scheme.",
     outcome:
-      "We arranged a secured loan with interest retained. The build was completed and the property sold.",
+      "We arranged a secured development facility with interest retained. The build was completed and the property sold.",
     image: {
       src: "/images/development-site.jpg",
-      alt: "Residential construction site with cranes and steel frames",
+      alt: "Illustrative aerial view of a residential construction site",
+      illustrative: true,
     },
     serviceSlug: "development-finance",
-    serviceLabel: "Development finance",
+    serviceLabel: "Explore development finance",
   },
   {
     slug: "buy-to-let-hong-kong-2-1m",
     headline: "£2,100,000 buy-to-let purchase",
     amount: "£2,100,000",
-    location: "Hong Kong-based investor",
+    location: "UK investment · Hong Kong-based buyer",
     loanType: "Foreign national buy-to-let",
     ltv: "75% LTV",
-    term: "Long-term let",
+    term: "Long-term investment mortgage",
     borrower: "Overseas investor",
     challenge:
       "A foreign national based in Hong Kong needed a UK buy-to-let mortgage without UK residency.",
     outcome:
-      "We placed the purchase with a lender that accepts overseas applicants at 75% LTV, and managed the process remotely to completion.",
+      "We placed the purchase with a lender that accepts overseas applicants at 75% LTV and managed the process remotely through to completion.",
     image: {
       src: "/images/london-aerial.jpg",
-      alt: "Aerial view of London and the River Thames",
+      alt: "Illustrative aerial view of central London and the River Thames",
+      illustrative: true,
     },
     serviceSlug: "foreign-national-buy-to-let-mortgages",
-    serviceLabel: "Foreign national buy-to-let",
+    serviceLabel: "Explore foreign national buy-to-let",
   },
 ];
 

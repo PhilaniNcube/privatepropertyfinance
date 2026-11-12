@@ -26,7 +26,12 @@ export type Service = {
   image: { src: string; alt: string };
   facts: { label: string; value: string }[];
   sections: ContentSection[];
-  example?: { caseSlug: string; text: string };
+  example?: {
+    caseSlug: string;
+    eyebrow?: string;
+    heading?: string;
+    text: string;
+  };
   faqs: FAQ[];
   cta: { title: string; body: string };
   related: string[];
@@ -39,13 +44,13 @@ export const SERVICES: Service[] = [
     name: "Commercial Mortgages",
     navLabel: "Commercial Mortgages",
     formValue: "commercial",
-    metaTitle: "Commercial Mortgage Broker Manchester & London | PPF",
+    metaTitle: "Commercial Mortgage Broker UK | Private Property Finance",
     metaDescription:
-      "Commercial mortgages for offices, retail, industrial and mixed-use property. Owner-occupiers and investors, £100k–£20m. Talk to an independent broker.",
-    eyebrow: "Commercial mortgages",
+      "UK commercial mortgage broker for offices, retail, industrial and mixed-use property. Owner-occupiers and investors, £100k–£20m. Speak to an experienced broker.",
+    eyebrow: "Commercial mortgages · UK-wide",
     h1: "Commercial mortgages",
     intro:
-      "Whether you're buying your own business premises, adding to a commercial portfolio or refinancing an existing loan, we find lenders across the UK that suit the property, the business behind it and the timescale.",
+      "Whether you are buying your own business premises, adding to a commercial investment portfolio or refinancing an existing facility, we arrange commercial mortgages across the UK tailored to the property, the business behind it and your timescale.",
     image: {
       src: "/images/commercial-offices.jpg",
       alt: "Glass-fronted commercial office buildings",
@@ -58,85 +63,108 @@ export const SERVICES: Service[] = [
     sections: [
       {
         id: "what-we-help-with",
-        eyebrow: "Scope",
+        eyebrow: "Who it suits",
         title: "What we can help with",
         items: [
           {
             title: "Owner-occupier mortgages",
-            body: "Buying the premises your business trades from, instead of paying rent.",
+            body: "Buying or refinancing the premises your business trades from, rather than paying rent to a landlord.",
           },
           {
             title: "Commercial investment mortgages",
-            body: "Buying or refinancing let property such as offices, shops, industrial units and mixed-use blocks.",
+            body: "Acquiring or refinancing income-producing offices, retail units, industrial estates, warehouses and mixed-use blocks.",
           },
           {
             title: "Semi-commercial property",
-            body: "Shops with flats above, and other mixed residential and commercial buildings.",
+            body: "Retail or office premises with residential flats above, and other mixed commercial and residential assets.",
           },
           {
             title: "Refinancing and capital raising",
-            body: "Moving off an expiring facility or releasing equity for the next purchase.",
+            body: "Replacing an expiring facility, restructuring debt or releasing equity for your next acquisition.",
           },
           {
-            title: "Specialist property",
-            body: "Care homes, hotels, pubs and other trading businesses.",
+            title: "Trading and specialist sectors",
+            body: "Care homes, hotels, hospitality, medical premises and owner-managed trading properties.",
+          },
+          {
+            title: "Company, trust and pension structures",
+            body: "Facilities arranged for trading limited companies, SPVs, LLPs, trusts and pension schemes (SIPP and SSAS).",
           },
         ],
-      },
-      {
-        id: "who-we-work-with",
-        eyebrow: "Borrowers",
-        title: "Who we work with",
-        body: "Trading businesses, limited companies and SPVs, partnerships, sole traders, trusts and pension schemes (SIPP/SSAS).",
       },
       {
         id: "lender-view",
-        eyebrow: "Underwriting",
+        eyebrow: "Lender considerations",
         title: "What lenders will look at",
         items: [
           {
-            title: "The property",
-            body: "Type, condition, location, and the lease and tenant if it's let.",
+            title: "The property and lease profile",
+            body: "Asset type, condition, location, alternative-use value, and—if let—the tenant covenant and unexpired lease term (WAULT).",
           },
           {
-            title: "For owner-occupiers",
-            body: "The trading history and profitability of the business.",
+            title: "For owner-occupiers: trading performance",
+            body: "Historic accounts, EBITDA/operating profit, debtor/creditor profile and whether the business can service the debt comfortably.",
           },
           {
-            title: "For investors",
-            body: "Whether the rental income covers the loan comfortably.",
+            title: "For investors: rental cover",
+            body: "Whether passing or projected market rent covers interest and capital repayments against the lender's stress rate.",
           },
           {
-            title: "You",
-            body: "Your deposit and your experience as a borrower.",
+            title: "Deposit and borrower track record",
+            body: "Your equity contribution, sector experience and net worth statement.",
           },
         ],
-        note: "We'll tell you upfront what a lender is likely to ask for, so there are no surprises at underwriting.",
+        note: "We review these points with you on the first call and tell you upfront what a credit committee is likely to ask for.",
+      },
+      {
+        id: "documents-required",
+        eyebrow: "Preparation",
+        title: "Typical documents required",
+        items: [
+          {
+            title: "Property details and leases",
+            body: "Heads of terms or address, purchase price or estimated value, occupational leases and tenancy schedule (for investment property).",
+          },
+          {
+            title: "Financial accounts (owner-occupiers)",
+            body: "Last two to three years' filed accounts, up-to-date management figures and recent business bank statements.",
+          },
+          {
+            title: "Asset and liability statement",
+            body: "Summary of existing properties, mortgages, rental income and personal or company balance sheet.",
+          },
+          {
+            title: "Identity and structure",
+            body: "Proof of ID, proof of address, company structure chart and confirmation of deposit source.",
+          },
+        ],
       },
       {
         id: "how-it-works",
-        eyebrow: "Process",
-        title: "How it works",
+        eyebrow: "Process, fees & next steps",
+        title: "How it works and what it costs",
         numbered: true,
         items: [
           {
-            title: "Initial call",
-            body: "Understand the property, the business and your goals.",
+            title: "Initial review",
+            body: "We discuss the property, the business or tenancy profile, and your timescale, then confirm whether the deal is financeable.",
           },
           {
-            title: "Indicative terms",
-            body: "We approach suitable lenders and come back with indicative terms.",
+            title: "Indicative terms and fee transparency",
+            body: "We approach suitable high street, challenger and specialist lenders and present indicative terms. Typical costs include a lender arrangement fee, RICS valuation fee and legal costs. Any broker fee or lender commission is explained and agreed with you in writing before we proceed.",
           },
           {
-            title: "Application to completion",
-            body: "We package the application, then manage the valuation, legal work and completion.",
+            title: "Packaging to completion",
+            body: "We write the credit submission, instruct the valuation alongside the lender, and coordinate with solicitors through to drawdown.",
           },
         ],
       },
     ],
     example: {
       caseSlug: "bridging-london-286k",
-      text: "A London investor's original lender withdrew two weeks before completion. We arranged a £286,000 bridging loan in time to save the deposit and complete the purchase.",
+      eyebrow: "Related bridging example",
+      heading: "Related short-term completion when a lender withdrew",
+      text: "Where a property acquisition faces an urgent deadline before long-term finance is put in place, we can step in with short-term bridging finance. In this related bridging case, a London investor's original lender withdrew two weeks before completion and we arranged a £286,000 facility in time to protect the deposit.",
     },
     faqs: [
       {
@@ -201,13 +229,13 @@ export const SERVICES: Service[] = [
     name: "Bridging Loans",
     navLabel: "Bridging Loans",
     formValue: "bridging",
-    metaTitle: "Bridging Loan Broker Manchester & London | PPF",
+    metaTitle: "Bridging Loan Broker UK | Fast Bridging Finance | PPF",
     metaDescription:
-      "Fast, flexible bridging loans for auction purchases, chain breaks, refurbishments and lender pull-outs. Residential, commercial and land, £100k–£20m.",
-    eyebrow: "Bridging loans",
+      "UK bridging loan broker for non-regulated investment and commercial property. Auction purchases, refurbishments, investment chain breaks and lender pull-outs, £100k–£20m.",
+    eyebrow: "Bridging loans · Non-regulated investment & business finance",
     h1: "Bridging loans",
     intro:
-      "When a deal can't wait for a mortgage, a bridging loan can provide funds in days or weeks. We arrange bridging finance across the UK for property investors, developers and businesses, secured on residential, commercial, mixed-use or land with or without planning.",
+      "When a property transaction cannot wait for a term mortgage, a bridging loan can provide funds in days or weeks. We arrange non-regulated bridging finance across the UK for property investors, developers and businesses, secured on investment residential, commercial, mixed-use property or land.",
     image: {
       src: "/images/london-street.jpg",
       alt: "Period London townhouses with a red bus in the background",
@@ -215,63 +243,79 @@ export const SERVICES: Service[] = [
     facts: [
       { label: "Typical loan size", value: "£100,000 – £20 million" },
       { label: "Term", value: "Usually 1 – 24 months" },
-      { label: "Security", value: "Residential, commercial, mixed-use or land" },
+      { label: "Scope", value: "Non-regulated investment & business property across the UK" },
     ],
     sections: [
       {
         id: "when-bridging",
-        eyebrow: "Use cases",
+        eyebrow: "Who it suits",
         title: "When bridging makes sense",
         items: [
           {
             title: "Auction purchases",
-            body: "Completing within the auction's 28-day deadline.",
+            body: "Meeting a 28-day auction completion deadline on an investment or commercial property.",
           },
           {
             title: "Lender pull-outs",
-            body: "Stepping in when the original funding falls through close to completion.",
+            body: "Stepping in quickly when an original lender withdraws or down-values close to completion.",
           },
           {
-            title: "Chain breaks",
-            body: "Buying the next property before the current one sells.",
+            title: "Investment chain breaks",
+            body: "Securing the next investment or commercial acquisition before an existing portfolio sale completes (for business and investment properties, not owner-occupied homes).",
           },
           {
-            title: "Refurbishment",
-            body: "Buying a property that isn't mortgageable yet, improving it, then refinancing or selling.",
+            title: "Light and heavy refurbishment",
+            body: "Acquiring an unmortgageable or tired property, completing works, then refinancing onto a buy-to-let or commercial term loan or selling.",
           },
           {
-            title: "Time-sensitive purchases",
-            body: "Below-market-value and other opportunities that won't wait for a mortgage.",
+            title: "Time-sensitive acquisitions",
+            body: "Completing on below-market-value or off-market opportunities that will not wait for mainstream underwriting.",
           },
           {
-            title: "Business needs",
-            body: "Raising capital quickly against property you already own.",
+            title: "Business capital raising",
+            body: "Releasing working capital or deposit funds rapidly against investment or commercial property you already own.",
           },
+        ],
+        note: "We arrange non-regulated bridging finance for business and investment purposes only. We do not arrange regulated bridging loans secured on a borrower's own home.",
+      },
+      {
+        id: "lender-considerations",
+        eyebrow: "Lender considerations",
+        title: "How bridging works and what lenders check",
+        body: "Bridging loans run from 1 to 24 months. Interest is typically retained or rolled up into the facility so monthly cash-flow payments are not required during works or marketing. Lenders focus on three fundamentals: the security property's current and post-works value, the net cash required after any existing debt and retained interest, and a credible exit strategy (sale or refinance).",
+        items: [
+          { title: "First and second charge", body: "Secured as the primary charge, or behind an existing mortgage that remains in place." },
+          { title: "Refurbishment and conversion", body: "Cosmetic upgrades through to structural reconfiguration and change of use." },
+          { title: "Bridge-to-let", body: "Short-term funding paired with a planned buy-to-let or commercial refinance exit." },
+          { title: "Commercial and land bridging", body: "Offices, retail, industrial, mixed-use buildings and sites with or without planning." },
         ],
       },
       {
-        id: "how-it-works",
-        eyebrow: "The structure",
-        title: "How a bridging loan works",
-        body: "Bridging loans are short-term, usually from a few months up to 12–24 months. Interest is commonly rolled up or retained, so you may not need to make monthly payments. Every lender will want a clear exit: how the loan will be repaid, usually by selling the property or refinancing onto a longer-term mortgage. A credible exit matters as much as the property itself.",
-      },
-      {
-        id: "types",
-        eyebrow: "Facilities",
-        title: "Types of bridging we arrange",
+        id: "documents-and-process",
+        eyebrow: "Documents, process & fees",
+        title: "What you will need and how costs work",
+        numbered: true,
         items: [
-          { title: "First and second charge", body: "Bridging secured ahead of, or behind, existing debt." },
-          { title: "Light and heavy refurbishment", body: "From cosmetic work to structural renovation." },
-          { title: "Auction finance", body: "Funds ready for a 28-day completion." },
-          { title: "Bridge-to-let", body: "Bridging with a pre-agreed buy-to-let exit." },
-          { title: "Commercial bridging", body: "Commercial and semi-commercial property." },
-          { title: "Land bridging", body: "Land with or without planning consent." },
+          {
+            title: "Property, debt and exit details",
+            body: "Address, purchase price or estimated value, any existing debt (confirming whether it will be repaid or remain), schedule of works (if refurbishing), and your planned exit route.",
+          },
+          {
+            title: "Clear gross vs. net loan breakdown",
+            body: "We set out the gross loan, retained interest, lender arrangement fee (typically 1%–2%), valuation and legal costs, and any broker fee in writing upfront so you know the exact net day-one advance.",
+          },
+          {
+            title: "Valuation, legals and drawdown",
+            body: "We instruct a lender with the right appetite and panel valuers/solicitors who can work to your completion date.",
+          },
         ],
       },
     ],
     example: {
       caseSlug: "bridging-london-286k",
-      text: "£286,000 bridging loan, London, 70% LTV. A property investor's original lender withdrew two weeks before completion. We found a bridging lender able to complete in time, so the client kept their deposit and completed the purchase.",
+      eyebrow: "Completed bridging transaction",
+      heading: "A recent bridging loan case",
+      text: "£286,000 bridging loan, London, 70% LTV. A property investor's original lender withdrew two weeks before completion. We arranged a replacement bridging facility in time, protecting the client's deposit and completing the purchase.",
     },
     faqs: [
       {
@@ -327,7 +371,7 @@ export const SERVICES: Service[] = [
     related: ["commercial-mortgages", "development-finance"],
     card: {
       title: "Bridging Loans",
-      body: "Short-term finance when timing matters: auction purchases, broken chains, refurbishments and lender pull-outs.",
+      body: "Short-term non-regulated finance when timing matters: auction purchases, investment chain breaks, refurbishments and lender pull-outs.",
     },
   },
   {
@@ -335,13 +379,13 @@ export const SERVICES: Service[] = [
     name: "Development Finance",
     navLabel: "Development Finance",
     formValue: "development",
-    metaTitle: "Property Development Finance Broker | Manchester & London",
+    metaTitle: "Property Development Finance Broker UK | PPF",
     metaDescription:
-      "Development finance for ground-up builds, conversions and refurbishments. Senior, stretch senior and exit loans for new and experienced developers.",
-    eyebrow: "Development finance",
+      "UK property development finance broker for ground-up builds, conversions and heavy refurbishments. Senior, stretch senior and exit loans from £100k to £20m.",
+    eyebrow: "Development finance · UK-wide",
     h1: "Property development finance",
     intro:
-      "From a single plot to a multi-unit scheme, we structure development funding across the UK around your build programme, so the money is there when each stage needs it.",
+      "From a single plot to a multi-unit residential or commercial scheme, we structure development funding across the UK around your build programme, ensuring each drawdown stage aligns with your cash flow.",
     image: {
       src: "/images/development-site.jpg",
       alt: "Aerial view of a residential construction site with cranes and steel frames",
@@ -354,72 +398,80 @@ export const SERVICES: Service[] = [
     sections: [
       {
         id: "what-we-arrange",
-        eyebrow: "Funding",
+        eyebrow: "Who it suits",
         title: "What we arrange",
         items: [
           {
             title: "Ground-up development",
-            body: "New-build residential, commercial and mixed-use schemes.",
+            body: "New-build residential houses, apartment blocks, commercial units and mixed-use schemes.",
           },
           {
-            title: "Conversions",
-            body: "Office to residential, barn conversions, HMOs and changes of use.",
+            title: "Conversions and permitted development",
+            body: "Office-to-residential, commercial conversions, barn conversions, HMOs and material changes of use.",
           },
           {
             title: "Heavy refurbishment",
-            body: "Structural works that standard bridging won't cover.",
+            body: "Structural alterations, extensions and schemes requiring building regulations sign-off.",
           },
           {
             title: "Senior and stretched senior debt",
-            body: "Higher leverage to reduce the equity you need.",
+            body: "Funding a higher share of total project cost (LTC) and gross development value (LTGDV) to preserve developer equity.",
           },
           {
             title: "Mezzanine and equity introductions",
-            body: "For larger schemes where senior debt alone isn't enough.",
+            body: "Top-up funding for experienced developers where senior debt alone leaves an equity gap.",
           },
           {
-            title: "Development exit loans",
-            body: "Refinancing a completed scheme so you have time to sell or let the units at full value.",
+            title: "Development exit finance",
+            body: "Replacing the build facility at practical completion to reduce interest costs while units are sold or let.",
           },
         ],
-      },
-      {
-        id: "how-it-works",
-        eyebrow: "The structure",
-        title: "How development finance works",
-        body: "Lenders usually fund part of the land or purchase cost upfront, then release build costs in stages after a monitoring surveyor confirms each stage of work. The size of the loan is usually measured against the total cost of the project and against the gross development value (GDV), the finished scheme's expected value. Interest is normally rolled up and repaid on sale or refinance.",
       },
       {
         id: "lender-view",
-        eyebrow: "Underwriting",
-        title: "What lenders will want to see",
+        eyebrow: "Lender considerations",
+        title: "How development finance works and what lenders assess",
+        body: "Lenders typically advance a percentage of the site purchase or land value on day one, then release 100% of build costs in arrears across agreed stages verified by an independent monitoring surveyor (IMS). Interest is rolled up within the facility limit and repaid from unit sales or refinance.",
         items: [
-          { title: "Planning consent", body: "The consent and the drawings." },
-          { title: "Costs and programme", body: "A detailed cost plan and build programme." },
+          { title: "Planning consent", body: "Full planning permission or prior approval, approved drawings and any Section 106 / CIL obligations." },
+          { title: "Build costs and programme", body: "Itemised cost plan, contingency allowance, JCT contract terms and realistic build timetable." },
           {
-            title: "Track record",
-            body: "Your track record, or your professional team's (contractor, architect, project manager).",
+            title: "Developer and contractor track record",
+            body: "Delivered schemes of a comparable scale, or—for first-time developers—the experience of your main contractor and professional team.",
           },
           {
-            title: "Evidence of GDV",
-            body: "Agents' comparables supporting the finished value.",
-          },
-          {
-            title: "Equity and exit",
-            body: "Your equity contribution and a clear exit plan.",
+            title: "GDV comparables and exit",
+            body: "Local agent comparables supporting the finished unit values and absorption period, or rental cover if retaining.",
           },
         ],
       },
       {
-        id: "first-time-developers",
-        eyebrow: "First scheme",
-        title: "First-time developer? It can be done.",
-        body: "Lenders look harder at the team around you and at the contractor's track record. We'll help you put together a proposal that answers their questions before they ask them.",
+        id: "process-and-fees",
+        eyebrow: "Documents, process & fees",
+        title: "From appraisal to drawdown",
+        numbered: true,
+        items: [
+          {
+            title: "Share your development appraisal",
+            body: "Send us the site address, planning reference, land cost, build budget and estimated GDV (you can attach a PDF or Excel appraisal in our enquiry form).",
+          },
+          {
+            title: "Compare structured terms and costs",
+            body: "We model day-one land release, staged build drawdowns, rolled-up interest, lender arrangement and exit fees, RICS/IMS fees, and our agreed broker fee so you can see true net leverage and profit-on-cost.",
+          },
+          {
+            title: "Credit approval, legals and stage releases",
+            body: "We package the credit paper, coordinate the valuation and monitoring surveyor, and stay involved through completion.",
+          },
+        ],
+        note: "First-time developer? Lenders place extra weight on your contractor, architect and quantity surveyor. We help structure the professional team presentation before approaching credit.",
       },
     ],
     example: {
       caseSlug: "development-birmingham-405k",
-      text: "£405,000 refinance and further advance, Birmingham, 65% LTV, 12-month term. A sole-trader developer needed to refinance an existing facility and raise more funds to finish a residential scheme. We arranged a secured loan with interest retained, which let them finish the build and sell.",
+      eyebrow: "Completed development transaction",
+      heading: "A recent development finance case",
+      text: "£405,000 refinance and further advance, Birmingham, 65% LTV, 12-month term. A sole-trader developer needed to refinance an existing facility and raise additional funds to finish a residential scheme. We arranged a secured loan with interest retained, enabling completion and sale.",
     },
     faqs: [
       {
@@ -567,28 +619,34 @@ export const SERVICES: Service[] = [
       },
       {
         id: "plan-for",
-        eyebrow: "Considerations",
-        title: "Things to plan for",
+        eyebrow: "Considerations & fees",
+        title: "Key considerations and costs to plan for",
         items: [
           {
-            title: "Deposit",
-            body: "Expect to need a larger deposit than a UK resident would.",
+            title: "Deposit and rental cover (ICR)",
+            body: "Overseas borrowers typically need at least a 25% deposit (up to 75% LTV), and the expected rent must meet the lender's interest cover ratio (often 125% for UK SPVs or 145% in personal name).",
           },
           {
-            title: "Currency",
-            body: "If you earn in a foreign currency, lenders may apply extra checks or limit the loan.",
+            title: "Currency and country criteria",
+            body: "Lenders apply currency haircuts to overseas income and maintain approved country lists. We match your residency and income currency to the right panel.",
           },
           {
-            title: "Stamp duty",
-            body: "Non-UK residents pay an extra stamp duty surcharge on top of the higher rates for additional properties. Take tax advice before you buy.",
+            title: "Ownership structure and tax",
+            body: "Personal name vs. UK limited company (SPV) affects both lender ICR tests and tax. Non-UK residents also face an SDLT surcharge—always take independent UK tax advice.",
           },
           {
-            title: "Ownership structure",
-            body: "Limited company or personal name: each has tax and lending implications. We'll explain the lending side, and your accountant should advise on tax.",
+            title: "Fees and transparent terms",
+            body: "Expect a lender arrangement fee, valuation fee, UK legal costs (including identity certification) and any agreed broker fee, which we set out in writing before application.",
           },
         ],
       },
     ],
+    example: {
+      caseSlug: "buy-to-let-hong-kong-2-1m",
+      eyebrow: "Completed overseas investor transaction",
+      heading: "A recent foreign national buy-to-let case",
+      text: "£2,100,000 buy-to-let purchase at 75% LTV for a Hong Kong-based investor without UK residency. We placed the case with a specialist lender and managed the application remotely through to completion.",
+    },
     faqs: [
       {
         question: "Can a foreign national get a mortgage in the UK?",

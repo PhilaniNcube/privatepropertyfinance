@@ -48,6 +48,7 @@ const textFields = [
   "nationality",
   "propertyType",
   "occupancy",
+  "existingDebtHandling",
   "exitRoute",
   "planning",
   "experience",
@@ -57,6 +58,7 @@ const FIELD_LABELS: Record<string, string> = {
   propertyValue: "Property value",
   loanWanted: "Loan wanted",
   existingDebt: "Existing mortgage or debt",
+  existingDebtHandling: "Existing debt treatment",
   monthlyRent: "Monthly rent",
   buyingAs: "Buying as",
   country: "Country of residence",
@@ -196,6 +198,7 @@ export async function submitEnquiry(formData: FormData): Promise<EnquiryResult> 
     parsed.data.details,
     ``,
     `Privacy consent: given`,
+    `Marketing opt-in (optional): ${formData.get("marketingConsent") ? "yes" : "no"}`,
     attachments.length ? `Attachment: ${attachments[0].filename}` : "",
   ]
     .filter(Boolean)

@@ -38,7 +38,7 @@ const DEAL_OPTIONS: { value: DealType; label: string; description: string }[] = 
   {
     value: "bridging",
     label: "Bridging loan",
-    description: "Auction, chain break, refurbishment",
+    description: "Auction, investment chain break, refurbishment",
   },
   {
     value: "development",
@@ -52,7 +52,7 @@ const DEAL_OPTIONS: { value: DealType; label: string; description: string }[] = 
   },
   {
     value: "other",
-    label: "Something else",
+    label: "General enquiry",
     description: "Tell us what you're working on",
   },
 ];
@@ -89,8 +89,10 @@ const COUNTRIES = [
 ];
 
 const num = (value?: string) => {
-  const parsed = Number((value ?? "").replace(/[^0-9]/g, ""));
-  return Number.isFinite(parsed) ? parsed : 0;
+  const cleaned = (value ?? "").replace(/[^0-9]/g, "").slice(0, 11);
+  if (!cleaned) return 0;
+  const parsed = Number(cleaned);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
 };
 
 function MoneyInput({
@@ -133,7 +135,9 @@ function MoneyInput({
           inputMode="numeric"
           autoComplete="off"
           value={value ? Number(value).toLocaleString("en-GB") : ""}
-          onChange={(event) => onChange(event.target.value.replace(/[^0-9]/g, ""))}
+          onChange={(event) =>
+            onChange(event.target.value.replace(/[^0-9]/g, "").slice(0, 11))
+          }
           aria-invalid={Boolean(error)}
           aria-describedby={error ? `${id}-error` : help ? `${id}-help` : undefined}
           className="input-ppf pl-8"
@@ -175,6 +179,7 @@ export function EnquiryForm({
     details: "",
   });
   const [consent, setConsent] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -223,6 +228,8 @@ export function EnquiryForm({
       propertyValue: num(values.propertyValue),
       loanWanted: num(values.loanWanted),
       existingDebt: num(values.existingDebt),
+      existingDebtHandling:
+        values.existingDebtHandling === "remaining" ? "remaining" : "repaid",
       monthlyRent: num(values.monthlyRent),
       buyingAs:
         values.buyingAs === "limited"
@@ -234,6 +241,12 @@ export function EnquiryForm({
       buildCost: num(values.buildCost),
       otherCosts: num(values.otherCosts),
       gdv: num(values.gdv),
+      occupancy:
+        values.occupancy === "owner-occupied"
+          ? "owner-occupied"
+          : values.occupancy === "investment"
+            ? "investment"
+            : undefined,
       annualRentOrProfit: num(values.annualRentOrProfit),
     };
     return calculateIndicative(calcValues);
@@ -241,7 +254,6 @@ export function EnquiryForm({
 
   const chooseDeal = (next: DealType) => {
     setDealType(next);
-    setValues({});
     setErrors({});
     goToStep(2);
     if (!started) {
@@ -347,6 +359,7 @@ export function EnquiryForm({
     formData.append("timescale", contact.timescale);
     formData.append("details", contact.details.trim());
     if (consent) formData.append("consent", "on");
+    if (marketingConsent) formData.append("marketingConsent", "on");
     if (file) formData.append("attachment", file);
     const honeypot = document.getElementById("company_website") as HTMLInputElement | null;
     if (honeypot?.value) formData.append("company_website", honeypot.value);
@@ -376,6 +389,7 @@ export function EnquiryForm({
     setValues({});
     setContact({ name: "", email: "", phone: "", timescale: "", details: "" });
     setConsent(false);
+    setMarketingConsent(false);
     setFile(null);
     setErrors({});
     setServerError("");
@@ -590,10 +604,16 @@ export function EnquiryForm({
                     </div>
                     <MoneyInput
                       id="annualRentOrProfit"
-                      label="Annual rent or business profit"
+                      label={
+                        values.occupancy === "owner-occupied"
+                          ? "Annual business operating profit (EBITDA)"
+                          : values.occupancy === "investment"
+                            ? "Annual rental income"
+                            : "Annual rent or business profit"
+                      }
                       value={values.annualRentOrProfit ?? ""}
                       onChange={(value) => update("annualRentOrProfit", value)}
-                      help="Optional. Helps us sense-check the likely lender appetite."
+                      help="Optional. Helps us sense-check likely lender serviceability."
                     />
                   </>
                 ) : null}
@@ -624,7 +644,30 @@ export function EnquiryForm({
                         label="Existing mortgage or debt"
                         value={values.existingDebt ?? ""}
                         onChange={(value) => update("existingDebt", value)}
+                        help="Leave blank if unencumbered"
                       />
+                      <div>
+                        <label htmlFor="existingDebtHandling" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
+                          Existing debt treatment
+                        </label>
+                        <select
+                          id="existingDebtHandling"
+                          value={values.existingDebtHandling ?? "repaid"}
+                          onChange={(event) =>
+                            update("existingDebtHandling", event.target.value)
+                          }
+                          className="input-ppf"
+                        >
+                          <option value="repaid">
+                            Repaid by this loan (first charge)
+                          </option>
+                          <option value="remaining">
+                            Remains in place (second charge)
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="grid gap-5 sm:grid-cols-2">
                       <div>
                         <label htmlFor="termMonths" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
                           Term (months)
@@ -635,30 +678,30 @@ export function EnquiryForm({
                           inputMode="numeric"
                           value={values.termMonths ?? ""}
                           onChange={(event) =>
-                            update("termMonths", event.target.value.replace(/[^0-9]/g, ""))
+                            update("termMonths", event.target.value.replace(/[^0-9]/g, "").slice(0, 3))
                           }
                           className="input-ppf"
                           placeholder="e.g. 9"
                         />
                       </div>
-                    </div>
-                    <div>
-                      <label htmlFor="exitRoute" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
-                        Exit route<span className="text-gold-ink">&nbsp;*</span>
-                      </label>
-                      <select
-                        id="exitRoute"
-                        value={values.exitRoute ?? ""}
-                        onChange={(event) => update("exitRoute", event.target.value)}
-                        className="input-ppf"
-                        aria-invalid={Boolean(errors.exitRoute)}
-                      >
-                        <option value="">Select</option>
-                        <option value="sale">Sale</option>
-                        <option value="refinance">Refinance</option>
-                        <option value="other">Other</option>
-                      </select>
-                      <FieldError error={errors.exitRoute} />
+                      <div>
+                        <label htmlFor="exitRoute" className="mb-2 block font-sans text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-navy">
+                          Exit route<span className="text-gold-ink">&nbsp;*</span>
+                        </label>
+                        <select
+                          id="exitRoute"
+                          value={values.exitRoute ?? ""}
+                          onChange={(event) => update("exitRoute", event.target.value)}
+                          className="input-ppf"
+                          aria-invalid={Boolean(errors.exitRoute)}
+                        >
+                          <option value="">Select</option>
+                          <option value="sale">Sale</option>
+                          <option value="refinance">Refinance</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <FieldError error={errors.exitRoute} />
+                      </div>
                     </div>
                   </>
                 ) : null}
@@ -925,7 +968,12 @@ export function EnquiryForm({
                     {calculation.warning}
                   </p>
                 ) : null}
-                <p className="mt-6 border-t border-cream/15 pt-4 text-[0.66rem] leading-relaxed text-cream/65">
+                {calculation.assumptionsNote ? (
+                  <p className="mt-4 border-t border-cream/15 pt-3 text-[0.68rem] leading-relaxed text-cream/75">
+                    {calculation.assumptionsNote}
+                  </p>
+                ) : null}
+                <p className="mt-4 border-t border-cream/15 pt-3 text-[0.68rem] leading-relaxed text-cream/75">
                   {INDICATIVE_DISCLAIMER}
                 </p>
               </aside>
@@ -1028,7 +1076,7 @@ export function EnquiryForm({
               <FieldError error={errors.details} />
             </div>
 
-            <div className="mt-5 space-y-2">
+            <div className="mt-5 space-y-3">
               <div className="flex items-start gap-3">
                 <input
                   id="consent"
@@ -1043,18 +1091,31 @@ export function EnquiryForm({
                       return next;
                     });
                   }}
-                  className="mt-1 h-4 w-4 shrink-0 accent-[#0B1F3A]"
+                  className="mt-1 h-4 w-4 shrink-0 accent-[#00332E]"
                   aria-invalid={Boolean(errors.consent)}
                 />
-                <label htmlFor="consent" className="text-xs leading-relaxed text-ink/70">
+                <label htmlFor="consent" className="text-xs leading-relaxed text-ink/80">
                   I agree to the{" "}
                   <Link href="/privacy-policy" className="text-navy underline decoration-gold/50 underline-offset-2">
                     Privacy Policy
                   </Link>
-                  . We&apos;ll only use your details to respond to this enquiry.
+                  . We will only use your details to respond to this enquiry.<span className="text-gold-ink">&nbsp;*</span>
                 </label>
               </div>
               <FieldError error={errors.consent} />
+
+              <div className="flex items-start gap-3">
+                <input
+                  id="marketingConsent"
+                  type="checkbox"
+                  checked={marketingConsent}
+                  onChange={(event) => setMarketingConsent(event.target.checked)}
+                  className="mt-1 h-4 w-4 shrink-0 accent-[#00332E]"
+                />
+                <label htmlFor="marketingConsent" className="text-xs leading-relaxed text-ink/70">
+                  Optional: send me occasional market and lending updates by email. You can unsubscribe at any time.
+                </label>
+              </div>
             </div>
 
             <div

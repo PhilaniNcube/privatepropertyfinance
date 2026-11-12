@@ -4,34 +4,49 @@
 
 @layer base {
   :root {
-    --background: 40 30% 97%;
-    --foreground: 0 0% 13%;
+    /* Recovered PPF Green Palette (from commit 93993ff~1:app/globals.css)
+       --accent: 174 100% 10% (#00332E)
+       --accent-foreground: 174 100% 20% (#00665C)
+       --primary (ink): 240 5.9% 10% (#18181B) */
+    --ppf-green: #00332e;
+    --ppf-green-mid: #00665c;
+    --ppf-green-ink: #005249;
+    --ppf-green-deep: #002420;
+    --ppf-green-soft: #a7d7ce;
+    --ppf-sage-wash: #edf3f1;
+    --ppf-paper: #f7f6f2;
+    --ppf-stone: #eceae3;
+    --ppf-ink: #18181b;
+    --ppf-line: #d8ddd9;
+
+    --background: 48 20% 96%;
+    --foreground: 240 6% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
+    --card-foreground: 240 6% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
-    --primary: 214 68% 14%;
-    --primary-foreground: 40 30% 97%;
-    --secondary: 40 20% 92%;
-    --secondary-foreground: 214 68% 14%;
-    --muted: 40 20% 92%;
-    --muted-foreground: 215 10% 38%;
-    --accent: 214 68% 14%;
-    --accent-foreground: 40 30% 97%;
-    --destructive: 0 72% 45%;
+    --popover-foreground: 240 6% 10%;
+    --primary: 174 100% 10%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 160 20% 94%;
+    --secondary-foreground: 174 100% 10%;
+    --muted: 45 16% 91%;
+    --muted-foreground: 174 18% 30%;
+    --accent: 174 100% 10%;
+    --accent-foreground: 174 100% 20%;
+    --destructive: 0 72% 42%;
     --destructive-foreground: 0 0% 98%;
-    --border: 40 16% 84%;
-    --input: 40 16% 80%;
-    --ring: 41 49% 45%;
-    --radius: 0.125rem;
-    --sidebar-background: 40 30% 97%;
-    --sidebar-foreground: 0 0% 13%;
-    --sidebar-primary: 214 68% 14%;
-    --sidebar-primary-foreground: 40 30% 97%;
-    --sidebar-accent: 40 20% 92%;
-    --sidebar-accent-foreground: 214 68% 14%;
-    --sidebar-border: 40 16% 84%;
-    --sidebar-ring: 41 49% 45%;
+    --border: 150 8% 85%;
+    --input: 150 8% 80%;
+    --ring: 174 100% 20%;
+    --radius: 0.1875rem;
+    --sidebar-background: 48 20% 96%;
+    --sidebar-foreground: 240 6% 10%;
+    --sidebar-primary: 174 100% 10%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 160 20% 94%;
+    --sidebar-accent-foreground: 174 100% 10%;
+    --sidebar-border: 150 8% 85%;
+    --sidebar-ring: 174 100% 20%;
   }
 
   * {
@@ -46,7 +61,6 @@
   body {
     @apply bg-cream text-ink font-sans antialiased;
     font-feature-settings: "cv11", "ss01";
-    text-rendering: optimizeLegibility;
   }
 
   h1,
@@ -62,12 +76,12 @@
   }
 
   ::selection {
-    background: #a8863b;
-    color: #fff;
+    background: #00332e;
+    color: #ffffff;
   }
 
   :focus-visible {
-    outline: 2px solid #a8863b;
+    outline: 2px solid #00665c;
     outline-offset: 3px;
   }
 
@@ -86,15 +100,15 @@
 
 @layer components {
   .container-ppf {
-    @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12;
+    @apply mx-auto w-full max-w-[1380px] px-5 sm:px-8 lg:px-12;
   }
 
   .eyebrow {
-    @apply font-sans text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-gold-ink;
+    @apply font-sans text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold-ink;
   }
 
   .eyebrow-light {
-    @apply font-sans text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-gold-soft;
+    @apply font-sans text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-gold-soft;
   }
 
   .rule-gold {
@@ -102,59 +116,63 @@
   }
 
   .lede {
-    @apply text-lg leading-relaxed text-ink/75 sm:text-xl;
+    @apply text-lg leading-relaxed text-ink/80 sm:text-xl;
   }
 
   .body-copy {
-    @apply text-[1.02rem] leading-[1.75] text-ink/75;
+    @apply text-[1.03rem] leading-[1.75] text-ink/80;
   }
 
   .body-copy-light {
-    @apply text-[1.02rem] leading-[1.75] text-cream/70;
+    @apply text-[1.03rem] leading-[1.75] text-cream/80;
   }
 
   .link-arrow {
-    @apply inline-flex items-center gap-2 font-sans text-sm font-semibold text-navy underline decoration-gold/50 decoration-1 underline-offset-[6px] transition-colors hover:text-gold-ink hover:decoration-gold;
+    @apply inline-flex items-center gap-2 font-sans text-[0.92rem] font-semibold text-navy underline decoration-gold/60 decoration-1 underline-offset-[6px] transition-colors hover:text-gold-ink hover:decoration-gold active:translate-y-px;
   }
 
   .link-arrow-light {
-    @apply inline-flex items-center gap-2 font-sans text-sm font-semibold text-cream underline decoration-gold/60 decoration-1 underline-offset-[6px] transition-colors hover:text-gold-soft;
+    @apply inline-flex items-center gap-2 font-sans text-[0.92rem] font-semibold text-cream underline decoration-gold-soft/60 decoration-1 underline-offset-[6px] transition-colors hover:text-gold-soft active:translate-y-px;
   }
 
   .btn {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-none border px-6 py-3 font-sans text-[0.82rem] font-semibold uppercase tracking-[0.12em] transition-colors duration-200;
+    @apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[3px] border px-6 py-3 font-sans text-[0.9rem] font-semibold tracking-[0.01em] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-[#00665C] active:translate-y-px disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-55;
   }
 
   .btn-primary {
-    @apply btn border-navy bg-navy text-cream hover:border-navy-light hover:bg-navy-light;
+    @apply btn border-[#00332E] bg-[#00332E] text-white hover:border-[#00665C] hover:bg-[#00665C] active:bg-[#002420];
   }
 
   .btn-gold {
-    @apply btn border-gold bg-gold text-navy hover:border-gold-ink hover:bg-gold-ink hover:text-white;
+    @apply btn border-[#00332E] bg-[#00332E] text-white hover:border-[#00665C] hover:bg-[#00665C] active:bg-[#002420];
+  }
+
+  .btn-light {
+    @apply btn border-white bg-white text-[#00332E] hover:border-[#EDF3F1] hover:bg-[#EDF3F1] active:bg-[#A7D7CE];
   }
 
   .btn-outline {
-    @apply btn border-navy/30 bg-transparent text-navy hover:border-navy hover:bg-navy hover:text-cream;
+    @apply btn border-[#00332E]/35 bg-transparent text-[#00332E] hover:border-[#00332E] hover:bg-[#00332E] hover:text-white active:bg-[#002420];
   }
 
   .btn-outline-light {
-    @apply btn border-cream/40 bg-transparent text-cream hover:border-cream hover:bg-cream hover:text-navy;
+    @apply btn border-cream/45 bg-transparent text-cream hover:border-cream hover:bg-cream hover:text-[#00332E];
   }
 
   .card-quiet {
-    @apply border border-line bg-white/60;
+    @apply border border-line bg-white/80;
   }
 
   .input-ppf {
-    @apply h-12 w-full rounded-none border border-line bg-white px-4 font-sans text-base text-ink placeholder:text-ink/60 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold;
+    @apply h-12 w-full rounded-[3px] border border-line bg-white px-4 font-sans text-base text-ink placeholder:text-ink/55 focus:border-[#00665C] focus:outline-none focus:ring-2 focus:ring-[#00665C]/25 aria-[invalid=true]:border-red-700 aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-red-700/30;
   }
 
   .legal-copy {
-    @apply text-[0.78rem] leading-relaxed text-cream/65;
+    @apply text-[0.78rem] leading-relaxed text-cream/75;
   }
 
   .legal-copy a {
-    @apply underline decoration-cream/30 underline-offset-2 hover:text-cream;
+    @apply underline decoration-cream/40 underline-offset-2 hover:text-cream;
   }
 }
 
