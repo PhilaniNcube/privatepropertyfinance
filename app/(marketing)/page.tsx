@@ -299,7 +299,7 @@ export default function Home() {
             </div>
           ) : null}
 
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
+          <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {otherStudies.map((study) => (
               <CaseStudyCard key={study.slug} study={study} />
             ))}
@@ -322,7 +322,7 @@ export default function Home() {
                 yes.
               </p>
               <TextLink href="/team" light className="mt-7">
-                Meet the founder
+                Meet the team
               </TextLink>
             </div>
             <div className="grid gap-8 sm:grid-cols-1 lg:col-span-8">

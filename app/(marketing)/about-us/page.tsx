@@ -42,7 +42,7 @@ export default function AboutUsPage() {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link href="/team" className="btn-outline">
-              Meet the founder
+              Meet the team
             </Link>
           </>
         }

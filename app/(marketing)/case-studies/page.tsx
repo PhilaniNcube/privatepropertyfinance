@@ -13,22 +13,22 @@ import { CASE_STUDIES } from "@/lib/content/case-studies";
 export const metadata: Metadata = pageMetadata({
   title: "Completed Transactions | Private Property Finance",
   description:
-    "Recent bridging, development and commercial property finance deals arranged by Private Property Finance, with loan amounts, LTVs and timescales.",
+    "Recent buy-to-let, bridging and development finance deals arranged by Private Property Finance, with loan amounts, LTVs and timescales.",
   path: "/case-studies",
 });
 
 const commonThreads = [
   {
-    title: "A deadline that mattered",
-    body: "Two of these cases were driven by time: a lender withdrawing before completion, and a developer needing to finish a scheme. The finance had to work around the date, not the other way round.",
-  },
-  {
     title: "A lender that actually fits",
-    body: "None of these were vanilla cases. The value was in knowing which lender would look at the property, the borrower and the exit the right way.",
+    body: "None of these were vanilla cases: an overseas investor outside the usual residency profile, land rather than a finished building, a loan already in receivership, and a developer on only their second scheme. The value was in knowing which lender would look at the property, the borrower and the exit the right way.",
   },
   {
-    title: "Managed to completion",
-    body: "Valuers, solicitors and lender queries were handled by one broker, so the client could keep working on the project.",
+    title: "An exit the lender could believe in",
+    body: "The Liverpool land purchase was only fundable because the exit onto development finance was clear and evidenced. Bridging lenders test the exit as closely as the security.",
+  },
+  {
+    title: "A deadline that mattered",
+    body: "Receivers had already been appointed on the London loan. We completed the £500,000 refinance in three weeks, repaying the existing facility and helping the client keep the property.",
   },
 ];
 
@@ -89,7 +89,7 @@ export default function CaseStudiesPage() {
               </h2>
               <p className="mt-5 body-copy">
                 A lender reads the whole case: the borrower, the exit, the
-                timing and the team. These three show why the packaging matters
+                timing and the team. These four show why the packaging matters
                 as much as the asset.
               </p>
             </div>

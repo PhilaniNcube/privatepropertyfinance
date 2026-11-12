@@ -77,8 +77,8 @@ Vercel preview deployments are noindexed automatically when `VERCEL_ENV=preview`
 
 - Confirm the calculator caps, stress rate and ICR thresholds with lenders.
 - Confirm the recipient inbox for enquiries and that the Resend domain is verified.
-- Supply full team names, bios and headshots (currently a monogram placeholder).
-- Supply 8–12 completed transactions with permission to publish.
+- Supply Tawanda's headshot (currently shown as a monogram) and confirm full names, personal LinkedIn profiles and any approved former lender roles.
+- Supply further completed transactions with permission to publish.
 - Have the privacy policy, cookie policy and complaints page reviewed.
 - Verify Search Console and submit `/sitemap.xml` on launch day.
 - Add the Google Business Profile and LinkedIn URLs to `sameAs` in `lib/schema.ts`.

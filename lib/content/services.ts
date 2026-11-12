@@ -161,10 +161,10 @@ export const SERVICES: Service[] = [
       },
     ],
     example: {
-      caseSlug: "bridging-london-286k",
+      caseSlug: "bridging-refinance-london-500k",
       eyebrow: "Related bridging example",
-      heading: "Related short-term completion when a lender withdrew",
-      text: "Where a property acquisition faces an urgent deadline before long-term finance is put in place, we can step in with short-term bridging finance. In this related bridging case, a London investor's original lender withdrew two weeks before completion and we arranged a £286,000 facility in time to protect the deposit.",
+      heading: "Related short-term rescue after receivership",
+      text: "Where an existing loan has run past its term, short-term finance can still protect the asset. In this related bridging case, receivers had been appointed on a London investor's loan after refurbishment delays. We secured a £500,000 re-bridge at 65% LTV within three weeks, repaying the existing facility and helping the client retain the property.",
     },
     faqs: [
       {
@@ -312,10 +312,10 @@ export const SERVICES: Service[] = [
       },
     ],
     example: {
-      caseSlug: "bridging-london-286k",
+      caseSlug: "land-bridging-liverpool-330k",
       eyebrow: "Completed bridging transaction",
-      heading: "A recent bridging loan case",
-      text: "£286,000 bridging loan, London, 70% LTV. A property investor's original lender withdrew two weeks before completion. We arranged a replacement bridging facility in time, protecting the client's deposit and completing the purchase.",
+      heading: "A recent land bridging case",
+      text: "£330,000 land bridging loan, Liverpool, 50% LTV. A property investor needed short-term finance to buy land with planning permission and refinance onto development finance. Some lenders will not take land as security, so we presented the client's project experience and a clear exit to secure the bridge.",
     },
     faqs: [
       {
@@ -468,10 +468,10 @@ export const SERVICES: Service[] = [
       },
     ],
     example: {
-      caseSlug: "development-birmingham-405k",
+      caseSlug: "development-manchester-1-3m",
       eyebrow: "Completed development transaction",
       heading: "A recent development finance case",
-      text: "£405,000 refinance and further advance, Birmingham, 65% LTV, 12-month term. A sole-trader developer needed to refinance an existing facility and raise additional funds to finish a residential scheme. We arranged a secured loan with interest retained, enabling completion and sale.",
+      text: "£1.3 million ground-up development facility, Manchester, 68% LTGDV. A developer needed funding for their second scheme, with a limited track record and a requirement for a higher initial drawdown. We identified a lender comfortable with their experience and structured the facility around the project's upfront funding needs.",
     },
     faqs: [
       {
@@ -642,10 +642,10 @@ export const SERVICES: Service[] = [
       },
     ],
     example: {
-      caseSlug: "buy-to-let-hong-kong-2-1m",
+      caseSlug: "buy-to-let-nigeria-450k",
       eyebrow: "Completed overseas investor transaction",
       heading: "A recent foreign national buy-to-let case",
-      text: "£2,100,000 buy-to-let purchase at 75% LTV for a Hong Kong-based investor without UK residency. We placed the case with a specialist lender and managed the application remotely through to completion.",
+      text: "£450,000 buy-to-let purchase at 70% LTV for a Nigeria-based investor without UK residency. Their occupation and country of residence narrowed the lender pool; we placed the case with a lender that accepted both and managed the application remotely through to completion.",
     },
     faqs: [
       {

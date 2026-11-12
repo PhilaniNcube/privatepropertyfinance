@@ -113,7 +113,7 @@ export function personSchema(member: TeamMember) {
     name: member.name,
     jobTitle: member.role,
     description: member.experienceSummary,
-    email: member.email,
+    ...(member.email ? { email: member.email } : {}),
     ...(member.phone ? { telephone: member.phone } : {}),
     ...(member.image ? { image: `${SITE.url}${member.image.src}` } : {}),
     worksFor: { "@id": ORGANISATION_ID },
