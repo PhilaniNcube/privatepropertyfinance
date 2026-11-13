@@ -34,8 +34,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     outcome:
       "We identified a lender whose criteria accommodated both the client's occupation and Nigerian residency. We coordinated the mortgage process remotely through to completion, helping the client secure their UK investment property.",
     image: {
-      src: "/images/london-street.jpg",
-      alt: "Illustrative view of period townhouses in central London",
+      src: "/images/transactions/buy-to-let-uk.webp",
+      alt: "Illustrative view of white stucco townhouses",
       illustrative: true,
     },
     serviceSlug: "foreign-national-buy-to-let-mortgages",
@@ -55,8 +55,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     outcome:
       "We presented the client's previous project experience and a clear proposed exit through development finance, securing a £330,000 bridging loan to complete the land purchase.",
     image: {
-      src: "/images/development-site.jpg",
-      alt: "Illustrative aerial view of a residential construction site",
+      src: "/images/transactions/land-with-planning.webp",
+      alt: "Illustrative view of new-build houses bordering open land",
       illustrative: true,
     },
     serviceSlug: "bridging-loans",
@@ -76,8 +76,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     outcome:
       "We secured an alternative bridging lender willing to consider the circumstances and completed the £500,000 refinance within three weeks. This enabled the existing bridging facility to be repaid and helped the client retain the property.",
     image: {
-      src: "/images/london-aerial.jpg",
-      alt: "Illustrative aerial view of central London and the River Thames",
+      src: "/images/transactions/london-terrace.webp",
+      alt: "Illustrative view of stone terraced townhouses",
       illustrative: true,
     },
     serviceSlug: "bridging-loans",
@@ -97,8 +97,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     outcome:
       "We identified a lender prepared to support the developer's second scheme and secured a £1.3 million development facility at 68% of gross development value. The funding package also provided a higher initial drawdown to support the project's upfront funding requirements.",
     image: {
-      src: "/images/hero-architecture.jpg",
-      alt: "Illustrative view of a modern architectural development",
+      src: "/images/transactions/commercial-development.webp",
+      alt: "Illustrative view of a hotel dining room overlooking a lake",
       illustrative: true,
     },
     serviceSlug: "development-finance",
