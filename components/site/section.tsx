@@ -39,12 +39,16 @@ export function Section({
 export function Eyebrow({
   children,
   light = false,
+  className = "",
 }: {
   children: ReactNode;
   light?: boolean;
+  className?: string;
 }) {
   return (
-    <p className={`flex items-center gap-3 ${light ? "eyebrow-light" : "eyebrow"}`}>
+    <p
+      className={`flex items-center gap-3 ${light ? "eyebrow-light" : "eyebrow"} ${className}`}
+    >
       <span className={`h-px w-8 ${light ? "bg-gold-soft" : "bg-gold"}`} aria-hidden="true" />
       {children}
     </p>

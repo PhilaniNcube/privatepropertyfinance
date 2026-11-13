@@ -18,7 +18,7 @@ import {
   Stat,
 } from "@/components/site/section";
 import { CaseStudyCard } from "@/components/site/case-study-card";
-import { PropertyFilmHeroMedia } from "@/components/site/property-film-hero";
+import { HomeHeroFilm } from "@/components/site/home-hero-film";
 import { CtaBand } from "@/components/site/cta-band";
 import { FaqList } from "@/components/site/faq-list";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -93,86 +93,107 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-cream pb-0 pt-10 sm:pt-14 lg:pt-16">
-        <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
-            <div className="flex flex-col justify-center pb-4 lg:col-span-6 lg:py-8">
-              <Eyebrow>Specialist property finance across the UK</Eyebrow>
-              <h1 className="mt-5 font-serif text-[clamp(2.35rem,3.8vw,3.65rem)] leading-[1.06] tracking-[-0.02em] text-navy">
-                Property finance, arranged by people who&apos;ve sat on the
-                lender&apos;s side
-              </h1>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-ink/80 sm:text-[1.08rem]">
-                Commercial mortgages, bridging loans, development finance and
-                buy-to-let for overseas investors, from £100,000 to £20 million.
-                One experienced broker, a wide panel of lenders, and a straight
-                answer from the first call.
-              </p>
-              <p className="mt-4 max-w-xl border-l-2 border-gold pl-4 text-sm leading-relaxed text-ink/75">
-                Based in Manchester, with London meetings by appointment. We
-                work with investors, developers and businesses across the UK,
-                and overseas clients investing in UK property.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <Link href="/contact-us#enquiry-form" className="btn-primary">
-                  Discuss your finance requirements
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-                <Link href="/case-studies" className="link-arrow py-2">
-                  See completed transactions
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-              <div className="mt-7 flex items-center gap-3 text-sm text-ink/75">
-                <Phone className="h-4 w-4 text-gold-ink" aria-hidden="true" />
-                <span>
-                  Or call{" "}
-                  <a
-                    href={`tel:${SITE.phoneHref}`}
-                    className="font-semibold text-navy underline decoration-gold/50 underline-offset-4 hover:text-gold-ink"
-                  >
-                    {SITE.phone}
-                  </a>
-                </span>
-              </div>
-            </div>
+      <section className="relative isolate flex min-h-[clamp(36rem,calc(100svh-5rem),56rem)] flex-col justify-end overflow-clip bg-ppf-deep">
+        <HomeHeroFilm
+          desktopSrc="/images/London-Trainline-hero-1080p.mp4"
+          mobileSrc="/images/London-Trainline-hero-720p.mp4"
+          posterSrc="/images/London-Trainline-hero-poster.jpg"
+        />
 
-            <div className="relative lg:col-span-6">
-              <PropertyFilmHeroMedia mode="static" />
-              <div className="relative mt-4 border border-line bg-white p-5 sm:max-w-xs lg:mt-4">
-                <p className="font-serif text-3xl leading-none text-navy">20+ years</p>
-                <p className="mt-1.5 font-sans text-xs leading-relaxed text-ink/75">
-                  Lender-side experience across high street banks and specialist
-                  property lenders
-                </p>
-              </div>
+        {/* Legibility scrims over the footage. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,36,32,0.97)_0%,rgba(0,36,32,0.9)_22%,rgba(0,36,32,0.78)_45%,rgba(0,36,32,0.55)_68%,rgba(0,36,32,0.35)_88%,rgba(0,36,32,0.28)_100%)] lg:hidden"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(to_top,rgba(0,36,32,0.94)_0%,rgba(0,36,32,0.68)_18%,rgba(0,36,32,0.26)_42%,rgba(0,36,32,0.04)_68%,rgba(0,36,32,0.1)_100%)] lg:block"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(to_right,rgba(0,36,32,0.94)_0%,rgba(0,36,32,0.7)_26%,rgba(0,36,32,0.34)_50%,rgba(0,36,32,0.08)_72%,rgba(0,36,32,0)_86%)] lg:block"
+        />
+
+        <Container className="relative z-10 pb-10 pt-20 sm:pb-12 sm:pt-24 lg:pb-14 lg:pt-28">
+          <div className="max-w-[56rem]">
+            <Eyebrow
+              light
+              className="text-cream [text-shadow:0_1px_12px_rgba(0,36,32,0.7)]"
+            >
+              Specialist property finance across the UK
+            </Eyebrow>
+            <h1 className="mt-5 max-w-[54rem] font-serif text-[clamp(2.15rem,5.2vw,4.4rem)] leading-[1.02] tracking-[-0.03em] text-cream [text-shadow:0_1px_3px_rgba(0,36,32,0.6),0_10px_44px_rgba(0,36,32,0.55)]">
+              Property finance, arranged by people who&rsquo;ve sat on the
+              lender&rsquo;s side
+            </h1>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-cream/90 [text-shadow:0_1px_12px_rgba(0,36,32,0.6)] sm:text-lg">
+              Commercial mortgages, bridging loans, development finance and
+              buy-to-let for overseas investors, from £100,000 to £20 million.
+              One experienced broker, a wide panel of lenders, and a straight
+              answer from the first call.
+            </p>
+            <p className="mt-4 max-w-xl border-l-2 border-gold-soft/70 pl-4 text-sm leading-relaxed text-cream/80 [text-shadow:0_1px_12px_rgba(0,36,32,0.6)]">
+              Based in Manchester, with London meetings by appointment. We work
+              with investors, developers and businesses across the UK, and
+              overseas clients investing in UK property.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <Link href="/contact-us#enquiry-form" className="btn-light">
+                Discuss your finance requirements
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link href="/case-studies" className="link-arrow-light py-2">
+                See completed transactions
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="mt-6 flex items-center gap-2.5 text-sm text-cream/80">
+              <Phone className="h-4 w-4 text-gold-soft" aria-hidden="true" />
+              <span>
+                Or call{" "}
+                <a
+                  href={`tel:${SITE.phoneHref}`}
+                  className="font-semibold text-cream underline decoration-gold-soft/50 underline-offset-4 hover:text-gold-soft"
+                >
+                  {SITE.phone}
+                </a>
+              </span>
             </div>
           </div>
         </Container>
-
-        <div className="mt-12 border-y border-line bg-cream-dark/60 lg:mt-14">
-          <Container>
-            <ul className="grid gap-4 py-4 sm:grid-cols-3">
-              {[
-                "£100,000 – £20 million facilities",
-                "High street, specialist and private lenders",
-                "UK-wide coverage · Overseas investors welcome",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-2.5 font-sans text-xs font-semibold tracking-[0.04em] text-navy"
-                >
-                  <Check
-                    className="h-4 w-4 shrink-0 text-gold-ink"
-                    aria-hidden="true"
-                  />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Container>
-        </div>
       </section>
+
+      {/* Credential strip bridging the film hero and the editorial introduction. */}
+      <div className="border-b border-line bg-cream-dark/50">
+        <Container>
+          <ul className="grid gap-x-8 gap-y-3 py-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-center">
+            {[
+              "£100,000 – £20 million facilities",
+              "High street, specialist and private lenders",
+              "UK-wide coverage · Overseas investors welcome",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-2.5 font-sans text-xs font-semibold tracking-[0.04em] text-navy"
+              >
+                <Check
+                  className="h-4 w-4 shrink-0 text-gold-ink"
+                  aria-hidden="true"
+                />
+                {item}
+              </li>
+            ))}
+            <li className="flex items-baseline gap-2.5 lg:justify-self-end">
+              <span className="font-serif text-2xl leading-none text-navy">
+                20+ years
+              </span>
+              <span className="font-sans text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-ink/60">
+                Lender-side experience
+              </span>
+            </li>
+          </ul>
+        </Container>
+      </div>
 
       {/* Editorial Introduction */}
       <Section tone="cream">
