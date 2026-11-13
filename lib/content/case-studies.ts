@@ -76,7 +76,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     outcome:
       "We secured an alternative bridging lender willing to consider the circumstances and completed the £500,000 refinance within three weeks. This enabled the existing bridging facility to be repaid and helped the client retain the property.",
     image: {
-      src: "/images/transactions/london-terrace.webp",
+      src: "/images/Receivers.webp",
       alt: "Illustrative view of stone terraced townhouses",
       illustrative: true,
     },
@@ -97,7 +97,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     outcome:
       "We identified a lender prepared to support the developer's second scheme and secured a £1.3 million development facility at 68% of gross development value. The funding package also provided a higher initial drawdown to support the project's upfront funding requirements.",
     image: {
-      src: "/images/transactions/commercial-development.webp",
+      src: "/images/dev-loan.webp",
       alt: "Illustrative view of a hotel dining room overlooking a lake",
       illustrative: true,
     },

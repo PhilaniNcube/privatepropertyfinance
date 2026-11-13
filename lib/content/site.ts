@@ -9,6 +9,7 @@ export const SITE = {
   phoneHref: "+441613990207",
   mobile: "07351 088358",
   mobileHref: "+447351088358",
+  whatsappHref: "https://wa.me/447351088358",
   email: "info@privatepropertyfinance.com",
   hours: "Monday to Friday, 9:00–18:30",
   description:

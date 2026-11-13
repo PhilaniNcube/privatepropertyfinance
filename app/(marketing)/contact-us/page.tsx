@@ -46,7 +46,7 @@ export default function ContactUsPage() {
               Call {SITE.phone}
             </a>
             <a
-              href={`https://wa.me/${SITE.mobileHref.replace("+", "")}`}
+              href={SITE.whatsappHref}
               target="_blank"
               rel="noreferrer"
               className="btn-outline"
@@ -114,7 +114,7 @@ export default function ContactUsPage() {
                         Mobile / WhatsApp
                       </p>
                       <a
-                        href={`https://wa.me/${SITE.mobileHref.replace("+", "")}`}
+                        href={SITE.whatsappHref}
                         target="_blank"
                         rel="noreferrer"
                         className="mt-1 block font-serif text-2xl text-navy hover:text-gold-ink"

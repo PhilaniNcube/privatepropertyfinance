@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/site/header";
 import Footer from "@/components/site/footer";
+import WhatsAppButton from "@/components/site/whatsapp-button";
 import { ConsentManager } from "@/components/consent/consent-manager";
 import { Toaster } from "@/components/ui/sonner";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -121,6 +122,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <WhatsAppButton />
         <Toaster />
         <ConsentManager />
         <JsonLd data={organisationSchema()} />
