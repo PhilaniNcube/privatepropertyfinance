@@ -204,14 +204,16 @@ export async function submitEnquiry(formData: FormData): Promise<EnquiryResult> 
     .filter(Boolean)
     .join("\n");
 
-  const { error } = await resend.emails.send({
+  const emailPayload = {
     from: `Private Property Finance <${SITE.email}>`,
     to: [SITE.email],
     replyTo: parsed.data.email,
     subject,
     text: body,
     attachments: attachments.length ? attachments : undefined,
-  });
+  };
+
+  const { data, error } = await resend.emails.send(emailPayload);
 
   if (error) {
     console.error("Enquiry email failed", error);
@@ -221,9 +223,11 @@ export async function submitEnquiry(formData: FormData): Promise<EnquiryResult> 
     };
   }
 
+  console.log(`[enquiry] Resend accepted the enquiry email (id ${data?.id ?? "unknown"})`);
+
   // Auto-reply. A failure here shouldn't fail the enquiry.
   try {
-    await resend.emails.send({
+    const { error: autoReplyError } = await resend.emails.send({
       from: `Private Property Finance <${SITE.email}>`,
       to: [parsed.data.email],
       subject: "We've received your enquiry | Private Property Finance",
@@ -242,6 +246,10 @@ export async function submitEnquiry(formData: FormData): Promise<EnquiryResult> 
         SITE.riskWarning,
       ].join("\n"),
     });
+
+    if (autoReplyError) {
+      console.error("Auto-reply failed", autoReplyError);
+    }
   } catch (autoReplyError) {
     console.error("Auto-reply failed", autoReplyError);
   }
