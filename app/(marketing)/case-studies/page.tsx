@@ -6,7 +6,7 @@ import { Container, Eyebrow, Section, SectionHeading } from "@/components/site/s
 import { CaseStudyCard } from "@/components/site/case-study-card";
 import { CtaBand } from "@/components/site/cta-band";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, caseStudiesListSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 import { CASE_STUDIES } from "@/lib/content/case-studies";
 
@@ -118,6 +118,7 @@ export default function CaseStudiesPage() {
         title="Does your deal look like one of these?"
         body="Tell us the property, the amount and the date you need to work to. We'll tell you what's realistic."
       />
+      <JsonLd data={caseStudiesListSchema(CASE_STUDIES)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", path: "/" },

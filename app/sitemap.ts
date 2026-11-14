@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/content/site";
+import { buildLanguageAlternates } from "@/lib/seo";
 
-const lastModified = new Date("2026-11-12");
+const lastModified = new Date("2026-11-14");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: { path: string; priority: number; changeFrequency: "yearly" | "monthly" | "weekly" }[] = [
@@ -12,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/development-finance", priority: 0.9, changeFrequency: "monthly" },
     {
       path: "/foreign-national-buy-to-let-mortgages",
-      priority: 0.9,
+      priority: 0.95,
       changeFrequency: "monthly",
     },
     { path: "/case-studies", priority: 0.8, changeFrequency: "monthly" },
@@ -29,5 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
     changeFrequency: page.changeFrequency,
     priority: page.priority,
+    alternates: {
+      languages: buildLanguageAlternates(page.path),
+    },
   }));
 }

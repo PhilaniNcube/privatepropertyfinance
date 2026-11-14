@@ -9,6 +9,7 @@ import { ConsentManager } from "@/components/consent/consent-manager";
 import { Toaster } from "@/components/ui/sonner";
 import { JsonLd } from "@/components/seo/json-ld";
 import { organisationSchema, websiteSchema } from "@/lib/schema";
+import { buildLanguageAlternates } from "@/lib/seo";
 import { SITE } from "@/lib/content/site";
 
 const serif = Source_Serif_4({
@@ -33,9 +34,14 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
   publisher: "Athena Media",
+  alternates: {
+    canonical: "/",
+    languages: buildLanguageAlternates("/"),
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
+    alternateLocale: ["en_US", "en_HK", "en_SG", "en_AE", "en_AU"],
     siteName: SITE.name,
     title: "Private Property Finance | UK Property Finance Broker",
     description: SITE.description,

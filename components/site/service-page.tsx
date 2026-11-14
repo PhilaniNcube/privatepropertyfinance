@@ -14,7 +14,9 @@ import { EnquiryForm } from "@/components/forms/enquiry-form";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   breadcrumbSchema,
+  caseStudySchema,
   faqSchema,
+  serviceHowToSchema,
   serviceSchema,
 } from "@/lib/schema";
 import { SITE } from "@/lib/content/site";
@@ -28,6 +30,7 @@ export function ServicePage({ service }: { service: Service }) {
   const related = SERVICES.filter((item) =>
     service.related.includes(item.slug)
   );
+  const howTo = serviceHowToSchema(service);
 
   return (
     <>
@@ -80,49 +83,62 @@ export function ServicePage({ service }: { service: Service }) {
                 ) : null}
 
                 {section.items ? (
-                  <div
-                    className={
-                      section.numbered
-                        ? "space-y-0"
-                        : "grid gap-x-10 gap-y-0 sm:grid-cols-2"
-                    }
-                  >
-                    {section.items.map((item, itemIndex) => (
-                      <div
-                        key={item.title}
-                        className="border-t border-line py-5 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
-                      >
-                        <div className="flex items-start gap-4">
-                          {section.numbered ? (
-                            <span className="font-serif text-xl leading-none text-gold-ink">
-                              {String(itemIndex + 1).padStart(2, "0")}
-                            </span>
-                          ) : (
-                            <Check
-                              className="mt-1 h-3.5 w-3.5 shrink-0 text-gold-ink"
-                              aria-hidden="true"
-                            />
-                          )}
-                          <div>
-                            <h3 className="font-serif text-xl leading-snug text-navy">
-                              {item.title}
-                            </h3>
-                            <p className="mt-1.5 text-sm leading-relaxed text-ink/70">
-                              {item.body}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : null}
+                            section.numbered ? (
+                              <ol className="list-none space-y-0">
+                                {section.items.map((item, itemIndex) => (
+                                  <li
+                                    key={item.title}
+                                    className="border-t border-line py-5 first:border-t-0"
+                                  >
+                                    <div className="flex items-start gap-4">
+                                      <span className="font-serif text-xl leading-none text-gold-ink">
+                                        {String(itemIndex + 1).padStart(2, "0")}
+                                      </span>
+                                      <div>
+                                        <h3 className="font-serif text-xl leading-snug text-navy">
+                                          {item.title}
+                                        </h3>
+                                        <p className="mt-1.5 text-sm leading-relaxed text-ink/70">
+                                          {item.body}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </li>
+                                ))}
+                              </ol>
+                            ) : (
+                              <ul className="grid list-none gap-x-10 gap-y-0 sm:grid-cols-2">
+                                {section.items.map((item) => (
+                                  <li
+                                    key={item.title}
+                                    className="border-t border-line py-5 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
+                                  >
+                                    <div className="flex items-start gap-4">
+                                      <Check
+                                        className="mt-1 h-3.5 w-3.5 shrink-0 text-gold-ink"
+                                        aria-hidden="true"
+                                      />
+                                        <div>
+                                          <h3 className="font-serif text-xl leading-snug text-navy">
+                                            {item.title}
+                                          </h3>
+                                          <p className="mt-1.5 text-sm leading-relaxed text-ink/70">
+                                            {item.body}
+                                          </p>
+                                        </div>
+                                      </div>
+                        </li>
+                      ))}
+                      </ul>
+                    )
+                    ) : null}
 
-                {section.note ? (
-                  <p className="mt-6 border-l-2 border-gold pl-4 text-sm leading-relaxed text-ink/70">
-                    {section.note}
-                  </p>
-                ) : null}
-              </div>
+                    {section.note ? (
+                      <p className="mt-6 border-l-2 border-gold pl-4 text-sm leading-relaxed text-ink/70">
+                        {section.note}
+                      </p>
+                    ) : null}
+                  </div>
             </div>
           </Container>
         </Section>
@@ -239,6 +255,8 @@ export function ServicePage({ service }: { service: Service }) {
       ) : null}
 
       <JsonLd data={serviceSchema(service)} />
+      {howTo ? <JsonLd data={howTo} /> : null}
+      {example ? <JsonLd data={caseStudySchema(example)} /> : null}
       <JsonLd data={faqSchema(service.faqs)} />
       <JsonLd
         data={breadcrumbSchema([
