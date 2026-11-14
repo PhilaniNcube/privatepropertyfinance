@@ -642,10 +642,10 @@ export const SERVICES: Service[] = [
       },
     ],
     example: {
-      caseSlug: "buy-to-let-nigeria-450k",
+      caseSlug: "buy-to-let-hong-kong-2-1m",
       eyebrow: "Completed overseas investor transaction",
-      heading: "A recent foreign national buy-to-let case",
-      text: "£450,000 buy-to-let purchase at 70% LTV for a Nigeria-based investor without UK residency. Their occupation and country of residence narrowed the lender pool; we placed the case with a lender that accepted both and managed the application remotely through to completion.",
+      heading: "£2.1 million for an investor with no UK footprint",
+      text: "A Hong Kong-based investor needed a £2.1 million buy-to-let mortgage at 75% LTV, with no UK residency and no UK credit history. We took the case to a specialist lender with an appetite for high-value foreign national lending and evidenced the client's overseas income, assets and overall wealth, so the application could be assessed beyond a UK credit profile.",
     },
     faqs: [
       {

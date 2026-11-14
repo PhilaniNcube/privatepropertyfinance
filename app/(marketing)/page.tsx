@@ -90,6 +90,8 @@ const homeFaqs = [
 
 export default function Home() {
   const [featuredStudy, ...otherStudies] = CASE_STUDIES;
+  // Home is a teaser: three secondary cards fill one row on large screens.
+  const secondaryStudies = otherStudies.slice(0, 3);
 
   return (
     <>
@@ -320,8 +322,8 @@ export default function Home() {
             </div>
           ) : null}
 
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            {otherStudies.map((study) => (
+          <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {secondaryStudies.map((study) => (
               <CaseStudyCard key={study.slug} study={study} />
             ))}
           </div>

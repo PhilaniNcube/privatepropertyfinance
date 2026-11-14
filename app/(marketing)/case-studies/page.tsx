@@ -20,7 +20,7 @@ export const metadata: Metadata = pageMetadata({
 const commonThreads = [
   {
     title: "A lender that actually fits",
-    body: "None of these were vanilla cases: an overseas investor outside the usual residency profile, land rather than a finished building, a loan already in receivership, a hotel that had lost money for two years, and a developer on only their second scheme. The value was in knowing which lender would look at the property, the borrower and the exit the right way.",
+    body: "None of these were vanilla cases: overseas investors without UK credit history, land rather than a finished building, a loan already in receivership, a hotel that had lost money for two years, and a developer on only their second scheme. The value was in knowing which lender would look at the property, the borrower and the exit the right way.",
   },
   {
     title: "A business plan the lender could underwrite",
@@ -37,8 +37,6 @@ const commonThreads = [
 ];
 
 export default function CaseStudiesPage() {
-  const [featuredStudy, ...otherStudies] = CASE_STUDIES;
-
   return (
     <>
       <PageHero
@@ -77,14 +75,8 @@ export default function CaseStudiesPage() {
             </p>
           </div>
 
-          {featuredStudy ? (
-            <div className="mt-10">
-              <CaseStudyCard study={featuredStudy} featured />
-            </div>
-          ) : null}
-
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            {otherStudies.map((study) => (
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {CASE_STUDIES.map((study) => (
               <CaseStudyCard key={study.slug} study={study} />
             ))}
           </div>
@@ -101,7 +93,7 @@ export default function CaseStudiesPage() {
               </h2>
               <p className="mt-5 body-copy">
                 A lender reads the whole case: the borrower, the exit, the
-                timing and the team. These five show why the packaging matters
+                timing and the team. These six show why the packaging matters
                 as much as the asset.
               </p>
             </div>

@@ -42,6 +42,27 @@ export const CASE_STUDIES: CaseStudy[] = [
     serviceLabel: "Explore commercial mortgages",
   },
   {
+    slug: "buy-to-let-hong-kong-2-1m",
+    headline: "£2.1 million buy-to-let mortgage for a Hong Kong-based investor",
+    amount: "£2,100,000",
+    location: "UK investment · Hong Kong-based investor",
+    loanType: "Foreign national buy-to-let mortgage",
+    ltv: "75% LTV",
+    term: "High-value investment mortgage",
+    borrower: "High-net-worth overseas investor",
+    challenge:
+      "A high-net-worth investor based in Hong Kong required a substantial mortgage to purchase a UK investment property. With no UK residency or established UK credit history, securing a £2.1 million loan at 75% LTV required a lender comfortable with both the borrowing amount and the client's overseas circumstances.",
+    outcome:
+      "Drawing on our lender relationships, we identified a specialist lender with an appetite for high-value foreign national buy-to-let lending. We presented a comprehensive picture of the client's financial position, evidencing their overseas income, assets and overall wealth, which enabled the lender to assess the application beyond a UK credit profile. We secured a £2.1 million buy-to-let mortgage at 75% LTV, enabling the client to proceed with their UK investment property purchase.",
+    image: {
+      src: "/images/transactions/london-terrace.webp",
+      alt: "Illustrative view of stone terraced townhouses",
+      illustrative: true,
+    },
+    serviceSlug: "foreign-national-buy-to-let-mortgages",
+    serviceLabel: "Explore foreign national buy-to-let",
+  },
+  {
     slug: "buy-to-let-nigeria-450k",
     headline: "£450,000 buy-to-let mortgage for a Nigerian-based investor",
     amount: "£450,000",
@@ -98,7 +119,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "We secured an alternative bridging lender willing to consider the circumstances and completed the £500,000 refinance within three weeks. This enabled the existing bridging facility to be repaid and helped the client retain the property.",
     image: {
       src: "/images/Receivers.webp",
-      alt: "Illustrative view of stone terraced townhouses",
+      alt: "Illustrative view of a for-sale board outside a terraced house",
       illustrative: true,
     },
     serviceSlug: "bridging-loans",
