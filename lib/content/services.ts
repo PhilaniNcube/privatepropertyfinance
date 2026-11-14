@@ -161,10 +161,10 @@ export const SERVICES: Service[] = [
       },
     ],
     example: {
-      caseSlug: "bridging-refinance-london-500k",
-      eyebrow: "Related bridging example",
-      heading: "Related short-term rescue after receivership",
-      text: "Where an existing loan has run past its term, short-term finance can still protect the asset. In this related bridging case, receivers had been appointed on a London investor's loan after refurbishment delays. We secured a £500,000 re-bridge at 65% LTV within three weeks, repaying the existing facility and helping the client retain the property.",
+      caseSlug: "hotel-purchase-commercial-mortgage-680k",
+      eyebrow: "Completed transaction",
+      heading: "A loss-making hotel bought with a specialist lender",
+      text: "The hotel had traded at a loss for two years, so historic figures alone would not have supported a purchase. We built the case around a business plan and financial forecasts showing how the operator would return it to profit, and placed it with a specialist lender at 70% of vacant possession value. The facility ran interest-only for two years before capital repayments began.",
     },
     faqs: [
       {

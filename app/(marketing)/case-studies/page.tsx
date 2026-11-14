@@ -13,14 +13,18 @@ import { CASE_STUDIES } from "@/lib/content/case-studies";
 export const metadata: Metadata = pageMetadata({
   title: "Completed Transactions | Private Property Finance",
   description:
-    "Recent buy-to-let, bridging and development finance deals arranged by Private Property Finance, with loan amounts, LTVs and timescales.",
+    "Recent commercial, buy-to-let, bridging and development finance deals arranged by Private Property Finance, with loan amounts, LTVs and timescales.",
   path: "/case-studies",
 });
 
 const commonThreads = [
   {
     title: "A lender that actually fits",
-    body: "None of these were vanilla cases: an overseas investor outside the usual residency profile, land rather than a finished building, a loan already in receivership, and a developer on only their second scheme. The value was in knowing which lender would look at the property, the borrower and the exit the right way.",
+    body: "None of these were vanilla cases: an overseas investor outside the usual residency profile, land rather than a finished building, a loan already in receivership, a hotel that had lost money for two years, and a developer on only their second scheme. The value was in knowing which lender would look at the property, the borrower and the exit the right way.",
+  },
+  {
+    title: "A business plan the lender could underwrite",
+    body: "The hotel had traded at a loss, so historic figures alone would not have secured the purchase. What carried the case was a credible plan to return it to profit, backed by financial forecasts and an operator with a track record.",
   },
   {
     title: "An exit the lender could believe in",
@@ -33,6 +37,8 @@ const commonThreads = [
 ];
 
 export default function CaseStudiesPage() {
+  const [featuredStudy, ...otherStudies] = CASE_STUDIES;
+
   return (
     <>
       <PageHero
@@ -62,7 +68,7 @@ export default function CaseStudiesPage() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
               eyebrow="Recent deals"
-              title="Bridging, development and overseas buy-to-let"
+              title="Bridging, development, hotels and overseas buy-to-let"
               intro="Loan amounts, LTVs and the short version of what made each case interesting."
             />
             <p className="max-w-xs text-xs leading-relaxed text-ink/70">
@@ -71,8 +77,14 @@ export default function CaseStudiesPage() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {CASE_STUDIES.map((study) => (
+          {featuredStudy ? (
+            <div className="mt-10">
+              <CaseStudyCard study={featuredStudy} featured />
+            </div>
+          ) : null}
+
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {otherStudies.map((study) => (
               <CaseStudyCard key={study.slug} study={study} />
             ))}
           </div>
@@ -89,7 +101,7 @@ export default function CaseStudiesPage() {
               </h2>
               <p className="mt-5 body-copy">
                 A lender reads the whole case: the borrower, the exit, the
-                timing and the team. These four show why the packaging matters
+                timing and the team. These five show why the packaging matters
                 as much as the asset.
               </p>
             </div>

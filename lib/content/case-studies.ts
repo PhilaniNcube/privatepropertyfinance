@@ -21,6 +21,27 @@ export type CaseStudy = {
 
 export const CASE_STUDIES: CaseStudy[] = [
   {
+    slug: "hotel-purchase-commercial-mortgage-680k",
+    headline: "£680,000 commercial mortgage for a hotel purchase",
+    amount: "£680,000",
+    location: "UK hotel",
+    loanType: "Commercial mortgage",
+    ltv: "70% of vacant possession value",
+    term: "Two years interest-only, then three years of capital repayments",
+    borrower: "Hotel operator",
+    challenge:
+      "An experienced hotel operator required finance to purchase a hotel that had been loss-making for the previous two years. Its recent trading performance limited the lenders willing to support the acquisition.",
+    outcome:
+      "We worked with the client to strengthen their funding proposal through a robust business plan, outlining how they intended to return the hotel to profitability, supported by financial forecasts. We identified a specialist lender willing to assess the application based on the business plan, projected trading performance and the operator's experience. The resulting commercial mortgage provided two years of interest-only payments followed by three years of capital repayments, giving the client breathing space to implement their plans before beginning to repay the capital.",
+    image: {
+      src: "/images/transactions/commercial-development.webp",
+      alt: "Illustrative view of a hotel dining room overlooking a lake",
+      illustrative: true,
+    },
+    serviceSlug: "commercial-mortgages",
+    serviceLabel: "Explore commercial mortgages",
+  },
+  {
     slug: "buy-to-let-nigeria-450k",
     headline: "£450,000 buy-to-let mortgage for a Nigerian-based investor",
     amount: "£450,000",
@@ -98,7 +119,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "We identified a lender prepared to support the developer's second scheme and secured a £1.3 million development facility at 68% of gross development value. The funding package also provided a higher initial drawdown to support the project's upfront funding requirements.",
     image: {
       src: "/images/dev-loan.webp",
-      alt: "Illustrative view of a hotel dining room overlooking a lake",
+      alt: "Illustrative view of new-build houses under construction",
       illustrative: true,
     },
     serviceSlug: "development-finance",
