@@ -25,7 +25,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { faqSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 import { SERVICES } from "@/lib/content/services";
-import { CASE_STUDIES } from "@/lib/content/case-studies";
+import { CASE_STUDIES, getCaseStudy } from "@/lib/content/case-studies";
 import { SITE } from "@/lib/content/site";
 
 export const metadata: Metadata = pageMetadata({
@@ -89,7 +89,12 @@ const homeFaqs = [
 ];
 
 export default function Home() {
-  const [featuredStudy, ...otherStudies] = CASE_STUDIES;
+  // The featured deal is chosen editorially rather than by list order.
+  const featuredStudy =
+    getCaseStudy("buy-to-let-hong-kong-2-1m") ?? CASE_STUDIES[0];
+  const otherStudies = CASE_STUDIES.filter(
+    (study) => study.slug !== featuredStudy.slug,
+  );
   // Home is a teaser: three secondary cards fill one row on large screens.
   const secondaryStudies = otherStudies.slice(0, 3);
 
